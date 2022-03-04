@@ -7,9 +7,11 @@
 
 import UIKit
 
-class ProfileHeaderView: UIView {
+class ProfileHeaderView: UITableViewHeaderFooterView {
 
     private var statusText: String = ""
+    static let profileHeaderView = "ProfileHeaderView"
+
 
     var userName: UILabel = {
         let userName = UILabel()
@@ -44,7 +46,7 @@ class ProfileHeaderView: UIView {
     var buttonStatus: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = UIColor(hex: "#027AFF")
+        button.backgroundColor = UIColor(hex: "#4885CC")
         button.layer.cornerRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOffset = CGSize(width: 4, height: 4)
@@ -69,7 +71,7 @@ class ProfileHeaderView: UIView {
         text.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
-        text.placeholder = "Set status or title"  // HW 2.2
+        text.placeholder = "Set status"  // HW 2.2
         text.adjustsFontSizeToFitWidth = false // что то с клавиатурой
         text.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
 
@@ -80,37 +82,28 @@ class ProfileHeaderView: UIView {
 
     private func setupConstraints() {
 
-        self.translatesAutoresizingMaskIntoConstraints = false
-
-        guard let superView = superview else { return }
-
         NSLayoutConstraint.activate([
-
-            self.leftAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.leftAnchor),
-            self.rightAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.rightAnchor),
-            self.topAnchor.constraint(equalTo: superView.safeAreaLayoutGuide.topAnchor),
-            self.heightAnchor.constraint(equalToConstant: 220),
 
 
             avatar.widthAnchor.constraint(equalToConstant: 100),
             avatar.heightAnchor.constraint(equalTo: avatar.widthAnchor),
-            avatar.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-            avatar.topAnchor.constraint(equalTo: self.topAnchor, constant: 16),
+            avatar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.leadingMargin),
+            avatar.topAnchor.constraint(equalTo: self.topAnchor, constant: Constants.indent),
 
-            userName.leftAnchor.constraint(equalTo: avatar.rightAnchor, constant: 20),
+            userName.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 20),
             userName.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
 
-            buttonStatus.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: 16),
-            buttonStatus.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 16),
-            buttonStatus.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            buttonStatus.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: Constants.indent),
+            buttonStatus.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.leadingMargin),
+            buttonStatus.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Constants.trailingMargin),
             buttonStatus.heightAnchor.constraint(equalToConstant: 50),
 
-            statusLabel.leftAnchor.constraint(equalTo: avatar.rightAnchor, constant: 20),
-            statusLabel.rightAnchor.constraint(greaterThanOrEqualTo: self.rightAnchor, constant: -16),
+            statusLabel.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 20),
+            statusLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.trailingAnchor, constant: Constants.trailingMargin),
             statusLabel.bottomAnchor.constraint(equalTo: textFieldStatus.topAnchor, constant: -6),
 
-            textFieldStatus.leftAnchor.constraint(equalTo: avatar.rightAnchor, constant: 20),
-            textFieldStatus.rightAnchor.constraint(equalTo: self.rightAnchor, constant: -16),
+            textFieldStatus.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 20),
+            textFieldStatus.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Constants.trailingMargin),
             textFieldStatus.bottomAnchor.constraint(equalTo: buttonStatus.topAnchor, constant: -10),
             textFieldStatus.heightAnchor.constraint(equalToConstant: 40),
 
@@ -152,6 +145,15 @@ class ProfileHeaderView: UIView {
         statusText = text
         maxLenghtTextField()
         print(statusText)
+    }
+
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        addView()
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
 
 
