@@ -11,62 +11,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     var isLogIn = false
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupViews()
-        loginTF.delegate = self
-        passwordTF.delegate = self
-        self.navigationController?.navigationBar.isHidden = true
-
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
-        view.addGestureRecognizer(tapGesture)
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        
-        let nc = NotificationCenter.default
-        nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-
-    }
-
-    @objc private func keyboardShow(notification: NSNotification) {
-        if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            loginScrollView.contentOffset.y = kbdSize.height - (loginScrollView.frame.height - loginButton.frame.minY)
-            loginScrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbdSize.height, right: 0)
-
-            print(kbdSize.height)
-            print(loginScrollView.frame.height - loginButton.frame.minY)
-            print( loginScrollView.contentOffset.y)
-        }
-
-    }
-
-    @objc private func keyboardHide(notification: NSNotification) {
-        loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
-
-    }
-
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        loginTF.becomeFirstResponder()
-        loginTF.resignFirstResponder()
-        passwordTF.becomeFirstResponder()
-        passwordTF.resignFirstResponder()
-        return true;
-    }
-
-
     var loginScrollView: UIScrollView = {
         let loginScrollView = UIScrollView()
         loginScrollView.translatesAutoresizingMaskIntoConstraints = false
@@ -134,7 +78,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     var loginButton: UIButton = {
         let loginButton = UIButton()
         loginButton.translatesAutoresizingMaskIntoConstraints = false
-
         if let image = UIImage(named: "blue_pixel") {
             loginButton.setBackgroundImage(image.image(alpha: 1), for: .normal)
             loginButton.setBackgroundImage(image.image(alpha: 0.8), for: .selected)
@@ -173,13 +116,13 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             imageVK.widthAnchor.constraint(equalToConstant: 100),
 
             loginStackView.topAnchor.constraint(equalTo: imageVK.bottomAnchor, constant: 120),
-            loginStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            loginStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            loginStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
+            loginStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
             loginStackView.heightAnchor.constraint(equalToConstant: 100),
 
-            loginButton.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: 16),
-            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
-            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+            loginButton.topAnchor.constraint(equalTo: loginStackView.bottomAnchor, constant: Constants.indent),
+            loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
+            loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
         ])
     }
@@ -193,6 +136,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         loginStackView.addArrangedSubview(loginTF)
         loginStackView.addArrangedSubview(passwordTF)
         setupConstraints()
+    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        loginTF.becomeFirstResponder()
+        loginTF.resignFirstResponder()
+        passwordTF.becomeFirstResponder()
+        passwordTF.resignFirstResponder()
+        return true;
     }
 
 
@@ -212,15 +163,51 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         passwordTF.resignFirstResponder()
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupViews()
+        loginTF.delegate = self
+        passwordTF.delegate = self
+        self.navigationController?.navigationBar.isHidden = true
 
-}
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
+        view.addGestureRecognizer(tapGesture)
 
-extension UIImage {
-    func image(alpha: CGFloat) -> UIImage? {
-        UIGraphicsBeginImageContextWithOptions(size, false, scale)
-        draw(at: .zero, blendMode: .normal, alpha: alpha)
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        let nc = NotificationCenter.default
+        nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+
+    }
+
+    @objc private func keyboardShow(notification: NSNotification) {
+        if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
+            loginScrollView.contentOffset.y = kbdSize.height - (loginScrollView.frame.height - loginButton.frame.minY)
+            loginScrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbdSize.height, right: 0)
+
+            print(kbdSize.height)
+            print(loginScrollView.frame.height - loginButton.frame.minY)
+            print( loginScrollView.contentOffset.y)
+        }
+
+    }
+
+    @objc private func keyboardHide(notification: NSNotification) {
+        loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
+
+    }
+
+
+
 }

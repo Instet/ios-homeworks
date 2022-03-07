@@ -25,14 +25,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         let logIn = LogInViewController()
         logIn.view.backgroundColor = .white
-
         let profileNC = UINavigationController(rootViewController: logIn)
-
         logIn.navigationController?.navigationBar.isHidden = true
 
         feedNC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "note.text"), tag: 0)
         profileNC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
-        tabBarController.viewControllers = [profileNC, feedNC] // Массив кнопок
+        tabBarController.viewControllers = [profileNC, feedNC]
+        appendArrayPhotos()
 
         self.window?.rootViewController = tabBarController
         self.window?.makeKeyAndVisible()

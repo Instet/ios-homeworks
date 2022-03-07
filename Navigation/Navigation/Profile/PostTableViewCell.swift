@@ -9,8 +9,6 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
-    static let identifier = "PostTableViewCell"
-
     var postTitle: UILabel = {
         let postTitle = UILabel()
         postTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -99,8 +97,6 @@ class PostTableViewCell: UITableViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-
 
 
     override func awakeFromNib() {
