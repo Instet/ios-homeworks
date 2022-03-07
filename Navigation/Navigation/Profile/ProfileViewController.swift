@@ -9,59 +9,113 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    let profileHeader = ProfileHeaderView()
 
-    let titleButton: UIButton = {
-        let titleButton = UIButton()
-        titleButton.translatesAutoresizingMaskIntoConstraints = false
-        titleButton.setTitle("Set new title", for: .normal)
-        titleButton.setTitleColor(.lightGray, for: .highlighted)
-        titleButton.backgroundColor = UIColor(hex: "#027AFF")    // расширение UIColor
-        titleButton.addTarget(nil, action: #selector(pressButtonTitle), for: .touchUpInside)
+    var postTableView: UITableView = {
+        let postTableView = UITableView(frame: .zero, style: .grouped) // plain лучше
+        postTableView.translatesAutoresizingMaskIntoConstraints = false
+        postTableView.register(PostTableViewCell.self, forCellReuseIdentifier: PostTableViewCell.identifier)
+        postTableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: ProfileHeaderView.profileHeaderView)
+        postTableView.separatorInset = .zero
 
-        return titleButton
+        return postTableView
     }()
 
-    func setupTitleButton() {
-
-        [titleButton.leftAnchor.constraint(equalTo: view.leftAnchor),
-         titleButton.rightAnchor.constraint(equalTo: view.rightAnchor),
-         titleButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
-         titleButton.heightAnchor.constraint(equalToConstant: 50)
-        ].forEach{ $0.isActive = true }
-
-    }
-
-    @objc func pressButtonTitle() {
-       
-        if profileHeader.textFieldStatus.text != "" {
-            self.title = profileHeader.textFieldStatus.text
-            profileHeader.textFieldStatus.text = ""
-            profileHeader.textFieldStatus.resignFirstResponder()
-        } else if profileHeader.textFieldStatus.text == "" {
-            self.title = "New title"
-            profileHeader.textFieldStatus.resignFirstResponder()
-
-        }
+    private func setupConstaintTableView() {
+        NSLayoutConstraint.activate([
+            postTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            postTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            postTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            postTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
 
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
-        self.view.addSubview(profileHeader)
-        profileHeader.addView()
-        self.view.addSubviews(titleButton)
-        self.setupTitleButton()
+        self.navigationController?.navigationBar.isHidden = false
+        view.backgroundColor = .systemGray6
+        view.addSubviews(postTableView)
+        setupConstaintTableView()
+        postTableView.dataSource = self
+        postTableView.delegate = self
+        scrollViewWillBeginDecelerating(postTableView)
+        postTableView.refreshControl = UIRefreshControl()
+        postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
+        var exit = UIBarButtonItem()
+        exit = UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(exitInLogIn))
+        navigationItem.leftBarButtonItem = exit
+    }
 
+    @objc func reloadTableView() {
+        postTableView.reloadData()
+
+        postTableView.refreshControl?.endRefreshing()
+
+    }
+
+    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 10 {
+            navigationController?.setNavigationBarHidden(true, animated: true)
+
+        } else {
+            navigationController?.setNavigationBarHidden(false, animated: true)
+        }
+    }
+
+    @objc func exitInLogIn() {
+        let login = LogInViewController()
+        navigationController?.pushViewController(login, animated: true)
 
     }
 
 }
 
+extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
 
-// практика
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return postArray.count
+    }
+
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = postTableView.dequeueReusableCell(withIdentifier: PostTableViewCell.identifier, for: indexPath) as? PostTableViewCell
+        cell?.configPostArray(title: postArray[indexPath.row].title,
+                              description: postArray[indexPath.row].description,
+                              image: postArray[indexPath.row].image,
+                              likes: postArray[indexPath.row].likes,
+                              views: postArray[indexPath.row].views
+
+        )
+
+        return cell!
+    }
+
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
+        guard section == 0 else { return nil }
+
+        let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: ProfileHeaderView.profileHeaderView) as! ProfileHeaderView
+        return headerView
+    }
+
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 220
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+
+
+
+    }
+
+
+}
+
+
+// MARK: практика UIColor(hex:)
 public extension UIColor {
     convenience init?(hex: String) {
 
@@ -98,7 +152,4 @@ public extension UIColor {
 
         self.init(red: r, green: g, blue: b, alpha: a)
     }
-
-
-
 }

@@ -9,14 +9,12 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-    let post = Post(title: "Post")
-
     let firstButton: UIButton = {
         let firstButton = UIButton()
         firstButton.translatesAutoresizingMaskIntoConstraints = false
         firstButton.setTitle("First Button", for: .normal)
-        firstButton.backgroundColor = .black
-        firstButton.setTitleColor(.yellow, for: .normal)
+        firstButton.backgroundColor = UIColor(hex: "#4885CC")
+        firstButton.setTitleColor(.white, for: .normal)
         firstButton.layer.cornerRadius = 10
         firstButton.addTarget(nil, action: #selector(tapButtons), for: .touchUpInside)
         return firstButton
@@ -26,8 +24,8 @@ class FeedViewController: UIViewController {
         let secondButton = UIButton()
         secondButton.translatesAutoresizingMaskIntoConstraints = false
         secondButton.setTitle("Second Button", for: .normal)
-        secondButton.backgroundColor = .black
-        secondButton.setTitleColor(.yellow, for: .normal)
+        secondButton.backgroundColor = UIColor(hex: "#4885CC")
+        secondButton.setTitleColor(.white, for: .normal)
         secondButton.layer.cornerRadius = 10
         secondButton.addTarget(nil, action: #selector(tapButtons), for: .touchUpInside)
         return secondButton
@@ -38,7 +36,7 @@ class FeedViewController: UIViewController {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
-        stackView.backgroundColor = .yellow
+        stackView.backgroundColor = .white
         stackView.addArrangedSubview(firstButton)
         stackView.addArrangedSubview(secondButton)
         stackView.distribution = .fillEqually
@@ -71,7 +69,6 @@ class FeedViewController: UIViewController {
     @objc func tapButtons() {
         let postVC = PostViewController()
         navigationController?.pushViewController(postVC, animated: true)
-        postVC.postTitle = post.title
         tabBarController?.tabBar.isHidden = true
     }
 
