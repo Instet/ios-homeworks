@@ -10,8 +10,6 @@ import UIKit
 class ProfileHeaderView: UITableViewHeaderFooterView {
 
     private var statusText: String = ""
-    static let profileHeaderView = "ProfileHeaderView"
-
 
     var userName: UILabel = {
         let userName = UILabel()
@@ -84,7 +82,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
         NSLayoutConstraint.activate([
 
-
             avatar.widthAnchor.constraint(equalToConstant: 100),
             avatar.heightAnchor.constraint(equalTo: avatar.widthAnchor),
             avatar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.leadingMargin),
@@ -107,9 +104,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             textFieldStatus.bottomAnchor.constraint(equalTo: buttonStatus.topAnchor, constant: -10),
             textFieldStatus.heightAnchor.constraint(equalToConstant: 40),
 
-
         ] )
-
 
     }
 
@@ -154,17 +149,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-
-
-
-}
-
-public extension UIView {
-    func addSubviews(_ subviews: UIView...) {
-        for i in subviews {
-            self.addSubview(i)
-        }
     }
 
 }
