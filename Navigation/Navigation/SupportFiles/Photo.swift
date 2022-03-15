@@ -10,7 +10,7 @@ import UIKit
 var arrayPhotos: [UIImage] = []
 
 func appendArrayPhotos() {
-    for i in 1...20 {
-        arrayPhotos.append(UIImage(named: "\(i)") ?? UIImage())
+    for i in (1...21).shuffled() {
+        arrayPhotos.append(((UIImage(named: "\(i)") ?? UIImage(named: "error"))!))
     }
 }

@@ -9,36 +9,38 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
-    var postTableView: UITableView = {
-        let postTableView = UITableView(frame: .zero, style: .grouped)
+
+    static var postTableView: UITableView = {
+        let postTableView = UITableView(frame: .zero, style: .grouped) // plain лучше
         postTableView.translatesAutoresizingMaskIntoConstraints = false
         postTableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
         postTableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileHeaderView.self))
         postTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: String(describing: PhotosTableViewCell.self))
         postTableView.separatorInset = .zero
+
         return postTableView
     }()
 
     private func setupConstaintTableView() {
-
         NSLayoutConstraint.activate([
-            postTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            postTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            postTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            postTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+            ProfileViewController.postTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            ProfileViewController.postTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            ProfileViewController.postTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            ProfileViewController.postTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
+
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
         view.backgroundColor = .systemGray6
-        view.addSubviews(postTableView)
+        view.addSubviews(ProfileViewController.postTableView)
         setupConstaintTableView()
-        postTableView.dataSource = self
-        postTableView.delegate = self
-        postTableView.refreshControl = UIRefreshControl()
-        postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
+        ProfileViewController.postTableView.dataSource = self
+        ProfileViewController.postTableView.delegate = self
+        ProfileViewController.postTableView.refreshControl = UIRefreshControl()
+        ProfileViewController.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
         var exit = UIBarButtonItem()
         exit = UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(exitInLogIn))
         navigationItem.leftBarButtonItem = exit
@@ -46,28 +48,18 @@ class ProfileViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        // MARK: скрываю NavigationBar при скроллинге
-        scrollViewWillBeginDecelerating(postTableView)
+        navigationController?.navigationBar.isHidden = true
     }
 
     @objc func reloadTableView() {
-        postTableView.reloadData()
-        postTableView.refreshControl?.endRefreshing()
-
-    }
-
-    func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-        if scrollView.panGestureRecognizer.translation(in: scrollView).y < 0 {
-            navigationController?.setNavigationBarHidden(true, animated: true)
-        } else {
-            navigationController?.setNavigationBarHidden(false, animated: true)
-        }
+        ProfileViewController.postTableView.reloadData()
+        ProfileViewController.postTableView.refreshControl?.endRefreshing()
     }
 
     @objc func exitInLogIn() {
         let login = LogInViewController()
         navigationController?.pushViewController(login, animated: true)
-
+        resignFirstResponder()
     }
 
 }
@@ -90,7 +82,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.section == 1 {
-            guard let cell = postTableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as? PostTableViewCell else { return UITableViewCell() }
+            let cell = ProfileViewController.postTableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as! PostTableViewCell
             cell.configPostArray(title: postArray[indexPath.row].title,
                                   description: postArray[indexPath.row].description,
                                   image: postArray[indexPath.row].image,
@@ -99,19 +91,19 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
             return cell
         } else {
-            guard let cell = postTableView.dequeueReusableCell(withIdentifier: String(describing: PhotosTableViewCell.self), for: indexPath) as? PhotosTableViewCell else { return UITableViewCell()}
+
+            let cell = ProfileViewController.postTableView.dequeueReusableCell(withIdentifier: String(describing: PhotosTableViewCell.self), for: indexPath) as! PhotosTableViewCell
 
             return cell
         }
     }
 
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+
         guard section == 0 else { return nil }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileHeaderView.self)) as! ProfileHeaderView
         return headerView
     }
-
 
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if section == 0 {
@@ -121,8 +113,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
     }
 
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         if indexPath.section == 1 {
             tableView.deselectRow(at: indexPath, animated: false)
             postArray[indexPath.row].views += UInt(1)
@@ -133,6 +125,5 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         }
 
     }
-
 
 }

@@ -10,6 +10,8 @@ import UIKit
 class ProfileHeaderView: UITableViewHeaderFooterView {
 
     private var statusText: String = ""
+    private var defaultAvatarPoint: CGPoint?
+
 
     var userName: UILabel = {
         let userName = UILabel()
@@ -21,14 +23,39 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return userName
     }()
 
-    var avatar: UIImageView = {
+    var avatarFoneView: UIView = {
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = .gray
+        view.isHidden = true
+        view.alpha = 0
+        return view
+    }()
+
+    lazy var exitAvatarButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = .clear
+        button.contentMode = .scaleToFill  // отображение в кнопке
+        button.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))?.withTintColor(.gray, renderingMode: .automatic), for: .normal)
+        button.tintColor = .white
+        button.addTarget(self, action: #selector(closeAvatarView), for: .touchUpInside)
+        return button
+    }()
+
+    lazy var avatar: UIImageView = {
         let avatar = UIImageView()
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.image = UIImage(named: "гомер")
         avatar.clipsToBounds = true
         avatar.layer.borderWidth = 3
         avatar.layer.cornerRadius = 50
-        avatar.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
+        avatar.layer.borderColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
+        var gesture = UITapGestureRecognizer(target: self, action: #selector(self.didTapAvatar))
+        gesture.numberOfTapsRequired = 1
+        gesture.numberOfTouchesRequired = 1
+        avatar.addGestureRecognizer(gesture)
+        avatar.isUserInteractionEnabled = true
         return avatar
     }()
 
@@ -82,6 +109,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
         NSLayoutConstraint.activate([
 
+
             avatar.widthAnchor.constraint(equalToConstant: 100),
             avatar.heightAnchor.constraint(equalTo: avatar.widthAnchor),
             avatar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.leadingMargin),
@@ -104,12 +132,19 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             textFieldStatus.bottomAnchor.constraint(equalTo: buttonStatus.topAnchor, constant: -10),
             textFieldStatus.heightAnchor.constraint(equalToConstant: 40),
 
+            exitAvatarButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indent),
+            exitAvatarButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
+            exitAvatarButton.widthAnchor.constraint(equalToConstant: 40),
+            exitAvatarButton.heightAnchor.constraint(equalTo: exitAvatarButton.widthAnchor)
+
+
         ] )
+
 
     }
 
     func addView() {
-        addSubviews(userName, avatar, statusLabel, buttonStatus, textFieldStatus)
+        addSubviews(userName, statusLabel, buttonStatus, textFieldStatus, avatarFoneView, avatar, exitAvatarButton)
         self.setupConstraints()
     }
 
@@ -149,6 +184,57 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+
+    }
+
+
+    @objc  func didTapAvatar() {
+        UIImageView.animate(withDuration: 0.5) {
+            self.defaultAvatarPoint = self.avatar.center
+            self.avatar.center = CGPoint(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2 - self.avatar.center.y)
+            self.avatar.transform = CGAffineTransform(scaleX: self.contentView.frame.width / self.avatar.frame.width, y: self.contentView.frame.width / self.avatar.frame.width)
+            self.avatar.layer.cornerRadius = 0
+            self.avatarFoneView.isHidden = false
+            self.avatarFoneView.alpha = 0.9
+            ProfileViewController.postTableView.isScrollEnabled = false
+            ProfileViewController.postTableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = false
+            self.avatar.isUserInteractionEnabled = false
+        } completion: { _ in
+            UIImageView.animate(withDuration: 0.3) {
+                self.exitAvatarButton.alpha = 1
+
+
+            }
+
+        }
+
+    }
+
+
+
+    @objc func closeAvatarView() {
+        UIImageView.animate(withDuration: 0.3) {
+            self.exitAvatarButton.alpha = 0
+        } completion: { _ in
+            UIImageView.animate(withDuration: 0.5) {
+
+                guard self.defaultAvatarPoint != nil else { return }
+                self.avatar.center = self.defaultAvatarPoint!
+                self.avatar.transform = CGAffineTransform(scaleX: 1, y: 1)
+                self.avatar.layer.cornerRadius = self.avatar.frame.width / 2
+                self.avatarFoneView.alpha = 0
+                ProfileViewController.postTableView.isScrollEnabled = true
+                ProfileViewController.postTableView.cellForRow(at: IndexPath(row: 0, section: 0))?.isUserInteractionEnabled = true
+                self.avatar.isUserInteractionEnabled = true
+
+            }
+        }
+
+
     }
 
 }
+
+
+
+
