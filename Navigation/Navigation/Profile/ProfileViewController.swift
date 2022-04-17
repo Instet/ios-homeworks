@@ -35,7 +35,13 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
+
+        #if DEBUG
+        view.backgroundColor = .systemBlue
+        #else
         view.backgroundColor = .systemGray6
+        #endif
+
         view.addSubviews(ProfileViewController.postTableView)
         setupConstaintTableView()
         ProfileViewController.postTableView.dataSource = self

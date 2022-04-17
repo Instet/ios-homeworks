@@ -16,8 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let tabBarController = UITabBarController()
-        tabBarController.tabBar.backgroundColor = .clear
-        tabBarController.tabBar.barTintColor = .white
+        tabBarController.tabBar.backgroundColor = .white
+        tabBarController.tabBar.scrollEdgeAppearance?.selectionIndicatorTintColor = .white
 
         let feedVC = FeedViewController()
         feedVC.view.backgroundColor = .white
