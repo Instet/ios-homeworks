@@ -16,7 +16,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     var userName: UILabel = {
         let userName = UILabel()
-        //userName.translatesAutoresizingMaskIntoConstraints = false
         userName.textColor = .black
         userName.text = "Ruslan Magomedow"
         userName.textAlignment = .center
@@ -26,7 +25,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     var avatarFoneView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
-        //view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .gray
         view.isHidden = true
         view.alpha = 0
@@ -36,9 +34,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     lazy var exitAvatarButton: UIButton = {
         let button = UIButton()
         button.alpha = 0
-        //button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
-        button.contentMode = .scaleToFill  // отображение в кнопке
+        button.contentMode = .scaleToFill
         button.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))?.withTintColor(.gray, renderingMode: .automatic), for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(closeAvatarView), for: .touchUpInside)
@@ -47,7 +44,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     lazy var avatar: UIImageView = {
         let avatar = UIImageView()
-        //avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.image = UIImage(named: "гомер")
         avatar.clipsToBounds = true
         avatar.layer.borderWidth = 3
@@ -63,7 +59,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     var statusLabel: UILabel = {
         let label = UILabel()
-        //label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .gray
         label.text = "Waiting for something..."
         label.font = .systemFont(ofSize: 14, weight: .regular)
@@ -72,7 +67,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     var buttonStatus: UIButton = {
         let button = UIButton()
-        //button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor(hex: "#4885CC")
         button.layer.cornerRadius = 4
         button.layer.shadowColor = UIColor.black.cgColor
@@ -89,7 +83,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     var textFieldStatus: UITextField = {
         let text = UITextField()
-        //text.translatesAutoresizingMaskIntoConstraints = false
         text.backgroundColor = .white
         text.font = .systemFont(ofSize: 15, weight: .regular)
         text.textColor = .black
@@ -98,8 +91,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         text.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
-        text.placeholder = "Set status"  // HW 2.2
-        text.adjustsFontSizeToFitWidth = false // что то с клавиатурой
+        text.placeholder = "Set status"
+        text.adjustsFontSizeToFitWidth = false
         text.addTarget(ProfileHeaderView.self, action: #selector(statusTextChanged), for: .editingChanged)
 
 
@@ -143,43 +136,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             make.top.equalTo(self.snp.topMargin).offset(Constants.indent)
             make.width.height.equalTo(40)
             make.right.equalTo(contentView.snp.right).offset(Constants.trailingMargin)
-
         }
-
-//        NSLayoutConstraint.activate([
-
-//            avatar.widthAnchor.constraint(equalToConstant: 100),
-//            avatar.heightAnchor.constraint(equalTo: avatar.widthAnchor),
-//            avatar.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.leadingMargin),
-//            avatar.topAnchor.constraint(equalTo: self.topAnchor, constant: Constants.indent),
-
-//            userName.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 20),
-//            userName.topAnchor.constraint(equalTo: self.topAnchor, constant: 27),
-
-//            buttonStatus.topAnchor.constraint(equalTo: avatar.bottomAnchor, constant: Constants.indent),
-//            buttonStatus.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.leadingMargin),
-//            buttonStatus.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Constants.trailingMargin),
-//            buttonStatus.heightAnchor.constraint(equalToConstant: 50),
-
-
-
-//            statusLabel.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 20),
-//            statusLabel.trailingAnchor.constraint(greaterThanOrEqualTo: self.trailingAnchor, constant: Constants.trailingMargin),
-//            statusLabel.bottomAnchor.constraint(equalTo: textFieldStatus.topAnchor, constant: -6),
-
-//            textFieldStatus.leadingAnchor.constraint(equalTo: avatar.trailingAnchor, constant: 20),
-//            textFieldStatus.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Constants.trailingMargin),
-//            textFieldStatus.bottomAnchor.constraint(equalTo: buttonStatus.topAnchor, constant: -10),
-//            textFieldStatus.heightAnchor.constraint(equalToConstant: 40),
-
-//            exitAvatarButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indent),
-//            exitAvatarButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
-//            exitAvatarButton.widthAnchor.constraint(equalToConstant: 40),
-//            exitAvatarButton.heightAnchor.constraint(equalTo: exitAvatarButton.widthAnchor)
-//
-//
-//        ] )
-
 
     }
 
@@ -243,7 +200,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             UIImageView.animate(withDuration: 0.3) {
                 self.exitAvatarButton.alpha = 1
 
-
             }
 
         }
@@ -269,7 +225,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
             }
         }
-
 
     }
 
