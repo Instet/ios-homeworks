@@ -28,6 +28,7 @@
 		DBF92E70281599D400394008 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF92E6F281599D400394008 /* Checker.swift */; };
 		DBF92E7228159A3600394008 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF92E7128159A3600394008 /* LoginViewControllerDelegate.swift */; };
 		DBF92E7428159AF300394008 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF92E7328159AF300394008 /* LoginInspector.swift */; };
+		DBF92E762815A24700394008 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF92E752815A24700394008 /* Factory.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +55,7 @@
 		DBF92E6F281599D400394008 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
 		DBF92E7128159A3600394008 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
 		DBF92E7328159AF300394008 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
+		DBF92E752815A24700394008 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -132,6 +134,7 @@
 				DBF92E6F281599D400394008 /* Checker.swift */,
 				DBF92E7128159A3600394008 /* LoginViewControllerDelegate.swift */,
 				DBF92E7328159AF300394008 /* LoginInspector.swift */,
+				DBF92E752815A24700394008 /* Factory.swift */,
 			);
 			path = Checker;
 			sourceTree = "<group>";
@@ -220,6 +223,7 @@
 				DBBAECE227D6617C00AA366E /* Constants.swift in Sources */,
 				DBBBD14F27B91EC900900EE7 /* Post.swift in Sources */,
 				DBBAECE627D661A100AA366E /* Photo.swift in Sources */,
+				DBF92E762815A24700394008 /* Factory.swift in Sources */,
 				DBBBD15127B9602B00900EE7 /* InfoViewController.swift in Sources */,
 				DBBE367427D231E0006CD4FB /* LogInViewController.swift in Sources */,
 				DBF92E7228159A3600394008 /* LoginViewControllerDelegate.swift in Sources */,

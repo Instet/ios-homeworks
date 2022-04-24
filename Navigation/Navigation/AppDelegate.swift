@@ -22,7 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         feedVC.view.backgroundColor = .white
         let feedNC = UINavigationController(rootViewController: feedVC)
 
-        let loginInspector = LoginInspector()
+        let factory = MyLoginFactory()
+        let loginInspector = factory.factory()
         let logIn = LogInViewController()
         logIn.delegate = loginInspector
 
