@@ -25,6 +25,9 @@
 		DBBBD15127B9602B00900EE7 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBD15027B9602B00900EE7 /* InfoViewController.swift */; };
 		DBBE367427D231E0006CD4FB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBE367327D231E0006CD4FB /* LogInViewController.swift */; };
 		DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBE367527D23264006CD4FB /* PostTableViewCell.swift */; };
+		DBF92E70281599D400394008 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF92E6F281599D400394008 /* Checker.swift */; };
+		DBF92E7228159A3600394008 /* LoginViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF92E7128159A3600394008 /* LoginViewControllerDelegate.swift */; };
+		DBF92E7428159AF300394008 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF92E7328159AF300394008 /* LoginInspector.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +51,9 @@
 		DBBBD15027B9602B00900EE7 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DBBE367327D231E0006CD4FB /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		DBBE367527D23264006CD4FB /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		DBF92E6F281599D400394008 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		DBF92E7128159A3600394008 /* LoginViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewControllerDelegate.swift; sourceTree = "<group>"; };
+		DBF92E7328159AF300394008 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +111,7 @@
 		DBBBD13327B82BC200900EE7 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				DBF92E6E281599AC00394008 /* Checker */,
 				DBBAECE027D6613D00AA366E /* SupportFiles */,
 				DB70BE1027BB74EE00599559 /* Profile */,
 				DBBBD13427B82BC200900EE7 /* AppDelegate.swift */,
@@ -117,6 +124,16 @@
 				DBBBD15027B9602B00900EE7 /* InfoViewController.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		DBF92E6E281599AC00394008 /* Checker */ = {
+			isa = PBXGroup;
+			children = (
+				DBF92E6F281599D400394008 /* Checker.swift */,
+				DBF92E7128159A3600394008 /* LoginViewControllerDelegate.swift */,
+				DBF92E7328159AF300394008 /* LoginInspector.swift */,
+			);
+			path = Checker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -194,15 +211,18 @@
 				DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */,
 				DBBBD14D27B8CC3C00900EE7 /* PostViewController.swift in Sources */,
 				DBBBD13927B82BC200900EE7 /* ViewController.swift in Sources */,
+				DBF92E7428159AF300394008 /* LoginInspector.swift in Sources */,
 				DBBBD13527B82BC200900EE7 /* AppDelegate.swift in Sources */,
 				DBBBD14B27B8301E00900EE7 /* ProfileViewController.swift in Sources */,
 				DB70BE1227BB755F00599559 /* ProfileHeaderView.swift in Sources */,
+				DBF92E70281599D400394008 /* Checker.swift in Sources */,
 				DBBBD14927B8300E00900EE7 /* FeedViewController.swift in Sources */,
 				DBBAECE227D6617C00AA366E /* Constants.swift in Sources */,
 				DBBBD14F27B91EC900900EE7 /* Post.swift in Sources */,
 				DBBAECE627D661A100AA366E /* Photo.swift in Sources */,
 				DBBBD15127B9602B00900EE7 /* InfoViewController.swift in Sources */,
 				DBBE367427D231E0006CD4FB /* LogInViewController.swift in Sources */,
+				DBF92E7228159A3600394008 /* LoginViewControllerDelegate.swift in Sources */,
 				DBBAECEC27D6642700AA366E /* PhotosCollectionViewCell.swift in Sources */,
 				DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */,
 			);

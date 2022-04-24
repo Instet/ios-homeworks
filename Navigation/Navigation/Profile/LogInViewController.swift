@@ -9,7 +9,7 @@ import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
 
-    var isLogIn = false
+    var delegate: LoginViewControllerDelegate?
 
     lazy var loginScrollView: UIScrollView = {
         let loginScrollView = UIScrollView()
@@ -148,13 +148,36 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
 
     @objc private func pressLogIn() {
-        isLogIn = true
-        let profileVC = ProfileViewController()
-        navigationController?.pushViewController(profileVC, animated: false)
 
-        if isLogIn {
-            navigationController?.setViewControllers([profileVC], animated: true)
-            profileVC.navigationController?.navigationBar.isHidden = false
+        if loginTF.text?.isEmpty == true {
+            let alertVC = UIAlertController(title: "Ошибка ⚠️", message: "Введите логин!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alertVC.addAction(alertAction)
+            self.present(alertVC, animated: true)
+            return
+        }
+        if passwordTF.text?.isEmpty == true {
+            let alertVC = UIAlertController(title: "Ошибка ⚠️", message: "Введите пароль!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alertVC.addAction(alertAction)
+            self.present(alertVC, animated: true)
+            return
+
+        }
+
+        guard let login = loginTF.text else { return }
+        guard let password = passwordTF.text else { return }
+        guard let delegate = delegate else { return }
+        let isRight = delegate.check(login: login, password: password)
+
+        if isRight {
+            let profileVC = ProfileViewController()
+            navigationController?.pushViewController(profileVC, animated: false)
+        } else {
+            let alert = UIAlertController(title: "ВНИМАНИЕ", message: "Введен неверный логин или пароль!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alert.addAction(alertAction)
+            self.present(alert, animated: true)
         }
     }
 
