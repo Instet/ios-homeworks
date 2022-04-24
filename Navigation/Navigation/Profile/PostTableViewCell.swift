@@ -91,6 +91,7 @@ class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubviews(postTitle, postImage, postDescription, postLikes, postViews)
         setupConstraints()
+        self.selectionStyle = .default
 
     }
 
@@ -104,9 +105,5 @@ class PostTableViewCell: UITableViewCell {
 
     }
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-    }
 
 }

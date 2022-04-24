@@ -13,7 +13,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private var defaultAvatarPoint: CGPoint?
 
 
-    var userName: UILabel = {
+    lazy var userName: UILabel = {
         let userName = UILabel()
         userName.translatesAutoresizingMaskIntoConstraints = false
         userName.textColor = .black
@@ -23,7 +23,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return userName
     }()
 
-    var avatarFoneView: UIView = {
+    lazy var avatarFoneView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .gray
@@ -36,10 +36,11 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
-        button.contentMode = .scaleToFill  // отображение в кнопке
+        button.contentMode = .scaleToFill
         button.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))?.withTintColor(.gray, renderingMode: .automatic), for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(closeAvatarView), for: .touchUpInside)
+        button.alpha = 0
         return button
     }()
 
@@ -59,7 +60,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return avatar
     }()
 
-    var statusLabel: UILabel = {
+    lazy var statusLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textColor = .gray
@@ -68,7 +69,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return label
     }()
 
-    var buttonStatus: UIButton = {
+    lazy var buttonStatus: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor(hex: "#4885CC")
@@ -85,7 +86,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return button
     }()
 
-    var textFieldStatus: UITextField = {
+    lazy var textFieldStatus: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.backgroundColor = .white
@@ -96,12 +97,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         text.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
-        text.placeholder = "Set status"  // HW 2.2
-        text.adjustsFontSizeToFitWidth = false // что то с клавиатурой
+        text.placeholder = "Set status" 
+        text.adjustsFontSizeToFitWidth = false
         text.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
-
-
-
         return text
     }()
 
