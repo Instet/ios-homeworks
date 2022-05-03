@@ -40,6 +40,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         button.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))?.withTintColor(.gray, renderingMode: .automatic), for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(closeAvatarView), for: .touchUpInside)
+        button.alpha = 0
         return button
     }()
 
@@ -85,7 +86,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return button
     }()
 
-    var textFieldStatus: UITextField = {
+    lazy var textFieldStatus: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.backgroundColor = .white

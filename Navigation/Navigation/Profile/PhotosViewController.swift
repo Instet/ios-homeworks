@@ -6,8 +6,13 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
+
+    var facade = ImagePublisherFacade()
+    var newArrayImage = [UIImage]()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -16,6 +21,13 @@ class PhotosViewController: UIViewController {
         self.photosCollectionView.dataSource = self
         self.photosCollectionView.delegate = self
         setupConstraints()
+        facade.subscribe(self)
+        facade.addImagesWithTimer(time: 0.1, repeat: 21, userImages: arrayPhotos)
+    }
+
+    deinit {
+        facade.rechargeImageLibrary()
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -68,16 +80,30 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrayPhotos.count
+        return newArrayImage.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell()}
-        cell.configCellCollection(photo: arrayPhotos[indexPath.item])
+        cell.configCellCollection(photo: newArrayImage[indexPath.item])
 
         return cell
     }
 
 
 }
+
+extension PhotosViewController: ImageLibrarySubscriber {
+
+    func receive(images: [UIImage]) {
+        for i in images {
+            newArrayImage.append(i)
+        }
+        photosCollectionView.reloadData()
+
+    }
+
+
+}
+
 
