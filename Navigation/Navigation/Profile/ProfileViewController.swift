@@ -12,7 +12,7 @@ class ProfileViewController: UIViewController {
 
 
     static var postTableView: UITableView = {
-        let postTableView = UITableView(frame: .zero, style: .grouped)
+        let postTableView = UITableView(frame: .zero, style: .grouped) // plain лучше
         postTableView.translatesAutoresizingMaskIntoConstraints = false
         postTableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
         postTableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileHeaderView.self))
