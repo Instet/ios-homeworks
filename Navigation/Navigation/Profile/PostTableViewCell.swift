@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import iOSIntPackage
 
 class PostTableViewCell: UITableViewCell {
 
@@ -81,20 +80,9 @@ class PostTableViewCell: UITableViewCell {
     }
 
     func configPostArray(title: String, description: String, image: String, likes: UInt, views: UInt) {
-        self.postImage.image = UIImage(named: image)
-
-        let imageProcessor = ImageProcessor()
-        var arrayFilter = ColorFilter.allCases
-        arrayFilter.shuffle()
-        guard let imageFilter = postImage.image else { return }
-        imageProcessor.processImage(sourceImage: imageFilter, filter: arrayFilter[0]) { filterImage in
-            postImage.image = filterImage
-        }
-
-        
-
         self.postTitle.text = title
         self.postDescription.text = description
+        self.postImage.image = UIImage(named: image)
         self.postLikes.text = "Likes: \(likes)"
         self.postViews.text = "Views: \(views)"
     }
