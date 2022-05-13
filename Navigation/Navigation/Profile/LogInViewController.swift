@@ -75,7 +75,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return password
     }()
 
-    var loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let loginButton = UIButton()
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         if let image = UIImage(named: "blue_pixel") {

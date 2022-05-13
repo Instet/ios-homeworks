@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		DB70BE1227BB755F00599559 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */; };
+		DB81EADD282EB45900E8F6E4 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB81EADC282EB45900E8F6E4 /* CustomButton.swift */; };
+		DB81EADF282EB52E00E8F6E4 /* PasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB81EADE282EB52E00E8F6E4 /* PasswordModel.swift */; };
+		DB81EAE1282EB57100E8F6E4 /* PasswordCheckButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB81EAE0282EB57100E8F6E4 /* PasswordCheckButton.swift */; };
+		DB81EAE3282EB59800E8F6E4 /* PasswordTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB81EAE2282EB59800E8F6E4 /* PasswordTextField.swift */; };
 		DBBAECE227D6617C00AA366E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE127D6617C00AA366E /* Constants.swift */; };
 		DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE327D6618D00AA366E /* Extensions.swift */; };
 		DBBAECE627D661A100AA366E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE527D661A100AA366E /* Photo.swift */; };
@@ -30,6 +34,10 @@
 
 /* Begin PBXFileReference section */
 		DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		DB81EADC282EB45900E8F6E4 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
+		DB81EADE282EB52E00E8F6E4 /* PasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordModel.swift; sourceTree = "<group>"; };
+		DB81EAE0282EB57100E8F6E4 /* PasswordCheckButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordCheckButton.swift; sourceTree = "<group>"; };
+		DB81EAE2282EB59800E8F6E4 /* PasswordTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordTextField.swift; sourceTree = "<group>"; };
 		DBBAECE127D6617C00AA366E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DBBAECE327D6618D00AA366E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DBBAECE527D661A100AA366E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -77,6 +85,17 @@
 			path = Profile;
 			sourceTree = "<group>";
 		};
+		DB81EADB282EB43400E8F6E4 /* MyCustomModels */ = {
+			isa = PBXGroup;
+			children = (
+				DB81EADC282EB45900E8F6E4 /* CustomButton.swift */,
+				DB81EADE282EB52E00E8F6E4 /* PasswordModel.swift */,
+				DB81EAE0282EB57100E8F6E4 /* PasswordCheckButton.swift */,
+				DB81EAE2282EB59800E8F6E4 /* PasswordTextField.swift */,
+			);
+			path = MyCustomModels;
+			sourceTree = "<group>";
+		};
 		DBBAECE027D6613D00AA366E /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +126,7 @@
 		DBBBD13327B82BC200900EE7 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				DB81EADB282EB43400E8F6E4 /* MyCustomModels */,
 				DBBAECE027D6613D00AA366E /* SupportFiles */,
 				DB70BE1027BB74EE00599559 /* Profile */,
 				DBBBD13427B82BC200900EE7 /* AppDelegate.swift */,
@@ -193,7 +213,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBBAECE827D6640000AA366E /* PhotosTableViewCell.swift in Sources */,
+				DB81EAE1282EB57100E8F6E4 /* PasswordCheckButton.swift in Sources */,
+				DB81EAE3282EB59800E8F6E4 /* PasswordTextField.swift in Sources */,
+				DB81EADF282EB52E00E8F6E4 /* PasswordModel.swift in Sources */,
 				DBBAECEA27D6641200AA366E /* PhotosViewController.swift in Sources */,
+				DB81EADD282EB45900E8F6E4 /* CustomButton.swift in Sources */,
 				DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */,
 				DBBBD14D27B8CC3C00900EE7 /* PostViewController.swift in Sources */,
 				DBBBD13927B82BC200900EE7 /* ViewController.swift in Sources */,

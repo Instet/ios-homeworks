@@ -9,36 +9,56 @@ import UIKit
 
 class FeedViewController: UIViewController {
 
-    let firstButton: UIButton = {
-        let firstButton = UIButton()
-        firstButton.translatesAutoresizingMaskIntoConstraints = false
-        firstButton.setTitle("First Button", for: .normal)
-        firstButton.backgroundColor = UIColor(hex: "#4885CC")
-        firstButton.setTitleColor(.white, for: .normal)
-        firstButton.layer.cornerRadius = 10
-        firstButton.addTarget(nil, action: #selector(tapButtons), for: .touchUpInside)
+    var passwordText: String?
+
+
+    private lazy var checkLabel: UILabel = {
+        let label = UILabel()
+        label.isHidden = true
+        label.alpha = 0
+        return label
+    }()
+
+    private lazy var firstButton: CustomButton = {
+        let firstButton = CustomButton(title: "First Button", titleColor: .white) { [weak self] in
+            let postVC = PostViewController()
+            self?.navigationController?.pushViewController(postVC, animated: true)
+            self?.tabBarController?.tabBar.isHidden = true
+        }
         return firstButton
     }()
 
-    let secondButton: UIButton = {
-        let secondButton = UIButton()
-        secondButton.translatesAutoresizingMaskIntoConstraints = false
-        secondButton.setTitle("Second Button", for: .normal)
-        secondButton.backgroundColor = UIColor(hex: "#4885CC")
-        secondButton.setTitleColor(.white, for: .normal)
-        secondButton.layer.cornerRadius = 10
-        secondButton.addTarget(nil, action: #selector(tapButtons), for: .touchUpInside)
+    private lazy var secondButton: CustomButton = {
+        let secondButton = CustomButton(title: "Second Button", titleColor: .white) { [weak self] in
+            let postVC = PostViewController()
+            self?.navigationController?.pushViewController(postVC, animated: true)
+            self?.tabBarController?.tabBar.isHidden = true
+        }
         return secondButton
+    }()
+
+    private lazy var checkPasswordButton: PasswordCheckButton = {
+        let button = PasswordCheckButton { [weak self] in
+            Password.shared.check(self!.passwordText ?? "")
+            self?.passwordTF.resignFirstResponder()
+        }
+        return button
+    }()
+
+    private lazy var passwordTF: PasswordTextField = {
+        let text = PasswordTextField(delegatTF: self)
+        return text
     }()
 
     lazy var stackView: UIStackView = {
         let stackView = UIStackView()
-        stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 10
         stackView.backgroundColor = .white
         stackView.addArrangedSubview(firstButton)
         stackView.addArrangedSubview(secondButton)
+        stackView.addArrangedSubview(passwordTF)
+        stackView.addArrangedSubview(checkPasswordButton)
         stackView.distribution = .fillEqually
         return stackView
     }()
@@ -48,7 +68,9 @@ class FeedViewController: UIViewController {
             stackView.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
             stackView.centerYAnchor.constraint(equalTo: self.view.centerYAnchor),
             stackView.heightAnchor.constraint(equalToConstant: 200),
-            stackView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, constant: -32)
+            stackView.widthAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.widthAnchor, constant: -32),
+            checkLabel.bottomAnchor.constraint(equalTo: stackView.topAnchor, constant: -20),
+            checkLabel.centerXAnchor.constraint(equalTo: stackView.centerXAnchor)
         ])
     }
 
@@ -56,9 +78,10 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Feed"
-        self.view.addSubviews(stackView)
+        self.view.addSubviews(stackView, checkLabel)
         setupConstraintsStackView()
-
+        NotificationCenter.default.addObserver(self, selector: #selector(examinationPasswordTrue), name: Notification.Name("true"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(examinationPasswordFalse), name: Notification.Name("false"), object: nil)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -66,11 +89,42 @@ class FeedViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
     }
 
-    @objc func tapButtons() {
-        let postVC = PostViewController()
-        navigationController?.pushViewController(postVC, animated: true)
-        tabBarController?.tabBar.isHidden = true
+
+    @objc func examinationPasswordTrue() {
+        UILabel.animate(withDuration: 0.5) { [weak self] in
+            self?.checkLabel.text = "Пароль верный"
+            self?.checkLabel.textColor = .systemGreen
+            self?.checkLabel.isHidden = false
+            self?.checkLabel.alpha = 1
+        } completion: { [self] _ in
+            UILabel.animate(withDuration: 2) { [weak self] in
+                self?.checkLabel.alpha = 0
+            }
+        }
+        checkLabel.isHidden = false
     }
 
 
+    @objc func examinationPasswordFalse() {
+        UILabel.animate(withDuration: 0.5) { [weak self] in
+            self?.checkLabel.text = "Пароль неверный"
+            self?.checkLabel.textColor = .systemRed
+            self?.checkLabel.isHidden = false
+            self?.checkLabel.alpha = 1
+        } completion: { [self] _ in
+            UILabel.animate(withDuration: 2) { [weak self] in
+                self?.checkLabel.alpha = 0
+            }
+        }
+        checkLabel.isHidden = false
+    }
+
 }
+
+extension FeedViewController: PasswordTextFieldDelegate {
+
+    func enterPassword() {
+        passwordText = passwordTF.text!
+    }
+}
+
