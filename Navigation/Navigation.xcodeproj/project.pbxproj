@@ -11,6 +11,7 @@
 		DB2C7CE8282FCBA90044AC30 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CE7282FCBA90044AC30 /* MainTabBarController.swift */; };
 		DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */; };
 		DB2C7CEE282FD1780044AC30 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */; };
+		DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CF92830C20E0044AC30 /* Factory.swift */; };
 		DB70BE1227BB755F00599559 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */; };
 		DBBAECE227D6617C00AA366E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE127D6617C00AA366E /* Constants.swift */; };
 		DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE327D6618D00AA366E /* Extensions.swift */; };
@@ -35,6 +36,7 @@
 		DB2C7CE7282FCBA90044AC30 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		DB2C7CF92830C20E0044AC30 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
 		DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		DBBAECE127D6617C00AA366E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DBBAECE327D6618D00AA366E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -101,6 +103,14 @@
 			path = FeedCoordinator;
 			sourceTree = "<group>";
 		};
+		DB2C7CF82830C1E20044AC30 /* Factory */ = {
+			isa = PBXGroup;
+			children = (
+				DB2C7CF92830C20E0044AC30 /* Factory.swift */,
+			);
+			path = Factory;
+			sourceTree = "<group>";
+		};
 		DB70BE1027BB74EE00599559 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +157,7 @@
 			children = (
 				DB2C7CE3282FCAFB0044AC30 /* Coordinator */,
 				DB2C7CE6282FCB710044AC30 /* TabBarController */,
+				DB2C7CF82830C1E20044AC30 /* Factory */,
 				DB70BE1027BB74EE00599559 /* Profile */,
 				DBBBD13427B82BC200900EE7 /* AppDelegate.swift */,
 				DBBBD13D27B82BC400900EE7 /* Assets.xcassets */,
@@ -248,6 +259,7 @@
 				DBBE367427D231E0006CD4FB /* LogInViewController.swift in Sources */,
 				DBBAECEC27D6642700AA366E /* PhotosCollectionViewCell.swift in Sources */,
 				DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */,
+				DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */,
 				DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

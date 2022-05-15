@@ -137,14 +137,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         loginStackView.addArrangedSubview(passwordTF)
         setupConstraints()
     }
-//
-//    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-//        loginTF.becomeFirstResponder()
-//        loginTF.resignFirstResponder()
-//        passwordTF.becomeFirstResponder()
-//        passwordTF.resignFirstResponder()
-//        return true;
-//    }
+
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        loginTF.becomeFirstResponder()
+        loginTF.resignFirstResponder()
+        passwordTF.becomeFirstResponder()
+        passwordTF.resignFirstResponder()
+        return true;
+    }
 
 
     @objc private func pressLogIn() {
@@ -166,6 +166,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViews()
+    
         loginTF.delegate = self
         passwordTF.delegate = self
         self.navigationController?.navigationBar.isHidden = true

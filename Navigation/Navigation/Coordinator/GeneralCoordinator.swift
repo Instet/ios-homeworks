@@ -17,7 +17,7 @@ protocol GeneralCoordinator: AnyObject {
 final class RootCoordinator: GeneralCoordinator {
 
     func startApplication() -> UIViewController {
-        return UIViewController()
+        return MainTabBarController()
     }
 
 

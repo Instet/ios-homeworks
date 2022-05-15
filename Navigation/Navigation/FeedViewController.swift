@@ -56,6 +56,7 @@ class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Feed"
+        view.backgroundColor = .white
         self.view.addSubviews(stackView)
         setupConstraintsStackView()
 
