@@ -85,7 +85,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return button
     }()
 
-    var textFieldStatus: UITextField = {
+    lazy var textFieldStatus: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
         text.backgroundColor = .white
