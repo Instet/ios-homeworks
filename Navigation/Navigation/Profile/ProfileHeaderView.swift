@@ -98,7 +98,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         text.leftViewMode = .always
         text.placeholder = "Set status"  // HW 2.2
         text.adjustsFontSizeToFitWidth = false // что то с клавиатурой
-
+        text.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
 
 
 
