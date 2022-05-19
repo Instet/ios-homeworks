@@ -36,10 +36,11 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = .clear
-        button.contentMode = .scaleToFill  // отображение в кнопке
+        button.contentMode = .scaleToFill
         button.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))?.withTintColor(.gray, renderingMode: .automatic), for: .normal)
         button.tintColor = .white
         button.addTarget(self, action: #selector(closeAvatarView), for: .touchUpInside)
+        button.alpha = 0
         return button
     }()
 
@@ -96,8 +97,8 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         text.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
-        text.placeholder = "Set status"  // HW 2.2
-        text.adjustsFontSizeToFitWidth = false // что то с клавиатурой
+        text.placeholder = "Set status"
+        text.adjustsFontSizeToFitWidth = false
         text.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
 
 
