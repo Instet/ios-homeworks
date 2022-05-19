@@ -11,6 +11,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     private var statusText: String = ""
     private var defaultAvatarPoint: CGPoint?
+    
 
 
     lazy var userName: UILabel = {
@@ -39,6 +40,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         button.contentMode = .scaleToFill
         button.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))?.withTintColor(.gray, renderingMode: .automatic), for: .normal)
         button.tintColor = .white
+        button.alpha = 0
         button.addTarget(self, action: #selector(closeAvatarView), for: .touchUpInside)
         button.alpha = 0
         return button
@@ -49,6 +51,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.image = UIImage(named: "гомер")
         avatar.clipsToBounds = true
+        avatar.contentMode = .scaleToFill
         avatar.layer.borderWidth = 3
         avatar.layer.cornerRadius = 50
         avatar.layer.borderColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
@@ -100,8 +103,16 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         text.placeholder = "Set status" 
         text.adjustsFontSizeToFitWidth = false
         text.addTarget(self, action: #selector(statusTextChanged), for: .editingChanged)
+
         return text
     }()
+
+    func currentUser(user: User) {
+        userName.text = user.fullName
+        avatar.image = user.userAvatar
+        statusLabel.text = user.userStatus
+
+    }
 
     private func setupConstraints() {
 

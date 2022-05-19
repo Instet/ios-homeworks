@@ -9,7 +9,12 @@ import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
 
+
     var delegate: LoginViewControllerDelegate?
+
+    var isLogIn = false
+    var profile = ProfileHeaderView()
+
 
     lazy var loginScrollView: UIScrollView = {
         let loginScrollView = UIScrollView()
@@ -87,7 +92,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
         loginButton.setTitle("Log In", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
-        loginButton.addTarget(self, action: #selector(pressLogIn), for: .touchUpInside)
+        loginButton.addTarget(nil, action: #selector(pressLogIn), for: .touchUpInside)
         loginButton.layer.cornerRadius = 10
         loginButton.clipsToBounds = true
         return loginButton
@@ -149,6 +154,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     @objc private func pressLogIn() {
 
+
         if loginTF.text?.isEmpty == true {
             let alertVC = UIAlertController(title: "Ошибка ⚠️", message: "Введите логин!", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "ОК", style: .default)
@@ -177,9 +183,42 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             let alert = UIAlertController(title: "ВНИМАНИЕ", message: "Введен неверный логин или пароль!", preferredStyle: .alert)
             let alertAction = UIAlertAction(title: "ОК", style: .default)
             alert.addAction(alertAction)
+
+        #if DEBUG
+
+        let currentUser = TestUserService()
+        let profileViewController = ProfileViewController(userService: currentUser, userLogin: loginTF.text!)
+        profileViewController.userService = currentUser
+        if loginTF.text == currentUser.user.login {
+            profile.userName.text = currentUser.user.fullName
+
+            isLogIn = true
+            navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ок", style: .default))
             self.present(alert, animated: true)
         }
+
+        #else
+
+        let currentUser = CurrentUserService()
+        let profileViewController = ProfileViewController(userService: currentUser, userLogin: loginTF.text!)
+        profileViewController.userService = currentUser
+        if loginTF.text == currentUser.user.login {
+            isLogIn = true
+            navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ок", style: .default))
+
+            self.present(alert, animated: true)
+        }
+
+        #endif
+
     }
+
 
     @objc func tap() {
         loginTF.resignFirstResponder()

@@ -18,6 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let tabBarController = UITabBarController()
         tabBarController.tabBar.backgroundColor = .clear
 
+
         let feedVC = FeedViewController()
         feedVC.view.backgroundColor = .white
         let feedNC = UINavigationController(rootViewController: feedVC)

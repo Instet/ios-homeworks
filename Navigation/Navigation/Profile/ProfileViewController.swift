@@ -6,8 +6,26 @@
 //
 
 import UIKit
+import StorageService
 
 class ProfileViewController: UIViewController {
+
+    var userService: UserService
+
+    var userLogin: String
+
+
+    init(userService: UserService, userLogin: String) {
+        self.userService = userService
+        self.userLogin = userLogin
+   
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 
 
     static var postTableView: UITableView = {
@@ -32,7 +50,13 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
+
+        #if DEBUG
+        view.backgroundColor = .systemBlue
+        #else
         view.backgroundColor = .systemGray6
+        #endif
+
         view.addSubviews(ProfileViewController.postTableView)
         setupConstaintTableView()
         ProfileViewController.postTableView.dataSource = self
@@ -50,7 +74,6 @@ class ProfileViewController: UIViewController {
         ProfileViewController.postTableView.reloadData()
         ProfileViewController.postTableView.refreshControl?.endRefreshing()
     }
-
 
 }
 
@@ -92,6 +115,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
         guard section == 0 else { return nil }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileHeaderView.self)) as! ProfileHeaderView
+        if let user = userService.getUser(login: userLogin) {
+            headerView.currentUser(user: user)
+        }
         return headerView
     }
 
