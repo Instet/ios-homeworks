@@ -9,38 +9,39 @@ import UIKit
 
 class InfoViewController: UIViewController {
 
-    private let coordinator: InfoCoordinator?
-    private let viewModel: InfoViewModel?
-
-    init(coordinator: InfoCoordinator?,
-         viewModel: InfoViewModel) {
-        self.coordinator = coordinator
-        self.viewModel = viewModel
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-
-    lazy var buttonAlert: ButtonAlert = {
-        let button = ButtonAlert(title: "Info", titleColor: .white) { [ weak self ] in
-            guard let self = self else { return }
-            self.pressButton()
-        }
-        return button
-    }()
+    var buttonAlert = UIButton()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .yellow
-        view.addSubviews(buttonAlert)
-        viewModel?.setupConstraints(controller: self, button: buttonAlert)
+        buttonAlert = UIButton(frame: CGRect(x: view.frame.width / 2 - 100, y: view.frame.height / 2 - 25, width: 200, height: 50))
+        buttonAlert.autoresizingMask = .init(arrayLiteral: [.flexibleTopMargin, .flexibleLeftMargin, .flexibleBottomMargin, .flexibleRightMargin])
+        buttonAlert.setTitle("Info", for: .normal)
+        buttonAlert.addTarget(self, action: #selector(alertMessage), for: .touchUpInside)
+        buttonAlert.backgroundColor = .black
+        buttonAlert.setTitleColor(.yellow, for: .normal)
+        buttonAlert.layer.cornerRadius = 10
+        view.addSubview(buttonAlert)
 
     }
 
-    func pressButton() {
-        viewModel?.presentAlert(controller: self)
+    @objc func alertMessage() {
+        let alert = UIAlertController(title: "Attention", message: "More information?", preferredStyle: .alert)
+
+        let yes = UIAlertAction(title: "Yes", style: .default) { _ in
+            print("Информация получена")
+        }
+        let no = UIAlertAction(title: "No", style: .cancel) { _ in
+            print("Дополнительная информация не требуется")
+        }
+
+        alert.addAction(yes)
+        alert.addAction(no)
+
+        self.present(alert, animated: true, completion: nil)
+
+        
+
     }
 
 }

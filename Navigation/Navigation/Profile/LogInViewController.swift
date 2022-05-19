@@ -11,36 +11,26 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     var isLogIn = false
 
-    private var coordinator: LoginCoordinator?
-
-//
-//    lazy var indicator: UIActivityIndicatorView = {
-//        let indicator = UIActivityIndicatorView()
-//        indicator.color = .gray
-//        indicator.style = .medium
-//        return indicator
-//    }()
-
-    private lazy var loginScrollView: UIScrollView = {
+    var loginScrollView: UIScrollView = {
         let loginScrollView = UIScrollView()
         loginScrollView.translatesAutoresizingMaskIntoConstraints = false
         return loginScrollView
     }()
 
-    private lazy var contentView: UIView = {
+    var contentView: UIView = {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
 
-    private lazy var imageVK: UIImageView = {
+    var imageVK: UIImageView = {
         let imageVK = UIImageView()
         imageVK.image = UIImage(named: "logo")
         imageVK.translatesAutoresizingMaskIntoConstraints = false
         return imageVK
     }()
 
-    private lazy var loginStackView: UIStackView = {
+    var loginStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
@@ -53,7 +43,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return stack
     }()
 
-    private lazy var loginTF: UITextField = {
+    var loginTF: UITextField = {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
         login.placeholder = "Email or phone"
@@ -69,7 +59,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return login
     }()
 
-    private lazy var passwordTF: UITextField = {
+    var passwordTF: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
         password.leftViewMode = .always
@@ -85,8 +75,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return password
     }()
 
-
-    private lazy var loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let loginButton = UIButton()
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         if let image = UIImage(named: "blue_pixel") {
@@ -104,7 +93,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return loginButton
 
     }()
-
 
 
     private func setupConstraints() {
@@ -148,7 +136,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         loginStackView.addArrangedSubview(loginTF)
         loginStackView.addArrangedSubview(passwordTF)
         setupConstraints()
-
     }
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -162,12 +149,16 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     @objc private func pressLogIn() {
         isLogIn = true
-        let coordinator = ProfileCoordinator()
-        coordinator.showModel(navigation: navigationController, coordinator: coordinator)
+        let profileVC = ProfileViewController()
+        navigationController?.pushViewController(profileVC, animated: false)
+
+        if isLogIn {
+            navigationController?.setViewControllers([profileVC], animated: true)
+            profileVC.navigationController?.navigationBar.isHidden = false
+        }
     }
 
-
-    @objc private func tap() {
+    @objc func tap() {
         loginTF.resignFirstResponder()
         passwordTF.resignFirstResponder()
     }
@@ -177,10 +168,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         self.setupViews()
         loginTF.delegate = self
         passwordTF.delegate = self
-
-        
-
-        
+        self.navigationController?.navigationBar.isHidden = true
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
         view.addGestureRecognizer(tapGesture)
@@ -192,6 +180,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
     }
 
     override func viewDidDisappear(_ animated: Bool) {
@@ -218,6 +207,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
 
     }
+
 
 
 }
