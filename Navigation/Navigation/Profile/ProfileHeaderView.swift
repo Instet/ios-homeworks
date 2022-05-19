@@ -11,10 +11,9 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
     private var statusText: String = ""
     private var defaultAvatarPoint: CGPoint?
-    
 
 
-    lazy var userName: UILabel = {
+    var userName: UILabel = {
         let userName = UILabel()
         userName.translatesAutoresizingMaskIntoConstraints = false
         userName.textColor = .black
@@ -24,7 +23,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         return userName
     }()
 
-    lazy var avatarFoneView: UIView = {
+    var avatarFoneView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         view.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .gray
@@ -40,7 +39,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         button.contentMode = .scaleToFill  // отображение в кнопке
         button.setImage(UIImage(systemName: "xmark", withConfiguration: UIImage.SymbolConfiguration(pointSize: 22))?.withTintColor(.gray, renderingMode: .automatic), for: .normal)
         button.tintColor = .white
-        button.alpha = 0
         button.addTarget(self, action: #selector(closeAvatarView), for: .touchUpInside)
         return button
     }()
@@ -50,7 +48,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         avatar.translatesAutoresizingMaskIntoConstraints = false
         avatar.image = UIImage(named: "гомер")
         avatar.clipsToBounds = true
-        avatar.contentMode = .scaleToFill
         avatar.layer.borderWidth = 3
         avatar.layer.cornerRadius = 50
         avatar.layer.borderColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
@@ -107,13 +104,6 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
         return text
     }()
-
-    func currentUser(user: User) {
-        userName.text = user.fullName
-        avatar.image = user.userAvatar
-        statusLabel.text = user.userStatus
-
-    }
 
     private func setupConstraints() {
 
