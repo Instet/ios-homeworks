@@ -24,15 +24,20 @@ final class Factory {
         startModule()
     }
 
+    
+
     func startModule() {
         switch state {
         case .profile:
-            let controller = LogInViewController()
+            let coordinator = LoginCoordinator()
+            let controller = coordinator.showModel(coordinator: coordinator)
             navigation.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
             navigation.setViewControllers([controller], animated: false)
-
+            
+            ()
         case .feed:
-            let controller = FeedViewController()
+            let coordinator = FeedCoordinator()
+            let controller = coordinator.showModel(coordinator: coordinator)
             navigation.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "note.text"), tag: 0)
             navigation.setViewControllers([controller], animated: false)
 

@@ -18,23 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.makeKeyAndVisible()
         let coordinator: GeneralCoordinator = RootCoordinator()
 
-//        let tabBarController = UITabBarController()
-//        tabBarController.tabBar.backgroundColor = .clear
-//        tabBarController.tabBar.barTintColor = .white
-//
-//        let feedVC = FeedViewController()
-//        feedVC.view.backgroundColor = .white
-//        let feedNC = UINavigationController(rootViewController: feedVC)
-//
-//        let logIn = LogInViewController()
-//        logIn.view.backgroundColor = .white
-//        let profileNC = UINavigationController(rootViewController: logIn)
-//        logIn.navigationController?.navigationBar.isHidden = true
-//
-//        feedNC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "note.text"), tag: 0)
-//        profileNC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
-//        tabBarController.viewControllers = [profileNC, feedNC]
-
 
         appendArrayPhotos()
         self.window?.rootViewController = coordinator.startApplication()
