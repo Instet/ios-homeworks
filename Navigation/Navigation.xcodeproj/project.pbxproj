@@ -26,6 +26,7 @@
 		DBBBD15127B9602B00900EE7 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBD15027B9602B00900EE7 /* InfoViewController.swift */; };
 		DBBE367427D231E0006CD4FB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBE367327D231E0006CD4FB /* LogInViewController.swift */; };
 		DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBE367527D23264006CD4FB /* PostTableViewCell.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -142,6 +143,7 @@
 			productReference = DBBBD13127B82BC200900EE7 /* Navigation.app */;
 			productType = "com.apple.product-type.application";
 		};
+
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -377,6 +379,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -392,9 +395,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-18.Navigation";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+
 			};
 			name = Release;
 		};
