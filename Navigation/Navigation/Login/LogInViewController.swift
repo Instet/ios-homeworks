@@ -85,6 +85,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return password
     }()
 
+
     private lazy var loginButton: UIButton = {
         let loginButton = UIButton()
         loginButton.translatesAutoresizingMaskIntoConstraints = false
