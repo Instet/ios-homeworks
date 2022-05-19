@@ -9,21 +9,8 @@ import UIKit
 
 class PostViewController: UIViewController {
 
-    private let coordinator: PostCoordinator?
-
     var postTitle: String?
 
-    init(coordinator: PostCoordinator?, postTitle: String?) {
-        self.coordinator = coordinator
-        self.postTitle = postTitle
-        super.init(nibName: nil, bundle: nil)
-        
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .lightGray
@@ -33,11 +20,11 @@ class PostViewController: UIViewController {
         navigationItem.rightBarButtonItem = barButton
         
     }
-
+ 
+   
     @objc func tapInfo() {
-        let coordinator = InfoCoordinator()
-        coordinator.push(controller: navigationController, coordinator: coordinator)
-
+        let infoVC = InfoViewController()
+        present(infoVC, animated: true, completion: nil)
 
         
     }
