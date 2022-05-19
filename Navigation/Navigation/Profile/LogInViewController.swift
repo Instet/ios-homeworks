@@ -9,29 +9,33 @@ import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
 
+
+    var delegate: LoginViewControllerDelegate?
+
     var isLogIn = false
     var profile = ProfileHeaderView()
 
-    var loginScrollView: UIScrollView = {
+
+    lazy var loginScrollView: UIScrollView = {
         let loginScrollView = UIScrollView()
         loginScrollView.translatesAutoresizingMaskIntoConstraints = false
         return loginScrollView
     }()
 
-    var contentView: UIView = {
+    lazy var contentView: UIView = {
         let contentView = UIView()
         contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
 
-    var imageVK: UIImageView = {
+    lazy var imageVK: UIImageView = {
         let imageVK = UIImageView()
         imageVK.image = UIImage(named: "logo")
         imageVK.translatesAutoresizingMaskIntoConstraints = false
         return imageVK
     }()
 
-    var loginStackView: UIStackView = {
+    lazy var loginStackView: UIStackView = {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
@@ -44,7 +48,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return stack
     }()
 
-    var loginTF: UITextField = {
+    lazy var loginTF: UITextField = {
         let login = UITextField()
         login.translatesAutoresizingMaskIntoConstraints = false
         login.placeholder = "Email or phone"
@@ -60,7 +64,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return login
     }()
 
-    var passwordTF: UITextField = {
+    lazy var passwordTF: UITextField = {
         let password = UITextField()
         password.translatesAutoresizingMaskIntoConstraints = false
         password.leftViewMode = .always
@@ -150,6 +154,36 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     @objc private func pressLogIn() {
 
+
+        if loginTF.text?.isEmpty == true {
+            let alertVC = UIAlertController(title: "Ошибка ⚠️", message: "Введите логин!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alertVC.addAction(alertAction)
+            self.present(alertVC, animated: true)
+            return
+        }
+        if passwordTF.text?.isEmpty == true {
+            let alertVC = UIAlertController(title: "Ошибка ⚠️", message: "Введите пароль!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alertVC.addAction(alertAction)
+            self.present(alertVC, animated: true)
+            return
+
+        }
+
+        guard let login = loginTF.text else { return }
+        guard let password = passwordTF.text else { return }
+        guard let delegate = delegate else { return }
+        let isRight = delegate.check(login: login, password: password)
+
+        if isRight {
+            let profileVC = ProfileViewController()
+            navigationController?.pushViewController(profileVC, animated: false)
+        } else {
+            let alert = UIAlertController(title: "ВНИМАНИЕ", message: "Введен неверный логин или пароль!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alert.addAction(alertAction)
+
         #if DEBUG
 
         let currentUser = TestUserService()
@@ -177,6 +211,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         } else {
             let alert = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "Ок", style: .default))
+
             self.present(alert, animated: true)
         }
 

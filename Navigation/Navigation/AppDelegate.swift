@@ -16,14 +16,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         let tabBarController = UITabBarController()
-        tabBarController.tabBar.backgroundColor = .white
-        tabBarController.tabBar.scrollEdgeAppearance?.selectionIndicatorTintColor = .white
+        tabBarController.tabBar.backgroundColor = .clear
+
 
         let feedVC = FeedViewController()
         feedVC.view.backgroundColor = .white
         let feedNC = UINavigationController(rootViewController: feedVC)
 
+        let factory = MyLoginFactory()
+        let loginInspector = factory.factory()
         let logIn = LogInViewController()
+        logIn.delegate = loginInspector
+
         logIn.view.backgroundColor = .white
         let profileNC = UINavigationController(rootViewController: logIn)
         logIn.navigationController?.navigationBar.isHidden = true
