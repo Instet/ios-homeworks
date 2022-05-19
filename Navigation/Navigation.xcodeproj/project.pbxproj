@@ -25,10 +25,16 @@
 		DBBBD15127B9602B00900EE7 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBD15027B9602B00900EE7 /* InfoViewController.swift */; };
 		DBBE367427D231E0006CD4FB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBE367327D231E0006CD4FB /* LogInViewController.swift */; };
 		DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBE367527D23264006CD4FB /* PostTableViewCell.swift */; };
+
+		DBF92E60280F117800394008 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF92E5F280F117800394008 /* User.swift */; };
+		DBF92E64280F243B00394008 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF92E63280F243B00394008 /* CurrentUserService.swift */; };
+		DBF92E6628107B3000394008 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBF92E6528107B3000394008 /* TestUserService.swift */; };
+
 		DBF92E51280B1C4000394008 /* StorageService.h in Headers */ = {isa = PBXBuildFile; fileRef = DBF92E50280B1C4000394008 /* StorageService.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		DBF92E54280B1C4000394008 /* StorageService.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DBF92E4E280B1C4000394008 /* StorageService.framework */; };
 		DBF92E55280B1C4000394008 /* StorageService.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = DBF92E4E280B1C4000394008 /* StorageService.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		DBF92E5A280B1C5E00394008 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBD14E27B91EC900900EE7 /* Post.swift */; };
+
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,8 +83,14 @@
 		DBBBD15027B9602B00900EE7 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DBBE367327D231E0006CD4FB /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		DBBE367527D23264006CD4FB /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+
+		DBF92E5F280F117800394008 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		DBF92E63280F243B00394008 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
+		DBF92E6528107B3000394008 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
+
 		DBF92E4E280B1C4000394008 /* StorageService.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = StorageService.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBF92E50280B1C4000394008 /* StorageService.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = StorageService.h; sourceTree = "<group>"; };
+
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -145,6 +157,7 @@
 		DBBBD13327B82BC200900EE7 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				DBF92E5E280F105200394008 /* User */,
 				DBBAECE027D6613D00AA366E /* SupportFiles */,
 				DB70BE1027BB74EE00599559 /* Profile */,
 				DBBBD13427B82BC200900EE7 /* AppDelegate.swift */,
@@ -160,6 +173,16 @@
 			path = Navigation;
 			sourceTree = "<group>";
 		};
+
+		DBF92E5E280F105200394008 /* User */ = {
+			isa = PBXGroup;
+			children = (
+				DBF92E5F280F117800394008 /* User.swift */,
+				DBF92E63280F243B00394008 /* CurrentUserService.swift */,
+				DBF92E6528107B3000394008 /* TestUserService.swift */,
+			);
+			path = User;
+
 		DBF92E4F280B1C4000394008 /* StorageService */ = {
 			isa = PBXGroup;
 			children = (
@@ -167,6 +190,7 @@
 				DBF92E50280B1C4000394008 /* StorageService.h */,
 			);
 			path = StorageService;
+      
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -288,8 +312,11 @@
 				DBBBD13927B82BC200900EE7 /* ViewController.swift in Sources */,
 				DBBBD13527B82BC200900EE7 /* AppDelegate.swift in Sources */,
 				DBBBD14B27B8301E00900EE7 /* ProfileViewController.swift in Sources */,
+				DBF92E60280F117800394008 /* User.swift in Sources */,
+				DBF92E6628107B3000394008 /* TestUserService.swift in Sources */,
 				DB70BE1227BB755F00599559 /* ProfileHeaderView.swift in Sources */,
 				DBBBD14927B8300E00900EE7 /* FeedViewController.swift in Sources */,
+				DBF92E64280F243B00394008 /* CurrentUserService.swift in Sources */,
 				DBBAECE227D6617C00AA366E /* Constants.swift in Sources */,
 				DBBAECE627D661A100AA366E /* Photo.swift in Sources */,
 				DBBBD15127B9602B00900EE7 /* InfoViewController.swift in Sources */,
