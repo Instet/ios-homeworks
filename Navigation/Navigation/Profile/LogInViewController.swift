@@ -10,6 +10,7 @@ import UIKit
 class LogInViewController: UIViewController, UITextFieldDelegate {
 
     var isLogIn = false
+    var profile = ProfileHeaderView()
 
     var loginScrollView: UIScrollView = {
         let loginScrollView = UIScrollView()
@@ -148,15 +149,41 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
 
     @objc private func pressLogIn() {
-        isLogIn = true
-        let profileVC = ProfileViewController()
-        navigationController?.pushViewController(profileVC, animated: false)
 
-        if isLogIn {
-            navigationController?.setViewControllers([profileVC], animated: true)
-            profileVC.navigationController?.navigationBar.isHidden = false
+        #if DEBUG
+
+        let currentUser = TestUserService()
+        let profileViewController = ProfileViewController(userService: currentUser, userLogin: loginTF.text!)
+        profileViewController.userService = currentUser
+        if loginTF.text == currentUser.user.login {
+            profile.userName.text = currentUser.user.fullName
+
+            isLogIn = true
+            navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ок", style: .default))
+            self.present(alert, animated: true)
         }
+
+        #else
+
+        let currentUser = CurrentUserService()
+        let profileViewController = ProfileViewController(userService: currentUser, userLogin: loginTF.text!)
+        profileViewController.userService = currentUser
+        if loginTF.text == currentUser.user.login {
+            isLogIn = true
+            navigationController?.pushViewController(profileViewController, animated: true)
+        } else {
+            let alert = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Ок", style: .default))
+            self.present(alert, animated: true)
+        }
+
+        #endif
+
     }
+
 
     @objc func tap() {
         loginTF.resignFirstResponder()
