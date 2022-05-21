@@ -97,25 +97,21 @@ class FeedViewController: UIViewController {
         tabBarController?.tabBar.isHidden = false
     }
 
+
     @objc private func examinationPasswordTrue() {
-        UILabel.animate(withDuration: 0.5) { [weak self] in
-            self?.checkLabel.text = "Пароль верный"
-            self?.checkLabel.textColor = .systemGreen
-            self?.checkLabel.isHidden = false
-            self?.checkLabel.alpha = 1
-        } completion: { [self] _ in
-            UILabel.animate(withDuration: 2) { [weak self] in
-                self?.checkLabel.alpha = 0
-            }
-        }
-        checkLabel.isHidden = false
+        showMessage(true)
     }
-
-
     @objc private func examinationPasswordFalse() {
+        showMessage(false)
+    }
+
+
+
+
+    private func showMessage(_ isTrue: Bool) {
         UILabel.animate(withDuration: 0.5) { [weak self] in
-            self?.checkLabel.text = "Пароль неверный"
-            self?.checkLabel.textColor = .systemRed
+            self?.checkLabel.text = isTrue ? "Пароль верный" : "Пароль неверный"
+            self?.checkLabel.textColor = isTrue ? .systemGreen : .systemRed
             self?.checkLabel.isHidden = false
             self?.checkLabel.alpha = 1
         } completion: { [self] _ in
@@ -125,8 +121,11 @@ class FeedViewController: UIViewController {
         }
         checkLabel.isHidden = false
     }
+
 
 }
+
+
 
 extension FeedViewController: PasswordTextFieldDelegate {
 

@@ -13,14 +13,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     private var coordinator: LoginCoordinator?
 
-//
-//    lazy var indicator: UIActivityIndicatorView = {
-//        let indicator = UIActivityIndicatorView()
-//        indicator.color = .gray
-//        indicator.style = .medium
-//        return indicator
-//    }()
-
     private lazy var loginScrollView: UIScrollView = {
         let loginScrollView = UIScrollView()
         loginScrollView.translatesAutoresizingMaskIntoConstraints = false

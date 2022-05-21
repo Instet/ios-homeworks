@@ -41,6 +41,7 @@
 		DBBBD15127B9602B00900EE7 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBD15027B9602B00900EE7 /* InfoViewController.swift */; };
 		DBBE367427D231E0006CD4FB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBE367327D231E0006CD4FB /* LogInViewController.swift */; };
 		DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBE367527D23264006CD4FB /* PostTableViewCell.swift */; };
+		DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,6 +88,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,6 +305,9 @@
 			dependencies = (
 			);
 			name = Navigation;
+			packageProductDependencies = (
+				DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */,
+			);
 			productName = Navigation;
 			productReference = DBBBD13127B82BC200900EE7 /* Navigation.app */;
 			productType = "com.apple.product-type.application";
@@ -331,6 +336,9 @@
 				Base,
 			);
 			mainGroup = DBBBD12827B82BC200900EE7;
+			packageReferences = (
+				DBF7EA192837642400E7DEC6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
+			);
 			productRefGroup = DBBBD13227B82BC200900EE7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -529,6 +537,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 46SB5959W9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -557,6 +566,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 46SB5959W9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -600,6 +610,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DBF7EA192837642400E7DEC6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/TrueMax/iOSIntPackage.git";
+			requirement = {
+				kind = exactVersion;
+				version = 3.2.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DBF7EA192837642400E7DEC6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */;
+			productName = iOSIntPackage;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = DBBBD12927B82BC200900EE7 /* Project object */;
 }

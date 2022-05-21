@@ -12,7 +12,6 @@ class PhotosTableViewCell: UITableViewCell {
 
     var labelPhotos: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Photos"
         label.font = .systemFont(ofSize: 24, weight: .bold)
         label.textColor = .black
@@ -21,14 +20,12 @@ class PhotosTableViewCell: UITableViewCell {
 
     var arrowImage: UIImageView = {
         let arrow = UIImageView()
-        arrow.translatesAutoresizingMaskIntoConstraints = false
         arrow.image = UIImage(systemName: "arrow.right")?.withTintColor(.black, renderingMode: .alwaysOriginal)
         return arrow
     }()
 
     var stackViewImage: UIStackView = {
         let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .horizontal
         stack.alignment = .center
         stack.distribution = .fillEqually
@@ -38,7 +35,6 @@ class PhotosTableViewCell: UITableViewCell {
 
    lazy var previewImageOne: UIImageView = {
         let preview = UIImageView()
-        preview.translatesAutoresizingMaskIntoConstraints = false
         preview.image = arrayPhotos[0]
         preview.layer.cornerRadius = 6
         preview.clipsToBounds = true
@@ -47,7 +43,6 @@ class PhotosTableViewCell: UITableViewCell {
 
     lazy var previewImageTwo: UIImageView = {
         let preview = UIImageView()
-        preview.translatesAutoresizingMaskIntoConstraints = false
         preview.image = arrayPhotos[1]
         preview.layer.cornerRadius = 6
         preview.clipsToBounds = true
@@ -56,7 +51,6 @@ class PhotosTableViewCell: UITableViewCell {
 
     lazy var previewImageThree: UIImageView = {
         let preview = UIImageView()
-        preview.translatesAutoresizingMaskIntoConstraints = false
         preview.image = arrayPhotos[2]
         preview.layer.cornerRadius = 6
         preview.clipsToBounds = true
@@ -65,7 +59,6 @@ class PhotosTableViewCell: UITableViewCell {
 
     lazy var previewImageFour: UIImageView = {
         let preview = UIImageView()
-        preview.translatesAutoresizingMaskIntoConstraints = false
         preview.image = arrayPhotos[3]
         preview.layer.cornerRadius = 6
         preview.clipsToBounds = true
@@ -105,7 +98,6 @@ class PhotosTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier:   reuseIdentifier)
-        self.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubviews(labelPhotos, arrowImage, stackViewImage)
         stackViewImage.addArrangedSubview(previewImageOne)
         stackViewImage.addArrangedSubview(previewImageTwo)
