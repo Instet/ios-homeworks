@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
         appendArrayPhotos()
-        self.window?.rootViewController = coordinator.startApplication()
+        self.window?.rootViewController = coordinator.startApplication(userData: nil)
 
 
 

@@ -9,15 +9,21 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    var userService: UserServiceProtocol
+    var userLogin: String
     private let coordinator: ProfileCoordinator?
-
     private let viewModel: ProfileViewModelProtocol?
 
 
     init(coordinator: ProfileCoordinator?,
-         viewModel: ProfileViewModelProtocol?) {
+         viewModel: ProfileViewModelProtocol?,
+         userService: UserServiceProtocol,
+         userLogin: String
+    ) {
         self.coordinator = coordinator
         self.viewModel = viewModel
+        self.userService = userService
+        self.userLogin = userLogin
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -109,6 +115,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
         guard section == 0 else { return nil }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileHeaderView.self)) as! ProfileHeaderView
+        if let user = userService.getUser(login: userLogin) {
+            headerView.currentUser(user: user)
+        }
         return headerView
     }
 
@@ -124,7 +133,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
         if indexPath.section == 1 {
             tableView.deselectRow(at: indexPath, animated: false)
-//            postArray[indexPath.row].views += UInt(1)
+            guard var viewModel = viewModel else { return }
+            viewModel.postArray[indexPath.row].views += UInt(1)
         } else {
             tableView.deselectRow(at: indexPath, animated: false)
             let photosViewController = PhotosViewController()

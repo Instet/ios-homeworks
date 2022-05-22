@@ -11,7 +11,7 @@ protocol ProfileViewModelProtocol {
 
     func numberOfRows() -> Int?
     func cellViewModel(forIndexPath indexPath: IndexPath) -> PostTableViewModel
-    
+    var postArray: [Post] { get set }
 }
 
 final class ProfileViewModel: ProfileViewModelProtocol {

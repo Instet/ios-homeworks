@@ -10,15 +10,27 @@ import UIKit
 
 protocol GeneralCoordinator: AnyObject {
 
-    func startApplication() -> UIViewController
+    func startApplication(userData: (userService: UserServiceProtocol, userLogin: String)?) -> UIViewController
 
+}
+
+protocol CoordinatorViewController: AnyObject {
+    var navigationController: UINavigationController? { get set }
+    func Start() -> UINavigationController?
 }
 
 final class RootCoordinator: GeneralCoordinator {
 
-    func startApplication() -> UIViewController {
-        return MainTabBarController()
+
+    enum StateAuthorization {
+        case authorized
+        case notAuthorized
     }
 
+
+    func startApplication(userData: (userService: UserServiceProtocol, userLogin: String)?) -> UIViewController {
+        let tabBarcontroller = MainTabBarController(coordinator: self, stateAuthorization: .notAuthorized, userData: userData)
+            return tabBarcontroller
+        }
 
 }

@@ -150,6 +150,15 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }
 
 
+    func currentUser(user: User) {
+        userName.text = user.fullName
+        avatar.image = user.userAvatar
+        statusLabel.text = user.userStatus
+
+    }
+
+
+
     @objc func pressButton() {
         if textFieldStatus.text != "" {
             statusLabel.text = textFieldStatus.text

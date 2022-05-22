@@ -8,13 +8,28 @@
 import Foundation
 import UIKit
 
-final class ProfileCoordinator {
-    
-    func showModel(navigation: UINavigationController? ,coordinator: ProfileCoordinator) {
-        let viewModel = ProfileViewModel()
-        let profile = ProfileViewController(coordinator: coordinator, viewModel: viewModel)
-        navigation?.pushViewController(profile, animated: true)
+final class ProfileCoordinator: CoordinatorViewController {
+
+    var navigationController: UINavigationController?
+    let userService: UserServiceProtocol?
+    let userLogin: String?
+
+    init(data: (userService: UserServiceProtocol, userLogin: String)) {
+        self.userService = data.userService
+        self.userLogin = data.userLogin
     }
 
+    func Start() -> UINavigationController? {
+        let factory = Factory(state: .profile)
+        guard let userService = userService,
+              let userLogin = userLogin else {
+            return nil
+        }
+            navigationController = factory.startModule(coordinator: self, data: (userService: userService, userLogin: userLogin))
+            return navigationController
+
+    }
 
 }
+
+

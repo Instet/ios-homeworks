@@ -9,9 +9,8 @@ import UIKit
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
 
-    var isLogIn = false
-
-    private var coordinator: LoginCoordinator?
+    var delegate: LoginViewControllerDelegate?
+    var callback: (_ userData: (userService: UserServiceProtocol, userLogin: String)) -> Void
 
     private lazy var loginScrollView: UIScrollView = {
         let loginScrollView = UIScrollView()
@@ -97,6 +96,15 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     }()
 
+    init(callback: @escaping (_ userData: (userService: UserServiceProtocol, userLogin: String)) -> Void) {
+        self.callback = callback
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
 
 
     private func setupConstraints() {
@@ -153,9 +161,95 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
 
     @objc private func pressLogIn() {
-        isLogIn = true
-        let coordinator = ProfileCoordinator()
-        coordinator.showModel(navigation: navigationController, coordinator: coordinator)
+
+        guard let delegate = delegate else { return }
+        guard let login = loginTF.text else { return }
+        guard let password = passwordTF.text else { return }
+
+        if login.isEmpty {
+            let alertVC = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alertVC.addAction(alertAction)
+            self.present(alertVC, animated: true)
+            return
+        }
+        if password.isEmpty {
+            let alertVC = UIAlertController(title: "Внимание", message: "Введите пароль!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alertVC.addAction(alertAction)
+            self.present(alertVC, animated: true)
+            return
+        }
+
+
+        let isRight = delegate.check(login: login, password: password)
+        if isRight {
+            var userService: UserServiceProtocol
+            #if DEBUG
+            userService = CurrentUserService()
+            #else
+            userService = TestUserService()
+            #endif
+            self.callback((userService: userService, userLogin: login))
+        } else {
+            let alert = UIAlertController(title: "Внимание", message: "Введен неверный логин или пароль!", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alert.addAction(alertAction)
+            self.present(alert, animated: true)
+
+        }
+
+
+//
+//        guard let login = loginTF.text else { return }
+//        guard let password = passwordTF.text else { return }
+//        guard let delegate = delegate else { return }
+//        let isRight = delegate.check(login: login, password: password)
+//
+//        if isRight {
+//            coordinator.showModel(navigation: navigationController, coordinator: coordinator)
+//
+//        } else {
+//            let alert = UIAlertController(title: "ВНИМАНИЕ", message: "Введен неверный логин или пароль!", preferredStyle: .alert)
+//            let alertAction = UIAlertAction(title: "ОК", style: .default)
+//            alert.addAction(alertAction)
+
+//        #if DEBUG
+
+//        let currentUser = TestUserService()
+//        let profileViewController = ProfileViewController(coordinator: navigationController, viewModel: <#T##ProfileViewModelProtocol?#>, userService: <#T##UserServiceProtocol#>, userLogin: <#T##String#>)
+//        profileViewController.userService = currentUser
+//        if loginTF.text == currentUser.user.login {
+//            profile.userName.text = currentUser.user.fullName
+//
+//            isLogIn = true
+//            navigationController?.pushViewController(profileViewController, animated: true)
+//        } else {
+//            let alert = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Ок", style: .default))
+//            self.present(alert, animated: true)
+//        }
+
+//        #else
+
+//        let currentUser = CurrentUserService()
+//        let profileViewController = ProfileViewController(userService: currentUser, userLogin: loginTF.text!)
+//        profileViewController.userService = currentUser
+//        if loginTF.text == currentUser.user.login {
+//            isLogIn = true
+//            navigationController?.pushViewController(profileViewController, animated: true)
+//        } else {
+//            let alert = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "Ок", style: .default))
+//
+//            self.present(alert, animated: true)
+//        }
+
+//        #endif
+
+
+//        }
+
     }
 
 
