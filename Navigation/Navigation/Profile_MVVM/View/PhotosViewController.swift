@@ -18,7 +18,7 @@ class PhotosViewController: UIViewController {
     var counter: Double = 0
 
 
-    lazy var indicator: UIActivityIndicatorView = {
+    private lazy var indicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
         indicator.color = .gray
         indicator.style = .large

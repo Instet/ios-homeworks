@@ -14,26 +14,22 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     private lazy var loginScrollView: UIScrollView = {
         let loginScrollView = UIScrollView()
-        loginScrollView.translatesAutoresizingMaskIntoConstraints = false
         return loginScrollView
     }()
 
     private lazy var contentView: UIView = {
         let contentView = UIView()
-        contentView.translatesAutoresizingMaskIntoConstraints = false
         return contentView
     }()
 
     private lazy var imageVK: UIImageView = {
         let imageVK = UIImageView()
         imageVK.image = UIImage(named: "logo")
-        imageVK.translatesAutoresizingMaskIntoConstraints = false
         return imageVK
     }()
 
     private lazy var loginStackView: UIStackView = {
         let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
         stack.layer.borderColor = UIColor.lightGray.cgColor
         stack.layer.borderWidth = 0.5
@@ -79,7 +75,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     private lazy var loginButton: UIButton = {
         let loginButton = UIButton()
-        loginButton.translatesAutoresizingMaskIntoConstraints = false
         if let image = UIImage(named: "blue_pixel") {
             loginButton.setBackgroundImage(image.image(alpha: 1), for: .normal)
             loginButton.setBackgroundImage(image.image(alpha: 0.8), for: .selected)
@@ -93,8 +88,36 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         loginButton.layer.cornerRadius = 10
         loginButton.clipsToBounds = true
         return loginButton
-
     }()
+
+    // MARK: - Task 9
+
+    private lazy var bruteForceButton: UIButton = {
+        let button = UIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        if let image = UIImage(named: "blue_pixel") {
+            button.setBackgroundImage(image.image(alpha: 1), for: .normal)
+            button.setBackgroundImage(image.image(alpha: 0.8), for: .selected)
+            button.setBackgroundImage(image.image(alpha: 0.8), for: .highlighted)
+            button.setBackgroundImage(image.image(alpha: 0.8), for: .disabled)
+        }
+        button.setTitle("Подобрать пароль", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.addTarget(self, action: #selector(bruteForceAction), for: .touchUpInside)
+        return button
+    }()
+
+
+    private lazy var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(style: .medium)
+        indicator.isHidden = true
+        return indicator
+    }()
+
+
+
 
     init(callback: @escaping (_ userData: (userService: UserServiceProtocol, userLogin: String)) -> Void) {
         self.callback = callback
@@ -104,7 +127,38 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
+
+
+    @objc func bruteForceAction() {
+        let queue = DispatchQueue.global(qos: .userInteractive)
+        guard let login = loginTF.text else { return }
+        guard login != "" else {
+            let alert = UIAlertController(title: "Ошибка!",
+                                          message: "Для подбора пароля введите логин: \n Instet",
+                                          preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК",
+                                            style: .default)
+            alert.addAction(alertAction)
+            present(alert, animated: true)
+            return
+        }
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
+        queue.async {
+            let bruteForce = BruteForce(loginInspector: self.delegate, login: login) { [weak self] password in
+                DispatchQueue.main.async {
+                    self?.passwordTF.text = password
+                    self?.passwordTF.isSecureTextEntry = false
+                    self?.activityIndicator.stopAnimating()
+                    self?.activityIndicator.isHidden = true
+                }
+            }
+            bruteForce.bruteForce()
+        }
+
+
+    }
 
 
     private func setupConstraints() {
@@ -136,15 +190,26 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             loginButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
+
+            bruteForceButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: Constants.indent),
+            bruteForceButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
+            bruteForceButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
+            bruteForceButton.heightAnchor.constraint(equalToConstant: 50),
+
+            activityIndicator.bottomAnchor.constraint(equalTo: loginStackView.bottomAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: loginStackView.centerXAnchor),
+            activityIndicator.heightAnchor.constraint(equalToConstant: 50)
+
+
         ])
     }
 
 
     private func setupViews() {
         view.backgroundColor = .white
-        view.addSubview(loginScrollView)
-        loginScrollView.addSubview(contentView)
-        contentView.addSubviews(imageVK, loginStackView, loginButton)
+        view.addSubviews(loginScrollView)
+        loginScrollView.addSubviews(contentView)
+        contentView.addSubviews(imageVK, loginStackView, loginButton, bruteForceButton, activityIndicator)
         loginStackView.addArrangedSubview(loginTF)
         loginStackView.addArrangedSubview(passwordTF)
         setupConstraints()
@@ -184,11 +249,10 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
         let isRight = delegate.check(login: login, password: password)
         if isRight {
-            var userService: UserServiceProtocol
             #if DEBUG
-            userService = CurrentUserService()
+            let userService = CurrentUserService()
             #else
-            userService = TestUserService()
+            let userService = TestUserService()
             #endif
             self.callback((userService: userService, userLogin: login))
         } else {
@@ -199,79 +263,26 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
         }
 
-
-//
-//        guard let login = loginTF.text else { return }
-//        guard let password = passwordTF.text else { return }
-//        guard let delegate = delegate else { return }
-//        let isRight = delegate.check(login: login, password: password)
-//
-//        if isRight {
-//            coordinator.showModel(navigation: navigationController, coordinator: coordinator)
-//
-//        } else {
-//            let alert = UIAlertController(title: "ВНИМАНИЕ", message: "Введен неверный логин или пароль!", preferredStyle: .alert)
-//            let alertAction = UIAlertAction(title: "ОК", style: .default)
-//            alert.addAction(alertAction)
-
-//        #if DEBUG
-
-//        let currentUser = TestUserService()
-//        let profileViewController = ProfileViewController(coordinator: navigationController, viewModel: <#T##ProfileViewModelProtocol?#>, userService: <#T##UserServiceProtocol#>, userLogin: <#T##String#>)
-//        profileViewController.userService = currentUser
-//        if loginTF.text == currentUser.user.login {
-//            profile.userName.text = currentUser.user.fullName
-//
-//            isLogIn = true
-//            navigationController?.pushViewController(profileViewController, animated: true)
-//        } else {
-//            let alert = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Ок", style: .default))
-//            self.present(alert, animated: true)
-//        }
-
-//        #else
-
-//        let currentUser = CurrentUserService()
-//        let profileViewController = ProfileViewController(userService: currentUser, userLogin: loginTF.text!)
-//        profileViewController.userService = currentUser
-//        if loginTF.text == currentUser.user.login {
-//            isLogIn = true
-//            navigationController?.pushViewController(profileViewController, animated: true)
-//        } else {
-//            let alert = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
-//            alert.addAction(UIAlertAction(title: "Ок", style: .default))
-//
-//            self.present(alert, animated: true)
-//        }
-
-//        #endif
-
-
-//        }
-
     }
 
 
-    @objc private func tap() {
-        loginTF.resignFirstResponder()
-        passwordTF.resignFirstResponder()
-    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViews()
         loginTF.delegate = self
         passwordTF.delegate = self
-
-        
-
-        
-
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
         view.addGestureRecognizer(tapGesture)
-
     }
+
+
+    @objc private func tap() {
+         loginTF.resignFirstResponder()
+         passwordTF.resignFirstResponder()
+     }
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -279,6 +290,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
+
 
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
@@ -288,22 +300,21 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     }
 
+
     @objc private func keyboardShow(notification: NSNotification) {
         if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
-            loginScrollView.contentOffset.y = kbdSize.height - (loginScrollView.frame.height - loginButton.frame.minY)
+            loginScrollView.contentOffset.y = kbdSize.height - (loginScrollView.frame.height - loginButton.frame.minY) + 50
             loginScrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbdSize.height, right: 0)
 
-            print(kbdSize.height)
-            print(loginScrollView.frame.height - loginButton.frame.minY)
-            print( loginScrollView.contentOffset.y)
         }
-
     }
+
 
     @objc private func keyboardHide(notification: NSNotification) {
         loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
-
     }
+
+
 
 
 }

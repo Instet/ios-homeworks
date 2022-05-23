@@ -59,26 +59,10 @@ final class MainTabBarController: UITabBarController {
             let loginFactory = MyLoginFactory()
             loginVC.delegate = loginFactory.factory()
             let loginNC = UINavigationController(rootViewController: loginVC)
+            loginNC.navigationBar.isHidden = true
             self.viewControllers = [loginNC]
         }
 
     }
 
-
-
-
-//    private let profile = Factory(navigation: UINavigationController(), state: .profile)
-//
-//    private let feed = Factory(navigation: UINavigationController(), state: .feed)
-
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        controllers()
-//    }
-
-//    func controllers() {
-//        viewControllers = [profile.navigation,
-//                           feed.navigation]
-//
-//    }
 }
