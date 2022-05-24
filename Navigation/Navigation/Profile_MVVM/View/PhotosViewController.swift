@@ -6,17 +6,76 @@
 //
 
 import UIKit
+import iOSIntPackage
 
 class PhotosViewController: UIViewController {
+
+    // MARK: - Task 8
+
+    let processor = ImageProcessor()
+    var newPhotosArray: [UIImage] = []
+    var timer: Timer?
+    var counter: Double = 0
+
+
+    private lazy var indicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.color = .gray
+        indicator.style = .large
+        indicator.startAnimating()
+        return indicator
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Photo Gallery"
-        self.view.addSubview(photosCollectionView)
+        self.view.addSubviews(photosCollectionView, indicator)
         self.photosCollectionView.dataSource = self
         self.photosCollectionView.delegate = self
         setupConstraints()
+
+        // MARK: - Task 8
+        processor.processImagesOnThread(sourceImages: arrayPhotos,
+                                        filter: .allCases.randomElement()!,
+                                        qos: .userInitiated) { filtres in
+            self.newPhotosArray.removeAll()
+            for value in filtres {
+                guard let value = value else { return }
+                self.newPhotosArray.append(UIImage(cgImage: value))
+            }
+            DispatchQueue.main.async {
+                self.photosCollectionView.reloadData()
+                self.indicator.stopAnimating()
+            }
+
+        }
+
+        timer = Timer.scheduledTimer(timeInterval: 0.05,
+                                     target: self,
+                                     selector: #selector(startTimer),
+                                     userInfo: nil,
+                                     repeats: true)
+
     }
+
+    @objc func startTimer() {
+        counter += 0.05
+        if !newPhotosArray.isEmpty {
+            print("Затрачено времени - \(counter)")
+            timer?.invalidate()
+        }
+    }
+
+
+    /*
+     background - 14.293999999997517
+     userInteractive - 3.668999999999707
+     default - 3.714999999999702
+     utility - 3.886999999999683
+     userInitiated - 3.868999999999685
+     */
+
+
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -35,7 +94,6 @@ class PhotosViewController: UIViewController {
 
     lazy var photosCollectionView: UICollectionView = {
         let photosCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        photosCollectionView.translatesAutoresizingMaskIntoConstraints = false
         photosCollectionView.backgroundColor = .white
         photosCollectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: PhotosCollectionViewCell.self))
         
@@ -47,7 +105,10 @@ class PhotosViewController: UIViewController {
             photosCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor),
             photosCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
             photosCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-            photosCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
+            photosCollectionView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+
+            indicator.centerXAnchor.constraint(equalTo: self.view.centerXAnchor),
+            indicator.centerYAnchor.constraint(equalTo: self.view.centerYAnchor)
         ])
     }
 
@@ -68,12 +129,12 @@ extension PhotosViewController: UICollectionViewDelegateFlowLayout {
 extension PhotosViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return arrayPhotos.count
+        return newPhotosArray.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PhotosCollectionViewCell.self), for: indexPath) as? PhotosCollectionViewCell else { return UICollectionViewCell()}
-        cell.configCellCollection(photo: arrayPhotos[indexPath.item])
+        cell.configCellCollection(photo: newPhotosArray[indexPath.item])
 
         return cell
     }

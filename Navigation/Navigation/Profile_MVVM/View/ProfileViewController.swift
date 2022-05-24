@@ -9,6 +9,28 @@ import UIKit
 
 class ProfileViewController: UIViewController {
 
+    var userService: UserServiceProtocol
+    var userLogin: String
+    private let coordinator: ProfileCoordinator?
+    private let viewModel: ProfileViewModelProtocol?
+
+
+    init(coordinator: ProfileCoordinator?,
+         viewModel: ProfileViewModelProtocol?,
+         userService: UserServiceProtocol,
+         userLogin: String
+    ) {
+        self.coordinator = coordinator
+        self.viewModel = viewModel
+        self.userService = userService
+        self.userLogin = userLogin
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
 
     static var postTableView: UITableView = {
         let postTableView = UITableView(frame: .zero, style: .grouped) // plain лучше
@@ -41,9 +63,7 @@ class ProfileViewController: UIViewController {
         ProfileViewController.postTableView.delegate = self
         ProfileViewController.postTableView.refreshControl = UIRefreshControl()
         ProfileViewController.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
-        var exit = UIBarButtonItem()
-        exit = UIBarButtonItem(title: "Exit", style: .plain, target: self, action: #selector(exitInLogIn))
-        navigationItem.leftBarButtonItem = exit
+
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -56,19 +76,13 @@ class ProfileViewController: UIViewController {
         ProfileViewController.postTableView.refreshControl?.endRefreshing()
     }
 
-    @objc func exitInLogIn() {
-        let login = LogInViewController()
-        navigationController?.pushViewController(login, animated: true)
-        resignFirstResponder()
-    }
-
 }
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 {
-            return postArray.count
+            return viewModel?.numberOfRows() ?? 0
         } else {
             return 1
         }
@@ -82,14 +96,13 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 
         if indexPath.section == 1 {
-            let cell = ProfileViewController.postTableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as! PostTableViewCell
-            cell.configPostArray(title: postArray[indexPath.row].title,
-                                  description: postArray[indexPath.row].description,
-                                  image: postArray[indexPath.row].image,
-                                  likes: postArray[indexPath.row].likes,
-                                  views: postArray[indexPath.row].views)
+            let cell = ProfileViewController.postTableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as? PostTableViewCell
+            guard let tableViewCell = cell, let viewModel = viewModel else { return UITableViewCell() }
+            let cellViewModel = viewModel.cellViewModel(forIndexPath: indexPath)
+            tableViewCell.viewModel = cellViewModel
+            
+            return tableViewCell
 
-            return cell
         } else {
 
             let cell = ProfileViewController.postTableView.dequeueReusableCell(withIdentifier: String(describing: PhotosTableViewCell.self), for: indexPath) as! PhotosTableViewCell
@@ -102,6 +115,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
         guard section == 0 else { return nil }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileHeaderView.self)) as! ProfileHeaderView
+        if let user = userService.getUser(login: userLogin) {
+            headerView.currentUser(user: user)
+        }
         return headerView
     }
 
@@ -117,7 +133,8 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
         if indexPath.section == 1 {
             tableView.deselectRow(at: indexPath, animated: false)
-            postArray[indexPath.row].views += UInt(1)
+            guard var viewModel = viewModel else { return }
+            viewModel.postArray[indexPath.row].views += UInt(1)
         } else {
             tableView.deselectRow(at: indexPath, animated: false)
             let photosViewController = PhotosViewController()

@@ -9,6 +9,19 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
+    var viewModel: PostTableViewModel? {
+        willSet(viewModel) {
+            guard let viewModel = viewModel else {
+                return
+            }
+            postTitle.text = viewModel.title
+            postDescription.text = viewModel.description
+            postImage.image = UIImage(named: viewModel.image)
+            postLikes.text = "Likes: \(viewModel.likes)"
+            postViews.text = "Views: \(viewModel.views)"
+        }
+    }
+
     var postTitle: UILabel = {
         let postTitle = UILabel()
         postTitle.translatesAutoresizingMaskIntoConstraints = false
@@ -79,13 +92,6 @@ class PostTableViewCell: UITableViewCell {
 
     }
 
-    func configPostArray(title: String, description: String, image: String, likes: UInt, views: UInt) {
-        self.postTitle.text = title
-        self.postDescription.text = description
-        self.postImage.image = UIImage(named: image)
-        self.postLikes.text = "Likes: \(likes)"
-        self.postViews.text = "Views: \(views)"
-    }
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
