@@ -36,7 +36,7 @@ class PhotosViewController: UIViewController {
 
         // MARK: - Task 8
         processor.processImagesOnThread(sourceImages: arrayPhotos,
-                                        filter: .allCases.randomElement()!,
+                                        filter: .fade,
                                         qos: .userInitiated) { filtres in
             self.newPhotosArray.removeAll()
             for value in filtres {

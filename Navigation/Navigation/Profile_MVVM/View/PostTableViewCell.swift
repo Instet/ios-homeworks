@@ -9,6 +9,7 @@ import UIKit
 
 class PostTableViewCell: UITableViewCell {
 
+
     var viewModel: PostTableViewModel? {
         willSet(viewModel) {
             guard let viewModel = viewModel else {
@@ -22,48 +23,73 @@ class PostTableViewCell: UITableViewCell {
         }
     }
 
-    var postTitle: UILabel = {
+    var counter: UInt?
+    
+    private lazy var postTitle: UILabel = {
         let postTitle = UILabel()
-        postTitle.translatesAutoresizingMaskIntoConstraints = false
         postTitle.font =  .systemFont(ofSize: 20, weight: .bold)
         postTitle.textColor = .black
         postTitle.numberOfLines = 2
         return postTitle
     }()
 
-    var postImage: UIImageView = {
+    private lazy var postImage: UIImageView = {
         let postImage = UIImageView()
-        postImage.translatesAutoresizingMaskIntoConstraints = false
         postImage.backgroundColor = .black
         postImage.contentMode = .scaleAspectFit
         return postImage
     }()
 
-    var postDescription: UILabel = {
+    private lazy var postDescription: UILabel = {
         let postDescription = UILabel()
-        postDescription.translatesAutoresizingMaskIntoConstraints = false
         postDescription.font = UIFont.systemFont(ofSize: 14)
         postDescription.textColor = .systemGray
         postDescription.numberOfLines = 0
         return postDescription
     }()
 
-    var postLikes: UILabel = {
+    private lazy var postLikes: UILabel = {
         let postLikes = UILabel()
-        postLikes.translatesAutoresizingMaskIntoConstraints = false
         postLikes.font = .systemFont(ofSize: 16)
         postLikes.textColor = .black
         return postLikes
     }()
 
 
-    var postViews: UILabel = {
+    private lazy var postViews: UILabel = {
         let postViews = UILabel()
-        postViews.translatesAutoresizingMaskIntoConstraints = false
         postViews.font = .systemFont(ofSize: 16)
         postViews.textColor = .black
         return postViews
     }()
+
+    private lazy var likesButtom: UIButton = {
+        let button = UIButton()
+        button.setImage(UIImage(systemName: "heart.fill")?.withTintColor(.gray, renderingMode: .alwaysOriginal), for: .normal)
+        button.setImage(UIImage(systemName: "heart.fill")?.withTintColor(.blue, renderingMode: .alwaysTemplate), for: .selected)
+        button.addTarget(self, action: #selector(likeAction), for: .touchUpInside)
+
+        return button
+    }()
+
+    
+    @objc func likeAction() {
+        guard let viewModel = viewModel else {
+            return
+        }
+        if likesButtom.isSelected {
+            likesButtom.isSelected = false
+            postLikes.text = "Likes: \(viewModel.likes)"
+        } else {
+            likesButtom.isSelected = true
+
+            postLikes.text = "Likes: \(viewModel.likes + 1)"
+            }
+
+        }
+
+
+
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -80,14 +106,18 @@ class PostTableViewCell: UITableViewCell {
             postDescription.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
             postDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
 
-            postLikes.topAnchor.constraint(equalTo: postDescription.bottomAnchor, constant: Constants.indent),
-            postLikes.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
-            postLikes.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indent),
 
             postViews.topAnchor.constraint(equalTo: postDescription.bottomAnchor, constant: Constants.indent),
             postViews.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
-            postViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indent)
+            postViews.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indent),
 
+            postLikes.topAnchor.constraint(equalTo: likesButtom.topAnchor),
+            postLikes.leadingAnchor.constraint(equalTo: likesButtom.trailingAnchor, constant: 8),
+            postLikes.heightAnchor.constraint(equalTo: likesButtom.heightAnchor),
+
+            likesButtom.topAnchor.constraint(equalTo: postDescription.bottomAnchor, constant: Constants.indent),
+            likesButtom.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
+            likesButtom.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -Constants.indent)
         ])
 
     }
@@ -95,9 +125,9 @@ class PostTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubviews(postTitle, postImage, postDescription, postLikes, postViews)
+        contentView.addSubviews(postTitle, postImage, postDescription, postLikes, postViews, likesButtom)
+        self.selectionStyle = .none
         setupConstraints()
-
     }
 
     required init?(coder: NSCoder) {
@@ -112,7 +142,6 @@ class PostTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
     }
 
 }
