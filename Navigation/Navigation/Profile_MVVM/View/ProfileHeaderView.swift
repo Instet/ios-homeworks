@@ -12,6 +12,11 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     private var statusText: String = ""
     private var defaultAvatarPoint: CGPoint?
 
+    static var timerLabel: UILabel = {
+        let label = UILabel()
+        return label
+    }()
+
 
     var userName: UILabel = {
         let userName = UILabel()
@@ -136,7 +141,12 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
             exitAvatarButton.topAnchor.constraint(equalTo: contentView.topAnchor, constant: Constants.indent),
             exitAvatarButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
             exitAvatarButton.widthAnchor.constraint(equalToConstant: 40),
-            exitAvatarButton.heightAnchor.constraint(equalTo: exitAvatarButton.widthAnchor)
+            exitAvatarButton.heightAnchor.constraint(equalTo: exitAvatarButton.widthAnchor),
+
+            ProfileHeaderView.timerLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Constants.trailingMargin),
+            ProfileHeaderView.timerLabel.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: Constants.indent)
+
+
 
 
         ] )
@@ -145,7 +155,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     }
 
     func addView() {
-        addSubviews(userName, statusLabel, buttonStatus, textFieldStatus, avatarFoneView, avatar, exitAvatarButton)
+        addSubviews(userName, statusLabel, buttonStatus, textFieldStatus, ProfileHeaderView.timerLabel, avatarFoneView, avatar, exitAvatarButton)
         self.setupConstraints()
     }
 

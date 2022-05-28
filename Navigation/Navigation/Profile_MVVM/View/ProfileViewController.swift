@@ -13,6 +13,12 @@ class ProfileViewController: UIViewController {
     var userLogin: String
     private let coordinator: ProfileCoordinator?
     private let viewModel: ProfileViewModelProtocol?
+    var timeSeconds = 15 {
+        didSet {
+            ProfileHeaderView.timerLabel.text = String(timeSeconds)
+        }
+    }
+
 
 
     init(coordinator: ProfileCoordinator?,
@@ -63,6 +69,7 @@ class ProfileViewController: UIViewController {
         ProfileViewController.postTableView.delegate = self
         ProfileViewController.postTableView.refreshControl = UIRefreshControl()
         ProfileViewController.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
+        timer()
 
     }
 
@@ -76,7 +83,43 @@ class ProfileViewController: UIViewController {
         ProfileViewController.postTableView.refreshControl?.endRefreshing()
     }
 
+    // MARK: - TASK 10
+    
+    func timer() {
+        _ = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { [weak self] timer in
+            guard let self = self else { return }
+            self.timeSeconds -= 1
+            if self.timeSeconds == 0 {
+                self.coordinator?.showNetology()
+                timer.invalidate()
+                ProfileHeaderView.timerLabel.isHidden = true
+            }
+        }
+    }
+
+
+    func reload() {
+        var timerSecond = 40
+        DispatchQueue.global(qos: .utility).async {
+            let timer = Timer.scheduledTimer(withTimeInterval: 1, repeats: true) { timer in
+                timerSecond -= 1
+                if timerSecond == 0 {
+                    DispatchQueue.main.async {
+                        ProfileViewController.postTableView.reloadData()
+                    }
+                }
+            }
+            RunLoop.current.add(timer, forMode: .common)
+            RunLoop.current.run()
+        }
+
+    }
+
 }
+
+
+
+
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
@@ -140,6 +183,9 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             let photosViewController = PhotosViewController()
             navigationController?.pushViewController(photosViewController, animated: true)
         }
+        // MARK: - TASK 10
+        // обновляем просмотры
+        reload()
 
     }
 
