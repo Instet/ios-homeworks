@@ -123,9 +123,14 @@ class ProfileViewController: UIViewController {
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
+// MARK: - TASK 11 (искуственно созданная ошибка при закомментировании массива с постами)
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 1 {
-            return viewModel?.numberOfRows() ?? 0
+            guard let count = try?viewModel?.numberOfRows() else {
+                preconditionFailure("Массив постов пуст")
+            }
+            return count
         } else {
             return 1
         }

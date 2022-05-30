@@ -13,7 +13,8 @@ class NetologyViewController: UIViewController {
 
     lazy var netologyWindow: UIImageView = {
         let view = UIImageView()
-        view.image = UIImage(named: "netology")
+        view.image = UIImage(named: "net")
+        view.layer.borderWidth = 1
         view.isHidden = false
         view.contentMode = .scaleToFill
 
@@ -83,6 +84,7 @@ class NetologyViewController: UIViewController {
         let url = URL(string: "https://netology.ru")
         guard let url = url else { return }
         UIApplication.shared.open(url)
+        self.dismiss(animated: false)
 
     }
 

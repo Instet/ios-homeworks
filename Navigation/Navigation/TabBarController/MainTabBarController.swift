@@ -37,19 +37,23 @@ final class MainTabBarController: UITabBarController {
     func switchStateApp() {
         switch stateAuthorization {
         case .authorized:
-            guard let userData = userData else { return }
-            
-            let profileCoordinator = ProfileCoordinator(data: userData)
-            let profileNC = profileCoordinator.Start()
+            do {
+                guard let userData = userData else { return }
 
-            let feedCoordinator = FeedCoordinator()
-            let feedNC = feedCoordinator.Start()
+                let profileCoordinator = ProfileCoordinator(data: userData)
+                let profileNC = try profileCoordinator.Start()
 
-            guard let profileNC = profileNC, let feedNC = feedNC else {
-                return
+                let feedCoordinator = FeedCoordinator()
+                let feedNC = feedCoordinator.Start()
+
+                guard let profileNC = profileNC, let feedNC = feedNC else {
+                    return
+                }
+                self.viewControllers = [profileNC, feedNC]
+            } catch {
+                preconditionFailure("Ошибка")
             }
-            self.viewControllers = [profileNC, feedNC]
-
+            
         case .notAuthorized:
             let loginVC = LogInViewController { userData in
                 self.userData = userData
