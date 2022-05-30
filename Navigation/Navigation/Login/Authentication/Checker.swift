@@ -13,7 +13,7 @@ final class Checker {
 
     private let login = "Instet"
 
-    private let password = "3009"
+    private let password = "123"
 
     func check(login: String, password: String) -> Bool {
         if login.hash == self.login.hash && password.hash == self.password.hash {

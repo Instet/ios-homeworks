@@ -19,6 +19,7 @@
 		DB6E34C0283A135300A44F03 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34BF283A135300A44F03 /* CurrentUserService.swift */; };
 		DB6E34C2283A138C00A44F03 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34C1283A138C00A44F03 /* TestUserService.swift */; };
 		DB6E34C4283AC37D00A44F03 /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34C3283AC37D00A44F03 /* BruteForce.swift */; };
+		DB6E34CA2841291500A44F03 /* NetologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34C92841291500A44F03 /* NetologyViewController.swift */; };
 		DB70BE1227BB755F00599559 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */; };
 		DBA0E24B28338CA4002C5077 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E24A28338CA4002C5077 /* ProfileViewModel.swift */; };
 		DBA0E25328339754002C5077 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E25228339754002C5077 /* FeedViewModel.swift */; };
@@ -63,6 +64,7 @@
 		DB6E34BF283A135300A44F03 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		DB6E34C1283A138C00A44F03 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		DB6E34C3283AC37D00A44F03 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
+		DB6E34C92841291500A44F03 /* NetologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetologyViewController.swift; sourceTree = "<group>"; };
 		DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		DBA0E24A28338CA4002C5077 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DBA0E25228339754002C5077 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
@@ -316,6 +318,7 @@
 				DBBBD14227B82BC400900EE7 /* Info.plist */,
 				DBBBD14C27B8CC3C00900EE7 /* PostViewController.swift */,
 				DBBBD15027B9602B00900EE7 /* InfoViewController.swift */,
+				DB6E34C92841291500A44F03 /* NetologyViewController.swift */,
 				DBA0E27B2834E534002C5077 /* InfoViewModel.swift */,
 				DBA0E27D2834E721002C5077 /* InfoCustomModel.swift */,
 				DBBAECE027D6613D00AA366E /* SupportFiles */,
@@ -404,6 +407,7 @@
 				DB6E34C4283AC37D00A44F03 /* BruteForce.swift in Sources */,
 				DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */,
 				DBBBD14D27B8CC3C00900EE7 /* PostViewController.swift in Sources */,
+				DB6E34CA2841291500A44F03 /* NetologyViewController.swift in Sources */,
 				DB2C7CEE282FD1780044AC30 /* FeedCoordinator.swift in Sources */,
 				DBBBD13527B82BC200900EE7 /* AppDelegate.swift in Sources */,
 				DBA0E24B28338CA4002C5077 /* ProfileViewModel.swift in Sources */,
@@ -584,7 +588,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -613,7 +617,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

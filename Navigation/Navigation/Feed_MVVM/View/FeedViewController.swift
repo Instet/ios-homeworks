@@ -45,6 +45,7 @@ class FeedViewController: UIViewController {
         let button = PasswordCheckButton { [weak self] in
             Password.shared.check(self!.passwordText ?? "")
             self?.passwordTF.resignFirstResponder()
+            
         }
         return button
     }()

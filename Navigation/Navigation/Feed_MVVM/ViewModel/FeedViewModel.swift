@@ -16,7 +16,6 @@ protocol FeedViewModelProtocol: AnyObject {
 
 final class FeedViewModel: FeedViewModelProtocol {
 
-    var callback: (() -> ())?
 
 
     func setupConstraints(controller: UIViewController, stackView: UIStackView, labelPasswordCheck: UILabel) {

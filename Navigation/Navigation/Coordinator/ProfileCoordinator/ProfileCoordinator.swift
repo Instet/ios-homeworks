@@ -27,7 +27,15 @@ final class ProfileCoordinator: CoordinatorViewController {
         }
             navigationController = factory.startModule(coordinator: self, data: (userService: userService, userLogin: userLogin))
             return navigationController
+        
 
+    }
+
+    // MARK: - TASK 10
+    func showNetology() {
+        let netology = NetologyViewController()
+        netology.modalPresentationStyle = .custom
+        self.navigationController?.present(netology, animated: false)
     }
 
 }
