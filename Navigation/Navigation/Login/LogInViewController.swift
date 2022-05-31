@@ -227,47 +227,57 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     @objc private func pressLogIn() {
 
+        // MARK: - TASK 11
+
         guard let delegate = delegate else { return }
         guard let login = loginTF.text else { return }
         guard let password = passwordTF.text else { return }
 
-        if login.isEmpty {
-            let alertVC = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "ОК", style: .default)
-            alertVC.addAction(alertAction)
-            self.present(alertVC, animated: true)
-            return
+        DispatchQueue.global().async {
+            self.authorization(delegate: delegate,
+                               login: login,
+                               password: password) { result in
+                switch result {
+                case .success(true):
+                    DispatchQueue.main.async {
+//                        #if DEBUG
+                        let userService = CurrentUserService()
+//                        #else
+//                        let userService = TestUserService()
+//                        #endif
+                        self.callback((userService: userService, userLogin: login))
+                    }
+                case .failure(.noLogin):
+                    DispatchQueue.main.async {
+                        let alertVC = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
+                        let alertAction = UIAlertAction(title: "ОК", style: .default)
+                        alertVC.addAction(alertAction)
+                        self.present(alertVC, animated: true)
+                    }
+                case .failure(.noPassword):
+                    DispatchQueue.main.async {
+                        let alertVC = UIAlertController(title: "Внимание", message: "Введите пароль!", preferredStyle: .alert)
+                        let alertAction = UIAlertAction(title: "ОК", style: .default)
+                        alertVC.addAction(alertAction)
+                        self.present(alertVC, animated: true)
+                    }
+                case .failure(.wrongDate):
+                    DispatchQueue.main.async {
+                        let alert = UIAlertController(title: "Внимание", message: "Введен неверный логин или пароль!", preferredStyle: .alert)
+                        let alertAction = UIAlertAction(title: "ОК", style: .default)
+                        alert.addAction(alertAction)
+                        self.present(alert, animated: true)
+                    }
+                default :
+                    break
+
+                }
+            }
         }
-        if password.isEmpty {
-            let alertVC = UIAlertController(title: "Внимание", message: "Введите пароль!", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "ОК", style: .default)
-            alertVC.addAction(alertAction)
-            self.present(alertVC, animated: true)
-            return
-        }
-
-
-        let isRight = delegate.check(login: login, password: password)
-        if isRight {
-            #if DEBUG
-            let userService = CurrentUserService()
-            #else
-            let userService = TestUserService()
-            #endif
-            self.callback((userService: userService, userLogin: login))
-        } else {
-            let alert = UIAlertController(title: "Внимание", message: "Введен неверный логин или пароль!", preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "ОК", style: .default)
-            alert.addAction(alertAction)
-            self.present(alert, animated: true)
-
-        }
-
     }
 
 
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViews()
@@ -314,7 +324,29 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
     }
 
+}
 
 
+// MARK: - TASK 11
+extension LogInViewController {
 
+// Result
+    private func authorization(delegate: LoginViewControllerDelegate?,
+                               login: String,
+                               password: String,
+                               completion: (Result<Bool, AuthorizationErrors>) -> Void) {
+        guard let delegate = delegate else { return }
+        let isRight = delegate.check(login: login, password: password)
+        if login.isEmpty {
+            completion(.failure(.noLogin))
+        }
+        if password.isEmpty {
+            completion(.failure(.noPassword))
+        }
+        if isRight{
+            completion(.success(true))
+        } else {
+            completion(.failure(.wrongDate))
+        }
+    }
 }

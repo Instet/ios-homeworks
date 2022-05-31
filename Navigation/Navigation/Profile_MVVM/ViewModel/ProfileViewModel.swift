@@ -9,14 +9,17 @@ import Foundation
 
 protocol ProfileViewModelProtocol {
 
-    func numberOfRows() -> Int?
+    func numberOfRows() throws -> Int
     func cellViewModel(forIndexPath indexPath: IndexPath) -> PostTableViewModel
     var postArray: [Post] { get set }
 }
 
 final class ProfileViewModel: ProfileViewModelProtocol {
 
-    public var postArray = [
+    public var postArray: [Post] = [
+        
+        // здесь можно закомментировать содержимое массива для вызова ошибки
+
         Post(title: "Российский Apple Store приостановил продажи",
              description: "Apple остановила продажи своих гаджетов на территории России и прекратила поставки в страну. Помимо этого, купертиновцы подтвердили ограничение работы Apple Pay.",
              image: "apple",
@@ -42,8 +45,14 @@ final class ProfileViewModel: ProfileViewModelProtocol {
              views: 312)
     ]
 
-    func numberOfRows() -> Int? {
-        return postArray.count
+// MARK: - TASK 11
+    
+    func numberOfRows() throws -> Int {
+        if postArray.count != 0 {
+            return postArray.count
+        } else {
+            throw AuthorizationErrors.wrongDate
+        }
     }
 
     

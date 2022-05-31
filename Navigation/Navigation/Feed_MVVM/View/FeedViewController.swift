@@ -82,7 +82,6 @@ class FeedViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.addSubviews(stackView, checkLabel)
@@ -91,11 +90,6 @@ class FeedViewController: UIViewController {
         viewModel?.setupConstraints(controller: self,
                                     stackView: stackView,
                                     labelPasswordCheck: checkLabel)
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        print("будет скрыт таббар и открыта страница пост")
-        tabBarController?.tabBar.isHidden = false
     }
 
 
