@@ -20,7 +20,7 @@
 		DB6E34C2283A138C00A44F03 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34C1283A138C00A44F03 /* TestUserService.swift */; };
 		DB6E34C4283AC37D00A44F03 /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34C3283AC37D00A44F03 /* BruteForce.swift */; };
 		DB6E34CA2841291500A44F03 /* NetologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34C92841291500A44F03 /* NetologyViewController.swift */; };
-		DB6E34CC2844FA1400A44F03 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34CB2844FA1400A44F03 /* Errors.swift */; };
+		DB6E34CC2844FA1400A44F03 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34CB2844FA1400A44F03 /* Error.swift */; };
 		DB70BE1227BB755F00599559 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */; };
 		DBA0E24B28338CA4002C5077 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E24A28338CA4002C5077 /* ProfileViewModel.swift */; };
 		DBA0E25328339754002C5077 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E25228339754002C5077 /* FeedViewModel.swift */; };
@@ -66,7 +66,7 @@
 		DB6E34C1283A138C00A44F03 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
 		DB6E34C3283AC37D00A44F03 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		DB6E34C92841291500A44F03 /* NetologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetologyViewController.swift; sourceTree = "<group>"; };
-		DB6E34CB2844FA1400A44F03 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		DB6E34CB2844FA1400A44F03 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		DBA0E24A28338CA4002C5077 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DBA0E25228339754002C5077 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
@@ -155,8 +155,10 @@
 			isa = PBXGroup;
 			children = (
 				DB2C7CE4282FCB420044AC30 /* GeneralCoordinator.swift */,
-				DB2C7CE9282FD0F90044AC30 /* ProfileCoordinator */,
-				DB2C7CEA282FD1140044AC30 /* FeedCoordinator */,
+				DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */,
+				DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */,
+				DBA0E2772834DEC7002C5077 /* PostCoordinator.swift */,
+				DBA0E2792834DED5002C5077 /* InfoCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -164,27 +166,10 @@
 		DB2C7CE6282FCB710044AC30 /* TabBarController */ = {
 			isa = PBXGroup;
 			children = (
+				DB2C7CF82830C1E20044AC30 /* Factory */,
 				DB2C7CE7282FCBA90044AC30 /* MainTabBarController.swift */,
 			);
 			path = TabBarController;
-			sourceTree = "<group>";
-		};
-		DB2C7CE9282FD0F90044AC30 /* ProfileCoordinator */ = {
-			isa = PBXGroup;
-			children = (
-				DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */,
-			);
-			path = ProfileCoordinator;
-			sourceTree = "<group>";
-		};
-		DB2C7CEA282FD1140044AC30 /* FeedCoordinator */ = {
-			isa = PBXGroup;
-			children = (
-				DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */,
-				DBA0E2762834DE9C002C5077 /* PostCoordinator */,
-				DBA0E2752834DE5A002C5077 /* InfoCoordinator */,
-			);
-			path = FeedCoordinator;
 			sourceTree = "<group>";
 		};
 		DB2C7CF82830C1E20044AC30 /* Factory */ = {
@@ -262,29 +247,13 @@
 			path = ModelViewElements;
 			sourceTree = "<group>";
 		};
-		DBA0E2752834DE5A002C5077 /* InfoCoordinator */ = {
-			isa = PBXGroup;
-			children = (
-				DBA0E2792834DED5002C5077 /* InfoCoordinator.swift */,
-			);
-			path = InfoCoordinator;
-			sourceTree = "<group>";
-		};
-		DBA0E2762834DE9C002C5077 /* PostCoordinator */ = {
-			isa = PBXGroup;
-			children = (
-				DBA0E2772834DEC7002C5077 /* PostCoordinator.swift */,
-			);
-			path = PostCoordinator;
-			sourceTree = "<group>";
-		};
 		DBBAECE027D6613D00AA366E /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
 				DBBAECE127D6617C00AA366E /* Constants.swift */,
 				DBBAECE327D6618D00AA366E /* Extensions.swift */,
 				DBBAECE527D661A100AA366E /* Photo.swift */,
-				DB6E34CB2844FA1400A44F03 /* Errors.swift */,
+				DB6E34CB2844FA1400A44F03 /* Error.swift */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -313,9 +282,9 @@
 				DBA0E24928338C1D002C5077 /* Login */,
 				DB2C7CE3282FCAFB0044AC30 /* Coordinator */,
 				DB2C7CE6282FCB710044AC30 /* TabBarController */,
-				DB2C7CF82830C1E20044AC30 /* Factory */,
 				DBA0E24E28339692002C5077 /* Feed_MVVM */,
 				DB0CE5E92831296C001BFDBC /* Profile_MVVM */,
+				DBBAECE027D6613D00AA366E /* SupportFiles */,
 				DBBBD13D27B82BC400900EE7 /* Assets.xcassets */,
 				DBBBD13F27B82BC400900EE7 /* LaunchScreen.storyboard */,
 				DBBBD14227B82BC400900EE7 /* Info.plist */,
@@ -324,7 +293,6 @@
 				DB6E34C92841291500A44F03 /* NetologyViewController.swift */,
 				DBA0E27B2834E534002C5077 /* InfoViewModel.swift */,
 				DBA0E27D2834E721002C5077 /* InfoCustomModel.swift */,
-				DBBAECE027D6613D00AA366E /* SupportFiles */,
 			);
 			path = Navigation;
 			sourceTree = "<group>";
@@ -441,7 +409,7 @@
 				DB6E34BB283A0F7800A44F03 /* LoginFactory.swift in Sources */,
 				DBA0E2742834D797002C5077 /* PasswordTextField.swift in Sources */,
 				DBA0E25328339754002C5077 /* FeedViewModel.swift in Sources */,
-				DB6E34CC2844FA1400A44F03 /* Errors.swift in Sources */,
+				DB6E34CC2844FA1400A44F03 /* Error.swift in Sources */,
 				DB6E34BE283A130800A44F03 /* User.swift in Sources */,
 				DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */,
 				DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */,

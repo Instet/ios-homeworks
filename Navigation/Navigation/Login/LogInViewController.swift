@@ -261,7 +261,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
                         alertVC.addAction(alertAction)
                         self.present(alertVC, animated: true)
                     }
-                case .failure(.wrongDate):
+                case .failure(.noDate):
                     DispatchQueue.main.async {
                         let alert = UIAlertController(title: "Внимание", message: "Введен неверный логин или пароль!", preferredStyle: .alert)
                         let alertAction = UIAlertAction(title: "ОК", style: .default)
@@ -334,7 +334,7 @@ extension LogInViewController {
     private func authorization(delegate: LoginViewControllerDelegate?,
                                login: String,
                                password: String,
-                               completion: (Result<Bool, AuthorizationErrors>) -> Void) {
+                               completion: (Result<Bool, AuthorizationError>) -> Void) {
         guard let delegate = delegate else { return }
         let isRight = delegate.check(login: login, password: password)
         if login.isEmpty {
@@ -346,7 +346,7 @@ extension LogInViewController {
         if isRight{
             completion(.success(true))
         } else {
-            completion(.failure(.wrongDate))
+            completion(.failure(.noDate))
         }
     }
 }

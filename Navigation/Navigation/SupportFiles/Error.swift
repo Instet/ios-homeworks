@@ -1,5 +1,5 @@
 //
-//  Errors.swift
+//  Error.swift
 //  Navigation
 //
 //  Created by Руслан Магомедов on 30.05.2022.
@@ -7,8 +7,8 @@
 
 import Foundation
 
-enum AuthorizationErrors: Error {
+enum AuthorizationError: Error {
     case noLogin
     case noPassword
-    case wrongDate
+    case noDate
 }

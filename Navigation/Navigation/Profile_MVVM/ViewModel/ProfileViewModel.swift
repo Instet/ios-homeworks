@@ -51,7 +51,7 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         if postArray.count != 0 {
             return postArray.count
         } else {
-            throw AuthorizationErrors.wrongDate
+            throw AuthorizationError.noDate
         }
     }
 
