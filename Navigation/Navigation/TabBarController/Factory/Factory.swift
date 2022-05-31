@@ -13,6 +13,7 @@ final class Factory {
     enum State {
         case profile
         case feed
+        case media
     }
 
     let state: State
@@ -29,7 +30,9 @@ final class Factory {
             let profileViewModel = ProfileViewModel()
             let profileVC = ProfileViewController(coordinator: coordinator as? ProfileCoordinator, viewModel: profileViewModel, userService: userDate.userService, userLogin: userDate.userLogin)
             let profileNC = UINavigationController(rootViewController: profileVC)
-            profileNC.tabBarItem = UITabBarItem(title: "Profile", image: UIImage(systemName: "person.crop.circle"), selectedImage: UIImage(systemName: "person.crop.circle.fill"))
+            profileNC.tabBarItem = UITabBarItem(title: "Profile",
+                                                image: UIImage(systemName: "person.crop.circle"),
+                                                selectedImage: UIImage(systemName: "person.crop.circle.fill"))
             return profileNC
 
         case .feed:
@@ -37,8 +40,19 @@ final class Factory {
             let feedVC = FeedViewController(coordinator: coordinator as? FeedCoordinator, viewModel: feedViewModel)
             feedVC.view.backgroundColor = .white
             let feedNC = UINavigationController(rootViewController: feedVC)
-            feedNC.tabBarItem = UITabBarItem(title: "Feed", image: UIImage(systemName: "note.text"), tag: 0)
+            feedNC.tabBarItem = UITabBarItem(title: "Feed",
+                                             image: UIImage(systemName: "note.text"),
+                                             tag: 0)
             return feedNC
+
+        case .media:
+            let mediaVC = MediaViewController(coordinator: coordinator as? MediaCoordinator)
+            mediaVC.view.backgroundColor = .white
+            let mediaNC = UINavigationController(rootViewController: mediaVC)
+            mediaNC.tabBarItem = UITabBarItem(title: "Media",
+                                              image: UIImage(systemName: "play"),
+                                              selectedImage: UIImage(systemName: "play.fill"))
+            return mediaNC
         }
     }
 

@@ -23,6 +23,10 @@
                                 </constraints>
                                 <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
                             </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="pla" translatesAutoresizingMaskIntoConstraints="NO" id="Ai5-k8-rlF">
+                                <rect key="frame" x="87" y="131" width="240" height="128"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="ajY-pu-qwi"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -39,5 +43,6 @@
     </scenes>
     <resources>
         <image name="logo" width="1024" height="1024"/>
+        <image name="pla" width="128" height="128"/>
     </resources>
 </document>

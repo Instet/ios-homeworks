@@ -44,9 +44,14 @@ final class MainTabBarController: UITabBarController {
                 let feedCoordinator = FeedCoordinator()
                 let feedNC = feedCoordinator.Start()
 
+                let mediaCoordinator = MediaCoordinator()
+                let mediaNC = mediaCoordinator.Start()
+
                 guard let profileNC = profileNC,
-                      let feedNC = feedNC else { return }
-                self.viewControllers = [profileNC, feedNC]
+                      let feedNC = feedNC,
+                      let mediaNC = mediaNC else { return }
+
+                self.viewControllers = [profileNC, feedNC, mediaNC]
 
         case .notAuthorized:
             let loginVC = LogInViewController { userData in
