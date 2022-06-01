@@ -44,7 +44,7 @@ final class MainTabBarController: UITabBarController {
                 let feedCoordinator = FeedCoordinator()
                 let feedNC = feedCoordinator.Start()
 
-                let mediaCoordinator = MediaCoordinator()
+                let mediaCoordinator = AudioCoordinator()
                 let mediaNC = mediaCoordinator.Start()
 
                 guard let profileNC = profileNC,

@@ -13,7 +13,7 @@ final class Factory {
     enum State {
         case profile
         case feed
-        case media
+        case music
     }
 
     let state: State
@@ -45,11 +45,12 @@ final class Factory {
                                              tag: 0)
             return feedNC
 
-        case .media:
-            let mediaVC = MediaViewController(coordinator: coordinator as? MediaCoordinator)
+        case .music:
+            let viewModel = AudioViewModel()
+            let mediaVC = AudioViewController(coordinator: coordinator as? AudioCoordinator, viewModel: viewModel)
             mediaVC.view.backgroundColor = .white
             let mediaNC = UINavigationController(rootViewController: mediaVC)
-            mediaNC.tabBarItem = UITabBarItem(title: "Media",
+            mediaNC.tabBarItem = UITabBarItem(title: "Music",
                                               image: UIImage(systemName: "play"),
                                               selectedImage: UIImage(systemName: "play.fill"))
             return mediaNC
