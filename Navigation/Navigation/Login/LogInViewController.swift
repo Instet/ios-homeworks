@@ -53,6 +53,8 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         login.font = UIFont.systemFont(ofSize: 16)
         login.autocapitalizationType = .none
         login.returnKeyType = .done
+        // для дебага
+        login.text = "Instet"
         return login
     }()
 

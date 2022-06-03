@@ -17,6 +17,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.makeKeyAndVisible()
         let coordinator: GeneralCoordinator = RootCoordinator()
+        UITabBar.appearance().barTintColor = .white
+        UITabBar.appearance().barStyle = .default
+  
 
 
         appendArrayPhotos()

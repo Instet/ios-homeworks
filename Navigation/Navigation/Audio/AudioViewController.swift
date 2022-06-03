@@ -13,13 +13,88 @@ class AudioViewController: UIViewController {
 
     private let coordinator: AudioCoordinator?
     private let viewModel: AudioViewModel?
-    var videoArray: [(name: String, url: URL)] = []
+    private var player: AVAudioPlayer!
+    private var switchTrack: Int = 0
 
 
-    lazy var mediaTableView: UITableView = {
-        let table = UITableView(frame: .zero, style: .grouped)
-        return table
+    lazy var playButton: UIButton = {
+        let button = UIButton()
+        button.clipsToBounds = true
+        button.imageView?.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
+                        for: .normal)
+        button.addTarget(self, action: #selector(playTrack), for: .touchUpInside)
+        return button
     }()
+
+    lazy var stopButton: UIButton = {
+        let button = UIButton()
+        button.clipsToBounds = true
+        button.imageView?.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "stop.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)), for: .normal)
+        button.addTarget(self, action: #selector(stopTrack), for: .touchUpInside)
+        return button
+    }()
+
+    lazy var nextButton: UIButton = {
+        let button = UIButton()
+        button.clipsToBounds = true
+        button.imageView?.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "forward.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
+                        for: .normal)
+        button.addTarget(self, action: #selector(nextTrack), for: .touchUpInside)
+        return button
+    }()
+
+    lazy var backButton: UIButton = {
+        let button = UIButton()
+        button.clipsToBounds = true
+        button.imageView?.tintColor = .black
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(systemName: "backward.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
+                        for: .normal)
+        button.addTarget(self, action: #selector(backTrack), for: .touchUpInside)
+        return button
+    }()
+
+    lazy var stackButton: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .horizontal
+        stack.distribution = .fillEqually
+        stack.spacing = 0
+        stack.addArrangedSubview(backButton)
+        stack.addArrangedSubview(playButton)
+        stack.addArrangedSubview(stopButton)
+        stack.addArrangedSubview(nextButton)
+
+        return stack
+    }()
+
+    lazy var titleTrackLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 20, weight: .bold)
+        label.textAlignment = .center
+        return label
+    }()
+
+
+    lazy var artistTrackLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 17, weight: .regular)
+        label.textColor = .gray
+        label.textAlignment = .center
+        return label
+    }()
+
+    lazy var imageTrack: UIImageView = {
+        let image = UIImageView()
+        image.contentMode = .scaleToFill
+        return image
+    }()
+
 
     init(coordinator: AudioCoordinator?,
          viewModel: AudioViewModel?) {
@@ -34,60 +109,104 @@ class AudioViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Media"
-        mediaTableView.dataSource = self
-               mediaTableView.delegate = self
-        mediaTableView.register(AudioTableViewCell.self, forCellReuseIdentifier: String(describing: AudioTableViewCell.self))
-        setupView()
+        self.title = "Music"
+        setupConstraints()
+        guard let viewModel = viewModel?.audioLibrary else { return }
+        player = try?AVAudioPlayer(contentsOf: (viewModel.first?.url)!)
+        titleTrackLabel.text = viewModel.first?.title
+        artistTrackLabel.text = viewModel.first?.artist
+        imageTrack.image = UIImage(named: viewModel.first?.image ?? "")
+        player.prepareToPlay()
 
-
+        
     }
 
-    private func setupView() {
-        view.addSubviews(mediaTableView)
+
+    private func setupConstraints() {
+        view.addSubviews(stackButton, titleTrackLabel, artistTrackLabel, imageTrack)
 
         NSLayoutConstraint.activate([
-            mediaTableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            mediaTableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            mediaTableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            mediaTableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+
+            stackButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.leadingMargin),
+            stackButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Constants.trailingMargin),
+            stackButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -50),
+            stackButton.heightAnchor.constraint(equalToConstant: 150),
+
+            titleTrackLabel.bottomAnchor.constraint(equalTo: stackButton.topAnchor, constant: -20),
+            titleTrackLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+
+            artistTrackLabel.topAnchor.constraint(equalTo: titleTrackLabel.bottomAnchor, constant: 10),
+            artistTrackLabel.centerXAnchor.constraint(equalTo: titleTrackLabel.centerXAnchor),
+
+            imageTrack.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Constants.leadingMargin),
+            imageTrack.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: Constants.trailingMargin),
+            imageTrack.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.indent),
+            imageTrack.heightAnchor.constraint(equalToConstant: UIScreen.main.bounds.width - 32)
+
         ])
 
     }
 
+    // Остался вопрос по проигрыванию всех треков, и проигрывания в фоне
+    @objc func playTrack() {
+        if player.isPlaying {
+            player.pause()
+            playButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
+                                for: .normal)
+        }
+         player.play()
+        playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
+                            for: .normal)
+
+    }
+
+
+
+    @objc func stopTrack() {
+        stopButton.setImage(UIImage(systemName: "stop.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40))?.withTintColor(.gray), for: .selected)
+        player.stop()
+        player.currentTime = 0
+
+    }
+
+    @objc func nextTrack() {
+        guard let viewModel = viewModel?.audioLibrary else { return }
+        if switchTrack == 0 {
+            switchTrack = viewModel.count - 1
+        } else {
+            switchTrack -= 1
+        }
+        player = try?AVAudioPlayer(contentsOf: (viewModel[switchTrack].url)!)
+        titleTrackLabel.text = viewModel[switchTrack].title
+        artistTrackLabel.text = viewModel[switchTrack].artist
+        imageTrack.image = UIImage(named: viewModel[switchTrack].image ?? "")
+        player.prepareToPlay()
+        player.play()
+
+    }
+
+    @objc func backTrack() {
+        guard let viewModel = viewModel?.audioLibrary else { return }
+        if switchTrack == viewModel.count - 1 {
+            switchTrack = 0
+        } else {
+            switchTrack += 1
+        }
+        player = try?AVAudioPlayer(contentsOf: (viewModel[switchTrack].url)!)
+        titleTrackLabel.text = viewModel[switchTrack].title
+        artistTrackLabel.text = viewModel[switchTrack].artist
+        imageTrack.image = UIImage(named: viewModel[switchTrack].image ?? "")
+        player.prepareToPlay()
+        player.play()
+
+    }
+
+
+    
 }
 
-extension AudioViewController: UITableViewDataSource, UITableViewDelegate {
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let viewModel = viewModel else { return 0}
-        return viewModel.numberOfRows(numberOfRowsInSection: section)
-
-    }
-
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-            let cell = mediaTableView.dequeueReusableCell(withIdentifier: String(describing: AudioTableViewCell.self), for: indexPath) as? AudioTableViewCell
-            guard let tableViewCell = cell,
-                  let viewModel = viewModel else { return UITableViewCell() }
-            tableViewCell.viewModel = viewModel.cellViewModel(forIndexPath: indexPath)
-            return tableViewCell
-
-    }
-
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-            return "Music"
-    }
-
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 70
-    }
-
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
- 
-    }
 
 
 
-}
+
+
