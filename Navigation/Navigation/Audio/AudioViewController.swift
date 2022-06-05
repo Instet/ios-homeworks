@@ -154,6 +154,7 @@ class AudioViewController: UIViewController {
             playButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
                                 for: .normal)
         }
+
          player.play()
         playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
                             for: .normal)

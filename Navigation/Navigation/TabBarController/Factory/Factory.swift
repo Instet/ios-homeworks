@@ -14,6 +14,7 @@ final class Factory {
         case profile
         case feed
         case music
+        case video
     }
 
     let state: State
@@ -54,6 +55,17 @@ final class Factory {
                                               image: UIImage(systemName: "play"),
                                               selectedImage: UIImage(systemName: "play.fill"))
             return mediaNC
+            
+        case .video:
+            let viewModel = VideoViewModel()
+            let videoVC = VideoViewController(coordinator: coordinator as? VideoCoordinator, viewModel: viewModel)
+            videoVC.view.backgroundColor = .white
+            let videoNC = UINavigationController(rootViewController: videoVC)
+            videoNC.tabBarItem = UITabBarItem(title: "Video",
+                                              image: UIImage(systemName: "tv"),
+                                              selectedImage: UIImage(systemName: "tv.fill"))
+            return videoNC
+            
         }
     }
 

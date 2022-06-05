@@ -47,11 +47,15 @@ final class MainTabBarController: UITabBarController {
                 let mediaCoordinator = AudioCoordinator()
                 let mediaNC = mediaCoordinator.Start()
 
+                let videoCoordinator = VideoCoordinator()
+                let videoNC = videoCoordinator.Start()
+
                 guard let profileNC = profileNC,
                       let feedNC = feedNC,
+                      let videoNC = videoNC,
                       let mediaNC = mediaNC else { return }
 
-                self.viewControllers = [profileNC, feedNC, mediaNC]
+                self.viewControllers = [profileNC, feedNC, mediaNC, videoNC]
 
         case .notAuthorized:
             let loginVC = LogInViewController { userData in
