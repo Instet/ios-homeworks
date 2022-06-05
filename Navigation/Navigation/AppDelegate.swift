@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AVFoundation
+import YoutubePlayer_in_WKWebView
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +21,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let coordinator: GeneralCoordinator = RootCoordinator()
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().barStyle = .default
+
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback, mode: .moviePlayback)
+        }
+        catch {
+            print(error.localizedDescription)
+        }
+
+        
+
+
   
 
 

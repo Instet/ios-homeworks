@@ -37,21 +37,34 @@ final class MainTabBarController: UITabBarController {
     func switchStateApp() {
         switch stateAuthorization {
         case .authorized:
-                guard let userData = userData else { return }
-                let profileCoordinator = ProfileCoordinator(data: userData)
-                let profileNC = try?profileCoordinator.Start()
+            guard let userData = userData else { return }
+            let profileCoordinator = ProfileCoordinator(data: userData)
+            let profileNC = try?profileCoordinator.Start()
             
-                let feedCoordinator = FeedCoordinator()
-                let feedNC = feedCoordinator.Start()
+            let feedCoordinator = FeedCoordinator()
+            let feedNC = feedCoordinator.Start()
 
-                let mediaCoordinator = AudioCoordinator()
-                let mediaNC = mediaCoordinator.Start()
+            let mediaCoordinator = AudioCoordinator()
+            let mediaNC = mediaCoordinator.Start()
 
-                guard let profileNC = profileNC,
-                      let feedNC = feedNC,
-                      let mediaNC = mediaNC else { return }
+            let videoCoordinator = VideoCoordinator()
+            let videoNC = videoCoordinator.Start()
 
-                self.viewControllers = [profileNC, feedNC, mediaNC]
+            let dictaphoneCoordinator = DictaphoneCoordinator()
+            let dictaphoneNC = dictaphoneCoordinator.Start()
+
+
+            guard let profileNC = profileNC,
+                  let feedNC = feedNC,
+                  let videoNC = videoNC,
+                  let mediaNC = mediaNC,
+                  let dictaphoneNC = dictaphoneNC  else { return }
+
+            self.viewControllers = [profileNC,
+                                    feedNC,
+                                    mediaNC,
+                                    videoNC,
+                                    dictaphoneNC]
 
         case .notAuthorized:
             let loginVC = LogInViewController { userData in
