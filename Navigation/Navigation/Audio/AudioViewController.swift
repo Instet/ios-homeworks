@@ -112,13 +112,26 @@ class AudioViewController: UIViewController {
         self.title = "Music"
         setupConstraints()
         guard let viewModel = viewModel?.audioLibrary else { return }
-        player = try?AVAudioPlayer(contentsOf: (viewModel.first?.url)!)
-        titleTrackLabel.text = viewModel.first?.title
-        artistTrackLabel.text = viewModel.first?.artist
-        imageTrack.image = UIImage(named: viewModel.first?.image ?? "")
-        player.prepareToPlay()
+        do {
+            player = try AVAudioPlayer(contentsOf: (viewModel.first?.url)!)
+            titleTrackLabel.text = viewModel.first?.title
+            artistTrackLabel.text = viewModel.first?.artist
+            imageTrack.image = UIImage(named: viewModel.first?.image ?? "")
+            player.prepareToPlay()
+        } catch {
+            print(error.localizedDescription)
+        }
+        setupAudioSession()
 
         
+    }
+    private func setupAudioSession() {
+        let audioSession = AVAudioSession.sharedInstance()
+        do {
+            try audioSession.setCategory(.playback)
+        } catch {
+            print(error.localizedDescription)
+        }
     }
 
 
@@ -147,17 +160,18 @@ class AudioViewController: UIViewController {
 
     }
 
-    // Остался вопрос по проигрыванию всех треков, и проигрывания в фоне
+    // Остался вопрос по проигрыванию всех треков
     @objc func playTrack() {
         if player.isPlaying {
             player.pause()
             playButton.setImage(UIImage(systemName: "pause.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
                                 for: .normal)
-        }
+        } else {
 
-         player.play()
-        playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
-                            for: .normal)
+            player.play()
+            playButton.setImage(UIImage(systemName: "play.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 40)),
+                                for: .normal)
+        }
 
     }
 

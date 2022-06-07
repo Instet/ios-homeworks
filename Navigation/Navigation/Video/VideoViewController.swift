@@ -9,6 +9,7 @@ import UIKit
 import AVFoundation
 
 
+
 class VideoViewController: UIViewController {
 
     private let coordinator: VideoCoordinator?
@@ -16,8 +17,6 @@ class VideoViewController: UIViewController {
 
     lazy var videoTableView: UITableView = {
         let table = UITableView(frame: .zero, style: .grouped)
-    
-        
         return table
     }()
     
@@ -60,21 +59,40 @@ class VideoViewController: UIViewController {
 extension VideoViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+
+        return (viewModel?.videoArray.count)!
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
+
+        let cell = videoTableView.dequeueReusableCell(withIdentifier: String(describing: VideoTableViewCell.self), for: indexPath) as? VideoTableViewCell
+        guard cell != nil,
+              let viewModel = viewModel?.videoArray else { return UITableViewCell() }
+        cell?.configVideo(name: viewModel[indexPath.row].title, url: viewModel[indexPath.row].url)
+        return cell!
     }
+
 
 }
 
 extension VideoViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        
-        return "Video"
+
+        return "My Video"
     }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let viewModel = viewModel else { return }
+        tableView.deselectRow(at: indexPath, animated: false)
+        let player = PlayerViewController(url: viewModel.videoArray[indexPath.row].url)
+        present(player, animated: true)
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+
 
 
 }

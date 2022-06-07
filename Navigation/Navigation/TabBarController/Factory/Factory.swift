@@ -15,6 +15,7 @@ final class Factory {
         case feed
         case music
         case video
+        case dictaphone
     }
 
     let state: State
@@ -65,7 +66,17 @@ final class Factory {
                                               image: UIImage(systemName: "tv"),
                                               selectedImage: UIImage(systemName: "tv.fill"))
             return videoNC
-            
+
+        case .dictaphone:
+            let dictaphoneVC = DictaphoneViewController(coordinator: coordinator as? DictaphoneCoordinator)
+            dictaphoneVC.view.backgroundColor = .white
+            let dictaphoneNC = UINavigationController(rootViewController: dictaphoneVC)
+            dictaphoneNC.tabBarItem = UITabBarItem(title: "Dictaphone",
+                                                   image: UIImage(systemName: "record.circle"),
+                                                   selectedImage: UIImage(systemName: "record.circle.fill"))
+
+
+            return dictaphoneNC
         }
     }
 

@@ -9,15 +9,31 @@ import UIKit
 
 class VideoTableViewCell: UITableViewCell {
 
+
+    var url: String?
+    var name: String = "" {
+        didSet {
+            titleVideo.text = name
+        }
+    }
+
     lazy var titleVideo: UILabel = {
         let label = UILabel()
         label.numberOfLines = 0
         return label
     }()
 
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        setupConstraits()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupConstraits()
     }
 
 
@@ -30,6 +46,11 @@ class VideoTableViewCell: UITableViewCell {
             titleVideo.centerYAnchor.constraint(equalTo: contentView.centerYAnchor)
 
         ])
+    }
+
+    func configVideo(name: String, url: String) {
+        self.name = name
+        self.url = url
     }
 
     
