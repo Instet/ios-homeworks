@@ -102,7 +102,13 @@ class DictaphoneViewController: UIViewController, AVAudioRecorderDelegate, AVAud
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        checkPermission()
+        DispatchQueue.global().async {
+            sleep(UInt32(0.2))
+            DispatchQueue.main.async {
+                self.checkPermission()
+            }
+        }
+
     }
 
     override func viewDidLoad() {
