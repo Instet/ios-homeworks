@@ -75,7 +75,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return password
     }()
 
-    var loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let loginButton = UIButton()
         loginButton.translatesAutoresizingMaskIntoConstraints = false
         if let image = UIImage(named: "blue_pixel") {
@@ -87,7 +87,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
         loginButton.setTitle("Log In", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
-        loginButton.addTarget(self, action: #selector(pressLogIn), for: .touchUpInside)
+        loginButton.addTarget(nil, action: #selector(pressLogIn), for: .touchUpInside)
         loginButton.layer.cornerRadius = 10
         loginButton.clipsToBounds = true
         return loginButton
