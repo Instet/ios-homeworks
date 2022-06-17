@@ -37,23 +37,36 @@ final class MainTabBarController: UITabBarController {
     func switchStateApp() {
         switch stateAuthorization {
         case .authorized:
-            do {
-                guard let userData = userData else { return }
-
-                let profileCoordinator = ProfileCoordinator(data: userData)
-                let profileNC = try profileCoordinator.Start()
-
-                let feedCoordinator = FeedCoordinator()
-                let feedNC = feedCoordinator.Start()
-
-                guard let profileNC = profileNC, let feedNC = feedNC else {
-                    return
-                }
-                self.viewControllers = [profileNC, feedNC]
-            } catch {
-                preconditionFailure("Ошибка")
-            }
+            guard let userData = userData else { return }
+            let profileCoordinator = ProfileCoordinator(data: userData)
+            let profileNC = try?profileCoordinator.Start()
             
+            let feedCoordinator = FeedCoordinator()
+            let feedNC = feedCoordinator.Start()
+
+            let mediaCoordinator = AudioCoordinator()
+            let mediaNC = mediaCoordinator.Start()
+
+            let videoCoordinator = VideoCoordinator()
+            let videoNC = videoCoordinator.Start()
+
+            let dictaphoneCoordinator = DictaphoneCoordinator()
+            let dictaphoneNC = dictaphoneCoordinator.Start()
+
+
+            guard let profileNC = profileNC,
+                  let feedNC = feedNC,
+                  let videoNC = videoNC,
+                  let mediaNC = mediaNC,
+                  let dictaphoneNC = dictaphoneNC  else { return }
+
+            self.viewControllers = [profileNC,
+                                    feedNC,
+                                    mediaNC,
+                                    videoNC,
+                                    dictaphoneNC]
+
+
         case .notAuthorized:
             let loginVC = LogInViewController { userData in
                 self.userData = userData
