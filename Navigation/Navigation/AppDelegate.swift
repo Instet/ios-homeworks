@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
         // MARK: - TASK 1.1 iosdt
-        let appConfiguration = AppConfiguration.randomCase()
+        let appConfiguration = AppConfiguration.randomURL()
         NetworkManager.shared.fetchData(url: appConfiguration)
 
 
