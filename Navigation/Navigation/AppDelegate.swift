@@ -30,7 +30,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             print(error.localizedDescription)
         }
 
-        
+
+        // MARK: - TASK 1.1 iosdt
+        let appConfiguration = AppConfiguration.randomCase()
+        NetworkManager.shared.fetchData(url: appConfiguration)
+
 
 
   

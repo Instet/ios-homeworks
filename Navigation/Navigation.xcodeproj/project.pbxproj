@@ -66,6 +66,8 @@
 		DBBBD15127B9602B00900EE7 /* InfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBBD15027B9602B00900EE7 /* InfoViewController.swift */; };
 		DBBE367427D231E0006CD4FB /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBE367327D231E0006CD4FB /* LogInViewController.swift */; };
 		DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBE367527D23264006CD4FB /* PostTableViewCell.swift */; };
+		DBD4A139285D180900D3C997 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4A138285D180900D3C997 /* NetworkManager.swift */; };
+		DBD4A13B285D245F00D3C997 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4A13A285D245F00D3C997 /* AppConfiguration.swift */; };
 		DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */; };
 /* End PBXBuildFile section */
 
@@ -130,6 +132,8 @@
 		DBBBD15027B9602B00900EE7 /* InfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewController.swift; sourceTree = "<group>"; };
 		DBBE367327D231E0006CD4FB /* LogInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		DBBE367527D23264006CD4FB /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
+		DBD4A138285D180900D3C997 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		DBD4A13A285D245F00D3C997 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -372,6 +376,7 @@
 		DBBBD13327B82BC200900EE7 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
+				DBD4A137285D17DB00D3C997 /* Networking */,
 				DBBBD13427B82BC200900EE7 /* AppDelegate.swift */,
 				DBA0E26C2834D698002C5077 /* ModelViewElements */,
 				DBA0E24928338C1D002C5077 /* Login */,
@@ -393,6 +398,15 @@
 				DBA0E27D2834E721002C5077 /* InfoCustomModel.swift */,
 			);
 			path = Navigation;
+			sourceTree = "<group>";
+		};
+		DBD4A137285D17DB00D3C997 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				DBD4A138285D180900D3C997 /* NetworkManager.swift */,
+				DBD4A13A285D245F00D3C997 /* AppConfiguration.swift */,
+			);
+			path = Networking;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -494,10 +508,12 @@
 				DBA0E28328361A62002C5077 /* PostTableViewModel.swift in Sources */,
 				DBA0E2782834DEC7002C5077 /* PostCoordinator.swift in Sources */,
 				DB70BE1227BB755F00599559 /* ProfileHeaderView.swift in Sources */,
+				DBD4A139285D180900D3C997 /* NetworkManager.swift in Sources */,
 				DBBBD14927B8300E00900EE7 /* FeedViewController.swift in Sources */,
 				DBBAECE227D6617C00AA366E /* Constants.swift in Sources */,
 				DBA0E2722834D787002C5077 /* PasswordCheckButton.swift in Sources */,
 				DBBBD14F27B91EC900900EE7 /* Post.swift in Sources */,
+				DBD4A13B285D245F00D3C997 /* AppConfiguration.swift in Sources */,
 				DB6E35052849E57D00A44F03 /* VideoViewModel.swift in Sources */,
 				DB6E34FF2849DBAB00A44F03 /* VideoViewController.swift in Sources */,
 				DBBAECE627D661A100AA366E /* Photo.swift in Sources */,
