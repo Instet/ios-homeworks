@@ -17,7 +17,6 @@ class PostViewController: UIViewController {
         self.coordinator = coordinator
         self.postTitle = postTitle
         super.init(nibName: nil, bundle: nil)
-        
     }
     
     required init?(coder: NSCoder) {

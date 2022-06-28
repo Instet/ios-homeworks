@@ -15,8 +15,5 @@ final class InfoCoordinator {
         let viewController = InfoViewController(coordinator: coordinator, viewModel: vieModel)
         viewController.view.backgroundColor = .systemGray5
         controller?.present(viewController, animated: true)
-        
-
-
     }
 }
