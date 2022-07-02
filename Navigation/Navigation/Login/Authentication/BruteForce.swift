@@ -33,8 +33,6 @@ final class BruteForce {
         if let loginInspector = loginInspector {
             while !loginInspector.check(login: login, password: password) {
                 password = generateBruteForce(password, fromArray: ALLOWED_CHARACTERS)
-                print(password)
-
             }
         }
 

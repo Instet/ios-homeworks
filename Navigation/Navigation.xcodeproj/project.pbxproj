@@ -39,6 +39,8 @@
 		DB6E35032849E4DD00A44F03 /* VideoCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E35022849E4DD00A44F03 /* VideoCoordinator.swift */; };
 		DB6E35052849E57D00A44F03 /* VideoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E35042849E57D00A44F03 /* VideoViewModel.swift */; };
 		DB70BE1227BB755F00599559 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */; };
+		DB7F36C528661F5800D929A0 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F36C428661F5800D929A0 /* Planet.swift */; };
+		DB7F36C7286AD42800D929A0 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F36C6286AD42700D929A0 /* InfoTableViewCell.swift */; };
 		DBA0E24B28338CA4002C5077 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E24A28338CA4002C5077 /* ProfileViewModel.swift */; };
 		DBA0E25328339754002C5077 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E25228339754002C5077 /* FeedViewModel.swift */; };
 		DBA0E26E2834D752002C5077 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E26D2834D752002C5077 /* CustomButton.swift */; };
@@ -103,6 +105,8 @@
 		DB6E35022849E4DD00A44F03 /* VideoCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoCoordinator.swift; sourceTree = "<group>"; };
 		DB6E35042849E57D00A44F03 /* VideoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideoViewModel.swift; sourceTree = "<group>"; };
 		DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
+		DB7F36C428661F5800D929A0 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
+		DB7F36C6286AD42700D929A0 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 		DBA0E24A28338CA4002C5077 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DBA0E25228339754002C5077 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		DBA0E26D2834D752002C5077 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -300,6 +304,14 @@
 			path = Video;
 			sourceTree = "<group>";
 		};
+		DB7F36C328636AC400D929A0 /* ApiModel */ = {
+			isa = PBXGroup;
+			children = (
+				DB7F36C428661F5800D929A0 /* Planet.swift */,
+			);
+			path = ApiModel;
+			sourceTree = "<group>";
+		};
 		DBA0E24928338C1D002C5077 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -376,8 +388,8 @@
 		DBBBD13327B82BC200900EE7 /* Navigation */ = {
 			isa = PBXGroup;
 			children = (
-				DBD4A137285D17DB00D3C997 /* Networking */,
 				DBBBD13427B82BC200900EE7 /* AppDelegate.swift */,
+				DBD4A137285D17DB00D3C997 /* Networking */,
 				DBA0E26C2834D698002C5077 /* ModelViewElements */,
 				DBA0E24928338C1D002C5077 /* Login */,
 				DB2C7CE3282FCAFB0044AC30 /* Coordinator */,
@@ -393,6 +405,7 @@
 				DBBBD14227B82BC400900EE7 /* Info.plist */,
 				DBBBD14C27B8CC3C00900EE7 /* PostViewController.swift */,
 				DBBBD15027B9602B00900EE7 /* InfoViewController.swift */,
+				DB7F36C6286AD42700D929A0 /* InfoTableViewCell.swift */,
 				DB6E34C92841291500A44F03 /* NetologyViewController.swift */,
 				DBA0E27B2834E534002C5077 /* InfoViewModel.swift */,
 				DBA0E27D2834E721002C5077 /* InfoCustomModel.swift */,
@@ -403,6 +416,7 @@
 		DBD4A137285D17DB00D3C997 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
+				DB7F36C328636AC400D929A0 /* ApiModel */,
 				DBD4A138285D180900D3C997 /* NetworkManager.swift */,
 				DBD4A13A285D245F00D3C997 /* AppConfiguration.swift */,
 			);
@@ -495,6 +509,7 @@
 				DBBAECE827D6640000AA366E /* PhotosTableViewCell.swift in Sources */,
 				DBBAECEA27D6641200AA366E /* PhotosViewController.swift in Sources */,
 				DB2A87FB284D07970037E1B4 /* DictaphoneViewController.swift in Sources */,
+				DB7F36C528661F5800D929A0 /* Planet.swift in Sources */,
 				DB6E34C4283AC37D00A44F03 /* BruteForce.swift in Sources */,
 				DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */,
 				DBBBD14D27B8CC3C00900EE7 /* PostViewController.swift in Sources */,
@@ -532,6 +547,7 @@
 				DB6E34E12846173700A44F03 /* Audio.swift in Sources */,
 				DB6E34B7283A0EDB00A44F03 /* Checker.swift in Sources */,
 				DB6E34E928461BD700A44F03 /* AudioCoordinator.swift in Sources */,
+				DB7F36C7286AD42800D929A0 /* InfoTableViewCell.swift in Sources */,
 				DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */,
 				DBA0E27C2834E534002C5077 /* InfoViewModel.swift in Sources */,
 				DB6E34C2283A138C00A44F03 /* TestUserService.swift in Sources */,
