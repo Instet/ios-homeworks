@@ -10,8 +10,7 @@ import UIKit
 
 struct User {
 
-    var login: String?
-    var fullName: String?
+    var name: String?
     var userStatus: String?
     var userAvatar: UIImage?
 

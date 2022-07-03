@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ProfileViewModelProtocol {
 
@@ -60,4 +61,5 @@ final class ProfileViewModel: ProfileViewModelProtocol {
         let post = postArray[indexPath.row]
         return PostTableViewModel(post: post)
     }
+
 }

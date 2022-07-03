@@ -10,20 +10,21 @@ import UIKit
 
 protocol UserServiceProtocol: AnyObject {
 
-    func getUser(login: String) -> User?
+    func getUser(name: String) -> User?
 
 }
 
 
 final class CurrentUserService: UserServiceProtocol {
 
-    var user = User(login: "Instet",
-                    fullName: "Ruslan Magomedow",
-                    userStatus: "Glück ist immer mit mir",
-                    userAvatar: UIImage(named: "гомер"))
+    private let user: User
 
-    func getUser(login: String) -> User? {
-        if login == user.login {
+    init(name: String, userStatus: String, userAvatar: String) {
+        self.user = User(name: name, userStatus: userStatus, userAvatar: UIImage(named: userAvatar))
+    }
+    
+    func getUser(name: String) -> User? {
+        if name == user.name {
             return user
         } else {
             return nil

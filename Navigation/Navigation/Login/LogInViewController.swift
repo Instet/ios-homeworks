@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import FirebaseAuth
 
 class LogInViewController: UIViewController, UITextFieldDelegate {
 
@@ -53,8 +54,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         login.font = UIFont.systemFont(ofSize: 16)
         login.autocapitalizationType = .none
         login.returnKeyType = .done
-        // для дебага
-        login.text = "Instet"
         return login
     }()
 
@@ -92,9 +91,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         return loginButton
     }()
 
-    // MARK: - Task 9
-
-    private lazy var bruteForceButton: UIButton = {
+    private lazy var registerButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         if let image = UIImage(named: "blue_pixel") {
@@ -103,11 +100,11 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             button.setBackgroundImage(image.image(alpha: 0.8), for: .highlighted)
             button.setBackgroundImage(image.image(alpha: 0.8), for: .disabled)
         }
-        button.setTitle("Подобрать пароль", for: .normal)
+        button.setTitle("Registration", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
-        button.addTarget(self, action: #selector(bruteForceAction), for: .touchUpInside)
+        button.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
         return button
     }()
 
@@ -130,37 +127,18 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-
-
-    @objc func bruteForceAction() {
-        let queue = DispatchQueue.global(qos: .userInteractive)
-        guard let login = loginTF.text else { return }
-        guard login != "" else {
-            let alert = UIAlertController(title: "Ошибка!",
-                                          message: "Для подбора пароля введите логин: \n Instet",
-                                          preferredStyle: .alert)
-            let alertAction = UIAlertAction(title: "ОК",
-                                            style: .default)
-            alert.addAction(alertAction)
-            present(alert, animated: true)
-            return
-        }
-        activityIndicator.isHidden = false
-        activityIndicator.startAnimating()
-        queue.async {
-            let bruteForce = BruteForce(loginInspector: self.delegate, login: login) { [weak self] password in
-                DispatchQueue.main.async {
-                    self?.passwordTF.text = password
-                    self?.passwordTF.isSecureTextEntry = false
-                    self?.activityIndicator.stopAnimating()
-                    self?.activityIndicator.isHidden = true
-                }
+    @objc func registerAction() {
+        guard let email = loginTF.text,
+              let password = passwordTF.text else { return }
+        CheckerService.shared.createUser(email: email, password: password) { success in
+            if success == true {
+                print("user created")
+            } else {
+                print("error")
             }
-            bruteForce.bruteForce()
         }
-
-
     }
+
 
 
     private func setupConstraints() {
@@ -193,15 +171,14 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
 
-            bruteForceButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: Constants.indent),
-            bruteForceButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
-            bruteForceButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
-            bruteForceButton.heightAnchor.constraint(equalToConstant: 50),
+            registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: Constants.indent),
+            registerButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
+            registerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
+            registerButton.heightAnchor.constraint(equalToConstant: 50),
 
             activityIndicator.bottomAnchor.constraint(equalTo: loginStackView.bottomAnchor),
             activityIndicator.centerXAnchor.constraint(equalTo: loginStackView.centerXAnchor),
             activityIndicator.heightAnchor.constraint(equalToConstant: 50)
-
 
         ])
     }
@@ -211,7 +188,7 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         view.backgroundColor = .white
         view.addSubviews(loginScrollView)
         loginScrollView.addSubviews(contentView)
-        contentView.addSubviews(imageVK, loginStackView, loginButton, bruteForceButton, activityIndicator)
+        contentView.addSubviews(imageVK, loginStackView, loginButton, registerButton, activityIndicator)
         loginStackView.addArrangedSubview(loginTF)
         loginStackView.addArrangedSubview(passwordTF)
         setupConstraints()
@@ -229,51 +206,18 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
 
     @objc private func pressLogIn() {
 
-        // MARK: - TASK 11
-
-        guard let delegate = delegate else { return }
         guard let login = loginTF.text else { return }
         guard let password = passwordTF.text else { return }
+        CheckerService.shared.checkCredential(email: login, password: password) { success in
+            if success {
+                let userService = CurrentUserService(name: "Ruslam Magomedow",
+                                                     userStatus: "Glück ist immer mit mir",
+                                                     userAvatar: "гомер")
+                self.callback((userService: userService, userLogin: login))
+                print("success")
+            } else {
+                print("error")
 
-        DispatchQueue.global().async {
-            self.authorization(delegate: delegate,
-                               login: login,
-                               password: password) { result in
-                switch result {
-                case .success(true):
-                    DispatchQueue.main.async {
-//                        #if DEBUG
-                        let userService = CurrentUserService()
-//                        #else
-//                        let userService = TestUserService()
-//                        #endif
-                        self.callback((userService: userService, userLogin: login))
-                    }
-                case .failure(.noLogin):
-                    DispatchQueue.main.async {
-                        let alertVC = UIAlertController(title: "Внимание", message: "Введите логин!", preferredStyle: .alert)
-                        let alertAction = UIAlertAction(title: "ОК", style: .default)
-                        alertVC.addAction(alertAction)
-                        self.present(alertVC, animated: true)
-                    }
-                case .failure(.noPassword):
-                    DispatchQueue.main.async {
-                        let alertVC = UIAlertController(title: "Внимание", message: "Введите пароль!", preferredStyle: .alert)
-                        let alertAction = UIAlertAction(title: "ОК", style: .default)
-                        alertVC.addAction(alertAction)
-                        self.present(alertVC, animated: true)
-                    }
-                case .failure(.noDate):
-                    DispatchQueue.main.async {
-                        let alert = UIAlertController(title: "Внимание", message: "Введен неверный логин или пароль!", preferredStyle: .alert)
-                        let alertAction = UIAlertAction(title: "ОК", style: .default)
-                        alert.addAction(alertAction)
-                        self.present(alert, animated: true)
-                    }
-                default :
-                    break
-
-                }
             }
         }
     }
@@ -326,29 +270,4 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
     }
 
-}
-
-
-// MARK: - TASK 11
-extension LogInViewController {
-
-// Result
-    private func authorization(delegate: LoginViewControllerDelegate?,
-                               login: String,
-                               password: String,
-                               completion: (Result<Bool, AuthorizationError>) -> Void) {
-        guard let delegate = delegate else { return }
-        let isRight = delegate.check(login: login, password: password)
-        if login.isEmpty {
-            completion(.failure(.noLogin))
-        }
-        if password.isEmpty {
-            completion(.failure(.noPassword))
-        }
-        if isRight{
-            completion(.success(true))
-        } else {
-            completion(.failure(.noDate))
-        }
-    }
 }

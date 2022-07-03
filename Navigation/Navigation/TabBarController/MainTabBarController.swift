@@ -38,7 +38,10 @@ final class MainTabBarController: UITabBarController {
         switch stateAuthorization {
         case .authorized:
             guard let userData = userData else { return }
-            let profileCoordinator = ProfileCoordinator(data: userData)
+            let profileCoordinator = ProfileCoordinator(data: userData) {
+                self.stateAuthorization = .notAuthorized
+                self.userData = nil
+            }
             let profileNC = try?profileCoordinator.Start()
             
             let feedCoordinator = FeedCoordinator()

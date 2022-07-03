@@ -9,13 +9,13 @@ import Foundation
 
 protocol LoginFactory {
 
-    func factory() -> LoginInspector
+    func factory() -> LoginViewControllerDelegate
 
 }
 
 struct MyLoginFactory: LoginFactory {
 
-    func factory() -> LoginInspector {
+    func factory() -> LoginViewControllerDelegate {
         return LoginInspector()
     }
 

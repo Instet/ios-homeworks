@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF516777CDD9450F6F128FED /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD9D0B25C8C2CE365A68942E /* Pods_Navigation.framework */; };
 		DB2A87F4284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView in Frameworks */ = {isa = PBXBuildFile; productRef = DB2A87F3284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView */; };
 		DB2A87F8284CEBB00037E1B4 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A87F7284CEBB00037E1B4 /* PlayerViewController.swift */; };
 		DB2A87FB284D07970037E1B4 /* DictaphoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A87FA284D07970037E1B4 /* DictaphoneViewController.swift */; };
@@ -16,13 +17,12 @@
 		DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */; };
 		DB2C7CEE282FD1780044AC30 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */; };
 		DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CF92830C20E0044AC30 /* Factory.swift */; };
-		DB6E34B7283A0EDB00A44F03 /* Checker.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34B6283A0EDB00A44F03 /* Checker.swift */; };
+		DB6E34B7283A0EDB00A44F03 /* CheckerServiceProtokol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34B6283A0EDB00A44F03 /* CheckerServiceProtokol.swift */; };
 		DB6E34B9283A0F1A00A44F03 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34B8283A0F1A00A44F03 /* LoginInspector.swift */; };
 		DB6E34BB283A0F7800A44F03 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34BA283A0F7800A44F03 /* LoginFactory.swift */; };
 		DB6E34BE283A130800A44F03 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34BD283A130800A44F03 /* User.swift */; };
 		DB6E34C0283A135300A44F03 /* CurrentUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34BF283A135300A44F03 /* CurrentUserService.swift */; };
 		DB6E34C2283A138C00A44F03 /* TestUserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34C1283A138C00A44F03 /* TestUserService.swift */; };
-		DB6E34C4283AC37D00A44F03 /* BruteForce.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34C3283AC37D00A44F03 /* BruteForce.swift */; };
 		DB6E34CA2841291500A44F03 /* NetologyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34C92841291500A44F03 /* NetologyViewController.swift */; };
 		DB6E34CC2844FA1400A44F03 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34CB2844FA1400A44F03 /* Error.swift */; };
 		DB6E34D12846143F00A44F03 /* Music5.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DB6E34D02846143F00A44F03 /* Music5.mp3 */; };
@@ -52,6 +52,8 @@
 		DBA0E27C2834E534002C5077 /* InfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E27B2834E534002C5077 /* InfoViewModel.swift */; };
 		DBA0E27E2834E721002C5077 /* InfoCustomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E27D2834E721002C5077 /* InfoCustomModel.swift */; };
 		DBA0E28328361A62002C5077 /* PostTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E28228361A62002C5077 /* PostTableViewModel.swift */; };
+		DBB686ED2871C729009348BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBB686EC2871C729009348BA /* GoogleService-Info.plist */; };
+		DBB686EF28720EA4009348BA /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB686EE28720EA4009348BA /* AuthModel.swift */; };
 		DBBAECE227D6617C00AA366E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE127D6617C00AA366E /* Constants.swift */; };
 		DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE327D6618D00AA366E /* Extensions.swift */; };
 		DBBAECE627D661A100AA366E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE527D661A100AA366E /* Photo.swift */; };
@@ -74,6 +76,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D5B3528D07655BD85E9D99C4 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
 		DB2A87F7284CEBB00037E1B4 /* PlayerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerViewController.swift; sourceTree = "<group>"; };
 		DB2A87FA284D07970037E1B4 /* DictaphoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictaphoneViewController.swift; sourceTree = "<group>"; };
 		DB2A87FC284D07B20037E1B4 /* DictaphoneCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictaphoneCoordinator.swift; sourceTree = "<group>"; };
@@ -82,13 +85,12 @@
 		DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		DB2C7CF92830C20E0044AC30 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
-		DB6E34B6283A0EDB00A44F03 /* Checker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checker.swift; sourceTree = "<group>"; };
+		DB6E34B6283A0EDB00A44F03 /* CheckerServiceProtokol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerServiceProtokol.swift; sourceTree = "<group>"; };
 		DB6E34B8283A0F1A00A44F03 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		DB6E34BA283A0F7800A44F03 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		DB6E34BD283A130800A44F03 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		DB6E34BF283A135300A44F03 /* CurrentUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserService.swift; sourceTree = "<group>"; };
 		DB6E34C1283A138C00A44F03 /* TestUserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUserService.swift; sourceTree = "<group>"; };
-		DB6E34C3283AC37D00A44F03 /* BruteForce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BruteForce.swift; sourceTree = "<group>"; };
 		DB6E34C92841291500A44F03 /* NetologyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetologyViewController.swift; sourceTree = "<group>"; };
 		DB6E34CB2844FA1400A44F03 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		DB6E34D02846143F00A44F03 /* Music5.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = Music5.mp3; sourceTree = "<group>"; };
@@ -118,6 +120,8 @@
 		DBA0E27B2834E534002C5077 /* InfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoViewModel.swift; sourceTree = "<group>"; };
 		DBA0E27D2834E721002C5077 /* InfoCustomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCustomModel.swift; sourceTree = "<group>"; };
 		DBA0E28228361A62002C5077 /* PostTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewModel.swift; sourceTree = "<group>"; };
+		DBB686EC2871C729009348BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DBB686EE28720EA4009348BA /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		DBBAECE127D6617C00AA366E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DBBAECE327D6618D00AA366E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DBBAECE527D661A100AA366E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -138,6 +142,8 @@
 		DBBE367527D23264006CD4FB /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DBD4A138285D180900D3C997 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DBD4A13A285D245F00D3C997 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		E3EBBD878BE92F46B486A554 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
+		FD9D0B25C8C2CE365A68942E /* Pods_Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,12 +153,30 @@
 			files = (
 				DB2A87F4284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView in Frameworks */,
 				DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */,
+				CF516777CDD9450F6F128FED /* Pods_Navigation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		419D70A9B86BF8C9E061C3C2 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FD9D0B25C8C2CE365A68942E /* Pods_Navigation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		767425861A7E4B39E579E53F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E3EBBD878BE92F46B486A554 /* Pods-Navigation.debug.xcconfig */,
+				D5B3528D07655BD85E9D99C4 /* Pods-Navigation.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		DB0CE5E92831296C001BFDBC /* Profile_MVVM */ = {
 			isa = PBXGroup;
 			children = (
@@ -236,10 +260,10 @@
 		DB6E34B5283A0EC800A44F03 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				DB6E34B6283A0EDB00A44F03 /* Checker.swift */,
+				DB6E34B6283A0EDB00A44F03 /* CheckerServiceProtokol.swift */,
 				DB6E34B8283A0F1A00A44F03 /* LoginInspector.swift */,
 				DB6E34BA283A0F7800A44F03 /* LoginFactory.swift */,
-				DB6E34C3283AC37D00A44F03 /* BruteForce.swift */,
+				DBB686EE28720EA4009348BA /* AuthModel.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -374,6 +398,8 @@
 			children = (
 				DBBBD13327B82BC200900EE7 /* Navigation */,
 				DBBBD13227B82BC200900EE7 /* Products */,
+				767425861A7E4B39E579E53F /* Pods */,
+				419D70A9B86BF8C9E061C3C2 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -403,6 +429,7 @@
 				DBBBD13D27B82BC400900EE7 /* Assets.xcassets */,
 				DBBBD13F27B82BC400900EE7 /* LaunchScreen.storyboard */,
 				DBBBD14227B82BC400900EE7 /* Info.plist */,
+				DBB686EC2871C729009348BA /* GoogleService-Info.plist */,
 				DBBBD14C27B8CC3C00900EE7 /* PostViewController.swift */,
 				DBBBD15027B9602B00900EE7 /* InfoViewController.swift */,
 				DB7F36C6286AD42700D929A0 /* InfoTableViewCell.swift */,
@@ -430,9 +457,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBBBD14527B82BC400900EE7 /* Build configuration list for PBXNativeTarget "Navigation" */;
 			buildPhases = (
+				90273FCCDB4BAA4036CC7F6E /* [CP] Check Pods Manifest.lock */,
 				DBBBD12D27B82BC200900EE7 /* Sources */,
 				DBBBD12E27B82BC200900EE7 /* Frameworks */,
 				DBBBD12F27B82BC200900EE7 /* Resources */,
+				7192D5C867633D7DA3F2DEA7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -490,6 +519,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DB6E34D52846145600A44F03 /* Music3.mp3 in Resources */,
+				DBB686ED2871C729009348BA /* GoogleService-Info.plist in Resources */,
 				DBBBD14127B82BC400900EE7 /* LaunchScreen.storyboard in Resources */,
 				DB6E34D72846146000A44F03 /* Music2.mp3 in Resources */,
 				DB6E34D12846143F00A44F03 /* Music5.mp3 in Resources */,
@@ -501,6 +531,48 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		7192D5C867633D7DA3F2DEA7 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		90273FCCDB4BAA4036CC7F6E /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Navigation-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		DBBBD12D27B82BC200900EE7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -510,7 +582,6 @@
 				DBBAECEA27D6641200AA366E /* PhotosViewController.swift in Sources */,
 				DB2A87FB284D07970037E1B4 /* DictaphoneViewController.swift in Sources */,
 				DB7F36C528661F5800D929A0 /* Planet.swift in Sources */,
-				DB6E34C4283AC37D00A44F03 /* BruteForce.swift in Sources */,
 				DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */,
 				DBBBD14D27B8CC3C00900EE7 /* PostViewController.swift in Sources */,
 				DB6E34CA2841291500A44F03 /* NetologyViewController.swift in Sources */,
@@ -545,7 +616,7 @@
 				DBA0E2702834D774002C5077 /* PasswordModel.swift in Sources */,
 				DBBAECEC27D6642700AA366E /* PhotosCollectionViewCell.swift in Sources */,
 				DB6E34E12846173700A44F03 /* Audio.swift in Sources */,
-				DB6E34B7283A0EDB00A44F03 /* Checker.swift in Sources */,
+				DB6E34B7283A0EDB00A44F03 /* CheckerServiceProtokol.swift in Sources */,
 				DB6E34E928461BD700A44F03 /* AudioCoordinator.swift in Sources */,
 				DB7F36C7286AD42800D929A0 /* InfoTableViewCell.swift in Sources */,
 				DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */,
@@ -561,6 +632,7 @@
 				DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */,
 				DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */,
 				DB2A87F8284CEBB00037E1B4 /* PlayerViewController.swift in Sources */,
+				DBB686EF28720EA4009348BA /* AuthModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -696,6 +768,7 @@
 		};
 		DBBBD14627B82BC400900EE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E3EBBD878BE92F46B486A554 /* Pods-Navigation.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -726,6 +799,7 @@
 		};
 		DBBBD14727B82BC400900EE7 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D5B3528D07655BD85E9D99C4 /* Pods-Navigation.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -746,7 +820,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-18";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-18.Navigation";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;

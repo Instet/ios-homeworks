@@ -11,14 +11,13 @@ import UIKit
 
 final class TestUserService: UserServiceProtocol {
 
-    var user = User(login: "TEST",
-                    fullName: "No Name",
+    var user = User(name: "No Name",
                     userStatus: "Login testing",
                     userAvatar: UIImage(systemName: "person.crop.circle")?.withTintColor(.black, renderingMode: .alwaysOriginal))
 
 
-    func getUser(login: String) -> User? {
-        if login == user.login {
+    func getUser(name: String) -> User? {
+        if name == user.name {
             return user
         } else {
             return nil
