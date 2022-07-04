@@ -8,10 +8,11 @@
 import UIKit
 import FirebaseAuth
 
-class LogInViewController: UIViewController, UITextFieldDelegate {
+class LogInViewController: UIViewController {
 
-    var delegate: LoginViewControllerDelegate?
+    weak var delegate: LoginViewControllerDelegate?
     var callback: (_ userData: (userService: UserServiceProtocol, userLogin: String)) -> Void
+    private let minLenght = 6
 
     private lazy var loginScrollView: UIScrollView = {
         let loginScrollView = UIScrollView()
@@ -82,7 +83,6 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             loginButton.setBackgroundImage(image.image(alpha: 0.8), for: .highlighted)
             loginButton.setBackgroundImage(image.image(alpha: 0.8), for: .disabled)
         }
-
         loginButton.setTitle("Log In", for: .normal)
         loginButton.setTitleColor(.white, for: .normal)
         loginButton.addTarget(self, action: #selector(pressLogIn), for: .touchUpInside)
@@ -94,28 +94,12 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
     private lazy var registerButton: UIButton = {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
-        if let image = UIImage(named: "blue_pixel") {
-            button.setBackgroundImage(image.image(alpha: 1), for: .normal)
-            button.setBackgroundImage(image.image(alpha: 0.8), for: .selected)
-            button.setBackgroundImage(image.image(alpha: 0.8), for: .highlighted)
-            button.setBackgroundImage(image.image(alpha: 0.8), for: .disabled)
-        }
-        button.setTitle("Registration", for: .normal)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
+        button.setTitle("Don't have an account? Register!", for: .normal)
+        button.setTitleColor(UIColor(hex: "#4885CC"), for: .normal)
+        button.setTitleColor(.gray, for: .highlighted)
         button.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
         return button
     }()
-
-
-    private lazy var activityIndicator: UIActivityIndicatorView = {
-        let indicator = UIActivityIndicatorView(style: .medium)
-        indicator.isHidden = true
-        return indicator
-    }()
-
-
 
 
     init(callback: @escaping (_ userData: (userService: UserServiceProtocol, userLogin: String)) -> Void) {
@@ -127,19 +111,31 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc func registerAction() {
-        guard let email = loginTF.text,
-              let password = passwordTF.text else { return }
-        CheckerService.shared.createUser(email: email, password: password) { success in
-            if success == true {
-                print("user created")
-            } else {
-                print("error")
-            }
-        }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.setupViews()
+        loginTF.delegate = self
+        passwordTF.delegate = self
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
+        view.addGestureRecognizer(tapGesture)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        let nc = NotificationCenter.default
+        nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+        nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
 
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        let nc = NotificationCenter.default
+        nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
+        nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+
+    }
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -171,24 +167,18 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
 
-            registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: Constants.indent),
+            registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 1),
             registerButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
             registerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
-            registerButton.heightAnchor.constraint(equalToConstant: 50),
-
-            activityIndicator.bottomAnchor.constraint(equalTo: loginStackView.bottomAnchor),
-            activityIndicator.centerXAnchor.constraint(equalTo: loginStackView.centerXAnchor),
-            activityIndicator.heightAnchor.constraint(equalToConstant: 50)
 
         ])
     }
-
 
     private func setupViews() {
         view.backgroundColor = .white
         view.addSubviews(loginScrollView)
         loginScrollView.addSubviews(contentView)
-        contentView.addSubviews(imageVK, loginStackView, loginButton, registerButton, activityIndicator)
+        contentView.addSubviews(imageVK, loginStackView, loginButton, registerButton)
         loginStackView.addArrangedSubview(loginTF)
         loginStackView.addArrangedSubview(passwordTF)
         setupConstraints()
@@ -202,72 +192,85 @@ class LogInViewController: UIViewController, UITextFieldDelegate {
         passwordTF.resignFirstResponder()
         return true;
     }
-
-
     @objc private func pressLogIn() {
-
         guard let login = loginTF.text else { return }
         guard let password = passwordTF.text else { return }
-        CheckerService.shared.checkCredential(email: login, password: password) { success in
+        CheckerService.shared.checkCredential(email: login, password: password) { [weak self] success in
             if success {
                 let userService = CurrentUserService(name: "Ruslam Magomedow",
                                                      userStatus: "Glück ist immer mit mir",
                                                      userAvatar: "гомер")
-                self.callback((userService: userService, userLogin: login))
+                self?.callback((userService: userService, userLogin: login))
                 print("success")
             } else {
+                self?.checkPassword(message: "Заполните все поля для входа")
                 print("error")
 
             }
         }
     }
 
+    @objc func registerAction() {
 
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.setupViews()
-        loginTF.delegate = self
-        passwordTF.delegate = self
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tap))
-        view.addGestureRecognizer(tapGesture)
+        guard let email = loginTF.text,
+              let password = passwordTF.text else { return }
+
+        CheckerService.shared.createUser(email: email, password: password) { [weak self] success in
+            if success == true {
+                print("user created")
+            } else {
+                self?.checkPassword(message: "Заполните все поля для регистрации")
+                print("error")
+            }
+        }
     }
-
 
     @objc private func tap() {
          loginTF.resignFirstResponder()
          passwordTF.resignFirstResponder()
      }
 
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        let nc = NotificationCenter.default
-        nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
-        nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
-    }
-
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        let nc = NotificationCenter.default
-        nc.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
-        nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-
-    }
-
-
     @objc private func keyboardShow(notification: NSNotification) {
         if let kbdSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             loginScrollView.contentOffset.y = kbdSize.height - (loginScrollView.frame.height - loginButton.frame.minY) + 50
             loginScrollView.verticalScrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: kbdSize.height, right: 0)
-
         }
     }
 
-
     @objc private func keyboardHide(notification: NSNotification) {
         loginScrollView.contentOffset = CGPoint(x: 0, y: 0)
+    }
+
+}
+
+
+extension LogInViewController {
+
+    private func checkPassword(message: String) {
+        guard let login = loginTF.text else { return }
+        guard let password = passwordTF.text else { return }
+        if login.isEmpty || password.isEmpty {
+            let alert = UIAlertController(title: "Внимание", message: message, preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alert.addAction(alertAction)
+            present(alert, animated: true)
+            return
+        } else if password.count < minLenght {
+            let alert = UIAlertController(title: "Внимание", message: "Минимальная длина пароля 6 символов", preferredStyle: .alert)
+            let alertAction = UIAlertAction(title: "ОК", style: .default)
+            alert.addAction(alertAction)
+            present(alert, animated: true)
+            return
+        }
+
+    }
+}
+
+extension LogInViewController: UITextFieldDelegate {
+
+    // Запрет на пробелы в полях TF
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        return !string.contains(where: {$0 == " " || $0 == "#"})
     }
 
 }

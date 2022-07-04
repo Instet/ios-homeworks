@@ -25,7 +25,7 @@ final class ProfileCoordinator: CoordinatorViewController {
         let factory = Factory(state: .profile)
         guard let userService = userService,
               let userLogin = userLogin else {
-            throw AuthorizationError.noDate
+            throw AuthorizationError.badAuthData
         }
         navigationController = factory.startModule(coordinator: self, data: (userService: userService, userLogin: userLogin))
         return navigationController

@@ -17,7 +17,7 @@
 		DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */; };
 		DB2C7CEE282FD1780044AC30 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */; };
 		DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CF92830C20E0044AC30 /* Factory.swift */; };
-		DB6E34B7283A0EDB00A44F03 /* CheckerServiceProtokol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34B6283A0EDB00A44F03 /* CheckerServiceProtokol.swift */; };
+		DB6E34B7283A0EDB00A44F03 /* CheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34B6283A0EDB00A44F03 /* CheckerService.swift */; };
 		DB6E34B9283A0F1A00A44F03 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34B8283A0F1A00A44F03 /* LoginInspector.swift */; };
 		DB6E34BB283A0F7800A44F03 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34BA283A0F7800A44F03 /* LoginFactory.swift */; };
 		DB6E34BE283A130800A44F03 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34BD283A130800A44F03 /* User.swift */; };
@@ -53,7 +53,6 @@
 		DBA0E27E2834E721002C5077 /* InfoCustomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E27D2834E721002C5077 /* InfoCustomModel.swift */; };
 		DBA0E28328361A62002C5077 /* PostTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E28228361A62002C5077 /* PostTableViewModel.swift */; };
 		DBB686ED2871C729009348BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBB686EC2871C729009348BA /* GoogleService-Info.plist */; };
-		DBB686EF28720EA4009348BA /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBB686EE28720EA4009348BA /* AuthModel.swift */; };
 		DBBAECE227D6617C00AA366E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE127D6617C00AA366E /* Constants.swift */; };
 		DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE327D6618D00AA366E /* Extensions.swift */; };
 		DBBAECE627D661A100AA366E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE527D661A100AA366E /* Photo.swift */; };
@@ -85,7 +84,7 @@
 		DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		DB2C7CF92830C20E0044AC30 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
-		DB6E34B6283A0EDB00A44F03 /* CheckerServiceProtokol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerServiceProtokol.swift; sourceTree = "<group>"; };
+		DB6E34B6283A0EDB00A44F03 /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
 		DB6E34B8283A0F1A00A44F03 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		DB6E34BA283A0F7800A44F03 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
 		DB6E34BD283A130800A44F03 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -121,7 +120,6 @@
 		DBA0E27D2834E721002C5077 /* InfoCustomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCustomModel.swift; sourceTree = "<group>"; };
 		DBA0E28228361A62002C5077 /* PostTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewModel.swift; sourceTree = "<group>"; };
 		DBB686EC2871C729009348BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		DBB686EE28720EA4009348BA /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		DBBAECE127D6617C00AA366E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DBBAECE327D6618D00AA366E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DBBAECE527D661A100AA366E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -260,10 +258,9 @@
 		DB6E34B5283A0EC800A44F03 /* Authentication */ = {
 			isa = PBXGroup;
 			children = (
-				DB6E34B6283A0EDB00A44F03 /* CheckerServiceProtokol.swift */,
+				DB6E34B6283A0EDB00A44F03 /* CheckerService.swift */,
 				DB6E34B8283A0F1A00A44F03 /* LoginInspector.swift */,
 				DB6E34BA283A0F7800A44F03 /* LoginFactory.swift */,
-				DBB686EE28720EA4009348BA /* AuthModel.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -616,7 +613,7 @@
 				DBA0E2702834D774002C5077 /* PasswordModel.swift in Sources */,
 				DBBAECEC27D6642700AA366E /* PhotosCollectionViewCell.swift in Sources */,
 				DB6E34E12846173700A44F03 /* Audio.swift in Sources */,
-				DB6E34B7283A0EDB00A44F03 /* CheckerServiceProtokol.swift in Sources */,
+				DB6E34B7283A0EDB00A44F03 /* CheckerService.swift in Sources */,
 				DB6E34E928461BD700A44F03 /* AudioCoordinator.swift in Sources */,
 				DB7F36C7286AD42800D929A0 /* InfoTableViewCell.swift in Sources */,
 				DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */,
@@ -632,7 +629,6 @@
 				DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */,
 				DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */,
 				DB2A87F8284CEBB00037E1B4 /* PlayerViewController.swift in Sources */,
-				DBB686EF28720EA4009348BA /* AuthModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
