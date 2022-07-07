@@ -10,7 +10,8 @@ import FirebaseAuth
 
 class LogInViewController: UIViewController {
 
-    weak var delegate: LoginViewControllerDelegate?
+    var delegate: LoginViewControllerDelegate?
+    
     var callback: (_ userData: (userService: UserServiceProtocol, userLogin: String)) -> Void
     private let minLenght = 6
 
@@ -192,37 +193,44 @@ class LogInViewController: UIViewController {
         passwordTF.resignFirstResponder()
         return true;
     }
+
     @objc private func pressLogIn() {
-        guard let login = loginTF.text else { return }
-        guard let password = passwordTF.text else { return }
-        CheckerService.shared.checkCredential(email: login, password: password) { [weak self] success in
+        guard
+            let email = loginTF.text,
+            let password = passwordTF.text
+        else { return }
+
+        self.delegate?.checkCredential(email: email, password: password, callback: { [weak self] success in
             if success {
                 let userService = CurrentUserService(name: "Ruslam Magomedow",
                                                      userStatus: "Glück ist immer mit mir",
                                                      userAvatar: "гомер")
-                self?.callback((userService: userService, userLogin: login))
+                self?.callback((userService: userService, userLogin: email))
                 print("success")
             } else {
                 self?.checkPassword(message: "Заполните все поля для входа")
                 print("error")
-
             }
-        }
+        })
     }
+
 
     @objc func registerAction() {
 
-        guard let email = loginTF.text,
-              let password = passwordTF.text else { return }
+        guard
+            let email = loginTF.text,
+            let password = passwordTF.text
+        else { return }
 
-        CheckerService.shared.createUser(email: email, password: password) { [weak self] success in
+        self.delegate?.createUser(email: email, password: password, callback: { [weak self] success in
             if success == true {
                 print("user created")
             } else {
                 self?.checkPassword(message: "Заполните все поля для регистрации")
                 print("error")
             }
-        }
+        })
+
     }
 
     @objc private func tap() {
