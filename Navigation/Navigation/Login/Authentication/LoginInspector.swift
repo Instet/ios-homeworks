@@ -7,6 +7,7 @@
 
 import Foundation
 import FirebaseAuth
+import RealmSwift
 
 protocol LoginViewControllerDelegate: AnyObject {
 
@@ -22,11 +23,14 @@ protocol LoginViewControllerDelegate: AnyObject {
 
 class LoginInspector: LoginViewControllerDelegate {
 
+    let realm = RealmService()
+
 
     func checkCredential(email: String, password: String, callback: @escaping (_ success: Bool) -> Void) {
         CheckerService.shared.checkCredential(email: email, password: password) { success in
             if success {
                 callback(true)
+                UserDefaults.standard.set(true, forKey: "isLogined")
             } else {
                 callback(false)
             }
@@ -38,6 +42,8 @@ class LoginInspector: LoginViewControllerDelegate {
         CheckerService.shared.createUser(email: email, password: password) { success in
             if success {
                 callback(true)
+                let model = AuthModel(email: email, password: password, isLogined: true)
+                RealmService.shared.save(model)
             } else {
                 callback(false)
             }

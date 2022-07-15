@@ -29,7 +29,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
 
         appendArrayPhotos()
-        self.window?.rootViewController = coordinator.startApplication(userData: nil)
+        self.window?.rootViewController = coordinator.startApplication(userData: nil, stateAuthorization: .notAuthorized)
 
 
 

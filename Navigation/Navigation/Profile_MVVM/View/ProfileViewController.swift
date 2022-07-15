@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import RealmSwift
 
 class ProfileViewController: UIViewController {
 
@@ -60,6 +61,14 @@ class ProfileViewController: UIViewController {
         } catch {
             print(error.localizedDescription)
         }
+
+        let currentUser = RealmService.shared.fetch()?.last
+        guard currentUser != nil else {
+            print("currentUser nil")
+            return
+        }
+        UserDefaults.standard.set(false, forKey: "isLogined")
+        RealmService.shared.deleteUser(currentUser!)
 
     }
 

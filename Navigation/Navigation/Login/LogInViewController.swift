@@ -11,7 +11,9 @@ import FirebaseAuth
 class LogInViewController: UIViewController {
 
     var delegate: LoginViewControllerDelegate?
-    
+
+    let coordinator = RootCoordinator()
+
     var callback: (_ userData: (userService: UserServiceProtocol, userLogin: String)) -> Void
     private let minLenght = 6
 
@@ -113,6 +115,8 @@ class LogInViewController: UIViewController {
     }
 
 
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupViews()
@@ -127,6 +131,16 @@ class LogInViewController: UIViewController {
         let nc = NotificationCenter.default
         nc.addObserver(self, selector: #selector(keyboardShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
+        authSignIn()
+
+        let currentUser = RealmService.shared.fetch()?.last
+        guard currentUser != nil else {
+            print("currentUser nil")
+            return
+        }
+        passwordTF.text = currentUser?.password
+        loginTF.text = currentUser?.email
     }
 
 
@@ -137,6 +151,7 @@ class LogInViewController: UIViewController {
         nc.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
 
     }
+
 
     private func setupConstraints() {
         NSLayoutConstraint.activate([
@@ -216,7 +231,6 @@ class LogInViewController: UIViewController {
 
 
     @objc func registerAction() {
-
         guard
             let email = loginTF.text,
             let password = passwordTF.text
@@ -281,4 +295,19 @@ extension LogInViewController: UITextFieldDelegate {
         return !string.contains(where: {$0 == " " || $0 == "#"})
     }
 
+}
+
+extension LogInViewController {
+
+    func authSignIn() {
+
+        // userdefauls
+        if UserDefaults.standard.bool(forKey: "isLogined") {
+            let userService = CurrentUserService(name: "Ruslam Magomedow",
+                                                 userStatus: "Glück ist immer mit mir",
+                                                 userAvatar: "гомер")
+            self.callback((userService: userService, userLogin: loginTF.text!))
+        }
+
+    }
 }
