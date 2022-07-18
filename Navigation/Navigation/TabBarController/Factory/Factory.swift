@@ -16,6 +16,7 @@ final class Factory {
         case music
         case video
         case dictaphone
+        case favoritesPost
     }
 
     let state: State
@@ -77,6 +78,17 @@ final class Factory {
 
 
             return dictaphoneNC
+
+        case .favoritesPost:
+            let favoritesVC = FavoritesViewController(coordinator: coordinator as? FavoritesCoordinator)
+            favoritesVC.view.backgroundColor = .white
+            favoritesVC.title = "My favorite posts"
+            let favoritesNC = UINavigationController(rootViewController: favoritesVC)
+            favoritesNC.tabBarItem = UITabBarItem(title: "Favorites",
+                                                  image: UIImage(systemName: "star"),
+                                                  selectedImage: UIImage(systemName: "star.fill"))
+
+            return favoritesNC
         }
     }
 
