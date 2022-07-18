@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import FirebaseAuth
+import RealmSwift
 
 class ProfileViewController: UIViewController {
 
@@ -20,6 +22,16 @@ class ProfileViewController: UIViewController {
     }
 
 
+    static var postTableView: UITableView = {
+        let postTableView = UITableView(frame: .zero, style: .grouped)
+        postTableView.translatesAutoresizingMaskIntoConstraints = false
+        postTableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
+        postTableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileHeaderView.self))
+        postTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: String(describing: PhotosTableViewCell.self))
+        postTableView.separatorInset = .zero
+        postTableView.separatorStyle = .none
+        return postTableView
+    }()
 
     init(coordinator: ProfileCoordinator?,
          viewModel: ProfileViewModelProtocol?,
@@ -31,23 +43,34 @@ class ProfileViewController: UIViewController {
         self.userService = userService
         self.userLogin = userLogin
         super.init(nibName: nil, bundle: nil)
+        let exitBarButton = UIBarButtonItem(title: "Exit",
+                                            style: .plain,
+                                            target: self, action: #selector(exitProfile))
+        self.navigationItem.rightBarButtonItem = exitBarButton
+        
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
+    @objc func exitProfile() {
+        do {
+            try Auth.auth().signOut()
+            coordinator?.exitProfile()
+        } catch {
+            print(error.localizedDescription)
+        }
 
-    static var postTableView: UITableView = {
-        let postTableView = UITableView(frame: .zero, style: .grouped)
-        postTableView.translatesAutoresizingMaskIntoConstraints = false
-        postTableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
-        postTableView.register(ProfileHeaderView.self, forHeaderFooterViewReuseIdentifier: String(describing: ProfileHeaderView.self))
-        postTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: String(describing: PhotosTableViewCell.self))
-        postTableView.separatorInset = .zero
-        postTableView.separatorStyle = .none
-        return postTableView
-    }()
+        let currentUser = RealmService.shared.fetch()?.last
+        guard currentUser != nil else {
+            print("currentUser nil")
+            return
+        }
+        UserDefaults.standard.set(false, forKey: "isLogined")
+        RealmService.shared.deleteUser(currentUser!)
+
+    }
 
     private func setupConstaintTableView() {
         NSLayoutConstraint.activate([
@@ -70,12 +93,6 @@ class ProfileViewController: UIViewController {
         ProfileViewController.postTableView.refreshControl = UIRefreshControl()
         ProfileViewController.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
         timer()
-
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        navigationController?.navigationBar.isHidden = true
     }
 
     @objc func reloadTableView() {
@@ -116,9 +133,6 @@ class ProfileViewController: UIViewController {
     }
 
 }
-
-
-
 
 
 extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
@@ -163,7 +177,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
 
         guard section == 0 else { return nil }
         let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ProfileHeaderView.self)) as! ProfileHeaderView
-        if let user = userService.getUser(login: userLogin) {
+        if let user = userService.getUser(name: userLogin) {
             headerView.currentUser(user: user)
         }
         return headerView

@@ -13,20 +13,22 @@ final class ProfileCoordinator: CoordinatorViewController {
     var navigationController: UINavigationController?
     let userService: UserServiceProtocol?
     let userLogin: String?
+    var callback: () -> Void
 
-    init(data: (userService: UserServiceProtocol, userLogin: String)) {
+    init(data: (userService: UserServiceProtocol, userLogin: String), callback: @escaping () -> Void) {
         self.userService = data.userService
         self.userLogin = data.userLogin
+        self.callback = callback
     }
 
     func Start() throws -> UINavigationController? {
         let factory = Factory(state: .profile)
         guard let userService = userService,
               let userLogin = userLogin else {
-            throw AuthorizationError.noDate
+            throw AuthorizationError.badAuthData
         }
-            navigationController = factory.startModule(coordinator: self, data: (userService: userService, userLogin: userLogin))
-            return navigationController
+        navigationController = factory.startModule(coordinator: self, data: (userService: userService, userLogin: userLogin))
+        return navigationController
     }
 
     // MARK: - TASK 10
@@ -34,6 +36,10 @@ final class ProfileCoordinator: CoordinatorViewController {
         let netology = NetologyViewController()
         netology.modalPresentationStyle = .custom
         self.navigationController?.present(netology, animated: false)
+    }
+
+    func exitProfile() {
+        callback()
     }
 
 }

@@ -12,7 +12,7 @@ final class MainTabBarController: UITabBarController {
 
     var coordinator: RootCoordinator
 
-    var stateAuthorization: RootCoordinator.StateAuthorization {
+    var stateAuthorization: StateAuthorization {
         didSet {
             switchStateApp()
         }
@@ -21,7 +21,7 @@ final class MainTabBarController: UITabBarController {
     var userData: (userService: UserServiceProtocol,userLogin: String)?
 
     init(coordinator: RootCoordinator,
-         stateAuthorization: RootCoordinator.StateAuthorization,
+         stateAuthorization: StateAuthorization,
          userData: (userService: UserServiceProtocol, userLogin: String)?) {
         self.coordinator = coordinator
         self.stateAuthorization = stateAuthorization
@@ -38,7 +38,10 @@ final class MainTabBarController: UITabBarController {
         switch stateAuthorization {
         case .authorized:
             guard let userData = userData else { return }
-            let profileCoordinator = ProfileCoordinator(data: userData)
+            let profileCoordinator = ProfileCoordinator(data: userData) {
+                self.stateAuthorization = .notAuthorized
+                self.userData = nil
+            }
             let profileNC = try?profileCoordinator.Start()
             
             let feedCoordinator = FeedCoordinator()

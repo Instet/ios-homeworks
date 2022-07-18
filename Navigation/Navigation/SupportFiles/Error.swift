@@ -8,7 +8,7 @@
 import Foundation
 
 enum AuthorizationError: Error {
-    case noLogin
-    case noPassword
-    case noDate
+    case badLogin
+    case badPassword
+    case badAuthData
 }

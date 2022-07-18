@@ -6,22 +6,51 @@
 //
 
 import Foundation
+import FirebaseAuth
+import RealmSwift
 
-protocol LoginViewControllerDelegate {
+protocol LoginViewControllerDelegate: AnyObject {
 
-    func check(login: String, password: String) -> Bool
+    func checkCredential(email: String,
+                         password: String,
+                         callback: @escaping (_ success: Bool) -> Void)
+
+    func createUser(email: String,
+                    password: String,
+                    callback: @escaping (_ success: Bool) -> Void)
 
 }
 
-struct LoginInspector: LoginViewControllerDelegate {
+class LoginInspector: LoginViewControllerDelegate {
 
-    func check(login: String, password: String) -> Bool {
-        let isRight = Checker.shared.check(login: login, password: password)
-        if isRight {
-            return true
-        } else {
-            return false
+    let realm = RealmService()
+
+
+    func checkCredential(email: String, password: String, callback: @escaping (_ success: Bool) -> Void) {
+        CheckerService.shared.checkCredential(email: email, password: password) { success in
+            if success {
+                callback(true)
+                UserDefaults.standard.set(true, forKey: "isLogined")
+            } else {
+                callback(false)
+            }
+        }
+
+    }
+
+    func createUser(email: String, password: String, callback: @escaping (_ success: Bool) -> Void) {
+        CheckerService.shared.createUser(email: email, password: password) { success in
+            if success {
+                callback(true)
+                let model = AuthModel(email: email, password: password, isLogined: true)
+                RealmService.shared.save(model)
+            } else {
+                callback(false)
+            }
         }
     }
+
+
+
 
 }

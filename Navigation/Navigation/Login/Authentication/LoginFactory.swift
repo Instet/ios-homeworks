@@ -7,16 +7,17 @@
 
 import Foundation
 
-protocol LoginFactory {
+protocol LoginFactory: AnyObject {
 
-    func factory() -> LoginInspector
+    func factory() -> LoginViewControllerDelegate
 
 }
 
-struct MyLoginFactory: LoginFactory {
+class MyLoginFactory: LoginFactory {
 
-    func factory() -> LoginInspector {
-        return LoginInspector()
+    func factory() -> LoginViewControllerDelegate {
+        let inspector = LoginInspector()
+        return inspector
     }
 
 
