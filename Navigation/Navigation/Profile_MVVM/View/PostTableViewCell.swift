@@ -23,7 +23,7 @@ class PostTableViewCell: UITableViewCell {
         }
     }
 
-    var favoritesViewModel: FavoritesCellViewModel? {
+    var favoritesViewModel: FavoritePostsCellViewModel? {
         willSet(viewModel) {
             guard let viewModel = viewModel else {
                 return

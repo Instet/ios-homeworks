@@ -1,5 +1,5 @@
 //
-//  FavoritesCellViewModel.swift
+//  FavoritePostsCellViewModel.swift
 //  Navigation
 //
 //  Created by Руслан Магомедов on 19.07.2022.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FavoritesCellViewModel {
+struct FavoritePostsCellViewModel {
 
     var post: FavoritePost
 

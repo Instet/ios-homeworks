@@ -1,5 +1,5 @@
 //
-//  FavoritesViewController.swift
+//  FavoritePostsViewController.swift
 //  Navigation
 //
 //  Created by Руслан Магомедов on 18.07.2022.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FavoritesViewController: UIViewController {
+class FavoritePostsViewController: UIViewController {
 
     private let coordinator: FavoritesCoordinator?
 
@@ -58,11 +58,11 @@ class FavoritesViewController: UIViewController {
 }
 
 
-extension FavoritesViewController: UITableViewDelegate {
+extension FavoritePostsViewController: UITableViewDelegate {
 
 }
 
-extension FavoritesViewController: UITableViewDataSource {
+extension FavoritePostsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return CoreDataManager.shared.postArray.count
@@ -71,7 +71,7 @@ extension FavoritesViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as? PostTableViewCell else { return  UITableViewCell()}
-        cell.favoritesViewModel = FavoritesCellViewModel(post: CoreDataManager.shared.postArray[indexPath.row])
+        cell.favoritesViewModel = FavoritePostsCellViewModel(post: CoreDataManager.shared.postArray[indexPath.row])
 
         return cell
 

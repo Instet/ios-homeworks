@@ -80,9 +80,9 @@ final class Factory {
             return dictaphoneNC
 
         case .favoritesPost:
-            let favoritesVC = FavoritesViewController(coordinator: coordinator as? FavoritesCoordinator)
+            let favoritesVC = FavoritePostsViewController(coordinator: coordinator as? FavoritesCoordinator)
             favoritesVC.view.backgroundColor = .white
-            favoritesVC.title = "My favorite posts"
+            favoritesVC.title = "Favorites"
             let favoritesNC = UINavigationController(rootViewController: favoritesVC)
             favoritesNC.tabBarItem = UITabBarItem(title: "Favorites",
                                                   image: UIImage(systemName: "star"),
