@@ -23,6 +23,19 @@ class PostTableViewCell: UITableViewCell {
         }
     }
 
+    var favoritesViewModel: FavoritesCellViewModel? {
+        willSet(viewModel) {
+            guard let viewModel = viewModel else {
+                return
+            }
+            postTitle.text = viewModel.title
+            postDescription.text = viewModel.description
+            postImage.image = UIImage(named: viewModel.image)
+            postLikes.text = "Likes: \(viewModel.likes)"
+            postViews.text = "Views: \(viewModel.views)"
+        }
+    }
+
     var counter: UInt?
     
     private lazy var postTitle: UILabel = {
