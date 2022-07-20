@@ -22,6 +22,12 @@
 		DB696227287D4D51006E6DE0 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB696226287D4D51006E6DE0 /* AuthModel.swift */; };
 		DB69622B287D5634006E6DE0 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69622A287D5634006E6DE0 /* RealmService.swift */; };
 		DB69622D287D56E7006E6DE0 /* DataBaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69622C287D56E7006E6DE0 /* DataBaseError.swift */; };
+		DB6962402885AE30006E6DE0 /* FavoritePostsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69623F2885AE30006E6DE0 /* FavoritePostsViewController.swift */; };
+		DB6962422885AEAD006E6DE0 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6962412885AEAD006E6DE0 /* FavoritesCoordinator.swift */; };
+		DB6962482885B9E4006E6DE0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6962472885B9E4006E6DE0 /* CoreDataManager.swift */; };
+		DB69624A2886F44E006E6DE0 /* FavoritePost.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6962492886F44D006E6DE0 /* FavoritePost.swift */; };
+		DB69624F28871D22006E6DE0 /* PostModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DB69624D28871D22006E6DE0 /* PostModel.xcdatamodeld */; };
+		DB69625128872C16006E6DE0 /* FavoritePostsCellViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69625028872C16006E6DE0 /* FavoritePostsCellViewModel.swift */; };
 		DB6E34B7283A0EDB00A44F03 /* CheckerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34B6283A0EDB00A44F03 /* CheckerService.swift */; };
 		DB6E34B9283A0F1A00A44F03 /* LoginInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34B8283A0F1A00A44F03 /* LoginInspector.swift */; };
 		DB6E34BB283A0F7800A44F03 /* LoginFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB6E34BA283A0F7800A44F03 /* LoginFactory.swift */; };
@@ -92,6 +98,12 @@
 		DB696226287D4D51006E6DE0 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		DB69622A287D5634006E6DE0 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		DB69622C287D56E7006E6DE0 /* DataBaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseError.swift; sourceTree = "<group>"; };
+		DB69623F2885AE30006E6DE0 /* FavoritePostsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsViewController.swift; sourceTree = "<group>"; };
+		DB6962412885AEAD006E6DE0 /* FavoritesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinator.swift; sourceTree = "<group>"; };
+		DB6962472885B9E4006E6DE0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		DB6962492886F44D006E6DE0 /* FavoritePost.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePost.swift; sourceTree = "<group>"; };
+		DB69624E28871D22006E6DE0 /* PostModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PostModel.xcdatamodel; sourceTree = "<group>"; };
+		DB69625028872C16006E6DE0 /* FavoritePostsCellViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritePostsCellViewModel.swift; sourceTree = "<group>"; };
 		DB6E34B6283A0EDB00A44F03 /* CheckerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckerService.swift; sourceTree = "<group>"; };
 		DB6E34B8283A0F1A00A44F03 /* LoginInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspector.swift; sourceTree = "<group>"; };
 		DB6E34BA283A0F7800A44F03 /* LoginFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginFactory.swift; sourceTree = "<group>"; };
@@ -244,6 +256,7 @@
 				DB6E34E828461BD700A44F03 /* AudioCoordinator.swift */,
 				DB6E35022849E4DD00A44F03 /* VideoCoordinator.swift */,
 				DB2A87FC284D07B20037E1B4 /* DictaphoneCoordinator.swift */,
+				DB6962412885AEAD006E6DE0 /* FavoritesCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -287,6 +300,26 @@
 				DB69622C287D56E7006E6DE0 /* DataBaseError.swift */,
 			);
 			path = DataBaseError;
+			sourceTree = "<group>";
+		};
+		DB69623E2885ADD8006E6DE0 /* FavoritePosts */ = {
+			isa = PBXGroup;
+			children = (
+				DB6962462885B9C5006E6DE0 /* CoreDataManager */,
+				DB69623F2885AE30006E6DE0 /* FavoritePostsViewController.swift */,
+				DB6962492886F44D006E6DE0 /* FavoritePost.swift */,
+				DB69625028872C16006E6DE0 /* FavoritePostsCellViewModel.swift */,
+			);
+			path = FavoritePosts;
+			sourceTree = "<group>";
+		};
+		DB6962462885B9C5006E6DE0 /* CoreDataManager */ = {
+			isa = PBXGroup;
+			children = (
+				DB6962472885B9E4006E6DE0 /* CoreDataManager.swift */,
+				DB69624D28871D22006E6DE0 /* PostModel.xcdatamodeld */,
+			);
+			path = CoreDataManager;
 			sourceTree = "<group>";
 		};
 		DB6E34B5283A0EC800A44F03 /* Authentication */ = {
@@ -453,6 +486,7 @@
 				DBD4A137285D17DB00D3C997 /* Networking */,
 				DB2C7CE3282FCAFB0044AC30 /* Coordinator */,
 				DB2C7CE6282FCB710044AC30 /* TabBarController */,
+				DB69623E2885ADD8006E6DE0 /* FavoritePosts */,
 				DBA0E24E28339692002C5077 /* Feed_MVVM */,
 				DB0CE5E92831296C001BFDBC /* Profile_MVVM */,
 				DBBAECE027D6613D00AA366E /* SupportFiles */,
@@ -636,6 +670,7 @@
 				DBBAECE227D6617C00AA366E /* Constants.swift in Sources */,
 				DBA0E2722834D787002C5077 /* PasswordCheckButton.swift in Sources */,
 				DBBBD14F27B91EC900900EE7 /* Post.swift in Sources */,
+				DB69624A2886F44E006E6DE0 /* FavoritePost.swift in Sources */,
 				DBD4A13B285D245F00D3C997 /* AppConfiguration.swift in Sources */,
 				DB6E35052849E57D00A44F03 /* VideoViewModel.swift in Sources */,
 				DB69622B287D5634006E6DE0 /* RealmService.swift in Sources */,
@@ -653,10 +688,13 @@
 				DB6E35012849DBE600A44F03 /* VideoTableViewCell.swift in Sources */,
 				DB6E34B9283A0F1A00A44F03 /* LoginInspector.swift in Sources */,
 				DBA0E2702834D774002C5077 /* PasswordModel.swift in Sources */,
+				DB6962422885AEAD006E6DE0 /* FavoritesCoordinator.swift in Sources */,
 				DBBAECEC27D6642700AA366E /* PhotosCollectionViewCell.swift in Sources */,
 				DB6E34E12846173700A44F03 /* Audio.swift in Sources */,
 				DB6E34B7283A0EDB00A44F03 /* CheckerService.swift in Sources */,
+				DB69624F28871D22006E6DE0 /* PostModel.xcdatamodeld in Sources */,
 				DB6E34E928461BD700A44F03 /* AudioCoordinator.swift in Sources */,
+				DB6962482885B9E4006E6DE0 /* CoreDataManager.swift in Sources */,
 				DB7F36C7286AD42800D929A0 /* InfoTableViewCell.swift in Sources */,
 				DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */,
 				DBA0E27C2834E534002C5077 /* InfoViewModel.swift in Sources */,
@@ -667,6 +705,8 @@
 				DB6E34CC2844FA1400A44F03 /* Error.swift in Sources */,
 				DB6E34F62846998000A44F03 /* AudioViewModel.swift in Sources */,
 				DB6E34BE283A130800A44F03 /* User.swift in Sources */,
+				DB6962402885AE30006E6DE0 /* FavoritePostsViewController.swift in Sources */,
+				DB69625128872C16006E6DE0 /* FavoritePostsCellViewModel.swift in Sources */,
 				DB6E34E528461B8D00A44F03 /* AudioViewController.swift in Sources */,
 				DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */,
 				DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */,
@@ -939,6 +979,19 @@
 			productName = iOSIntPackage;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		DB69624D28871D22006E6DE0 /* PostModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DB69624E28871D22006E6DE0 /* PostModel.xcdatamodel */,
+			);
+			currentVersion = DB69624E28871D22006E6DE0 /* PostModel.xcdatamodel */;
+			path = PostModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = DBBBD12927B82BC200900EE7 /* Project object */;
 }
