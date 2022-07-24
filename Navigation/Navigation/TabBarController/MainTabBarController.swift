@@ -56,14 +56,19 @@ final class MainTabBarController: UITabBarController {
             let dictaphoneCoordinator = DictaphoneCoordinator()
             let dictaphoneNC = dictaphoneCoordinator.Start()
 
+            let favoritesCoordinatir = FavoritesCoordinator()
+            let favoritesNC = favoritesCoordinatir.Start()
+
 
             guard let profileNC = profileNC,
                   let feedNC = feedNC,
                   let videoNC = videoNC,
                   let mediaNC = mediaNC,
-                  let dictaphoneNC = dictaphoneNC  else { return }
+                  let dictaphoneNC = dictaphoneNC,
+                  let favoritesNC = favoritesNC  else { return }
 
             self.viewControllers = [profileNC,
+                                    favoritesNC,
                                     feedNC,
                                     mediaNC,
                                     videoNC,

@@ -20,6 +20,7 @@ class ProfileViewController: UIViewController {
             ProfileHeaderView.timerLabel.text = String(timeSeconds)
         }
     }
+    private var cellIndex = 0
 
 
     static var postTableView: UITableView = {
@@ -132,6 +133,11 @@ class ProfileViewController: UIViewController {
 
     }
 
+    @objc func tappedPost() {
+        guard let viewModel = viewModel else { return }
+        CoreDataManager.shared.savePost(index: cellIndex, post: viewModel.postArray)
+    }
+
 }
 
 
@@ -162,7 +168,10 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             guard let tableViewCell = cell, let viewModel = viewModel else { return UITableViewCell() }
             let cellViewModel = viewModel.cellViewModel(forIndexPath: indexPath)
             tableViewCell.viewModel = cellViewModel
-            
+            let tapGesture = UITapGestureRecognizer()
+            tapGesture.numberOfTapsRequired = 2
+            tapGesture.addTarget(self, action: #selector(tappedPost))
+            cell?.addGestureRecognizer(tapGesture)
             return tableViewCell
 
         } else {
@@ -197,6 +206,7 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
             tableView.deselectRow(at: indexPath, animated: false)
             guard var viewModel = viewModel else { return }
             viewModel.postArray[indexPath.row].views += UInt(1)
+            self.cellIndex = indexPath.row
         } else {
             tableView.deselectRow(at: indexPath, animated: false)
             let photosViewController = PhotosViewController()
