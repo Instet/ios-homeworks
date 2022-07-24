@@ -13,5 +13,6 @@ struct Post {
     var image: String
     var likes: UInt
     var views: UInt
+    var author: String
 
 }

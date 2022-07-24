@@ -30,5 +30,9 @@ struct PostTableViewModel {
         return post.views
     }
 
+    var author: String {
+        return post.author
+    }
+
 }
 

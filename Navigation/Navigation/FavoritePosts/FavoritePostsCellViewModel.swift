@@ -30,4 +30,8 @@ struct FavoritePostsCellViewModel {
         return UInt(post.views)
     }
 
+    var author: String {
+        return post.author
+    }
+
 }

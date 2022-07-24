@@ -20,6 +20,7 @@ class PostTableViewCell: UITableViewCell {
             postImage.image = UIImage(named: viewModel.image)
             postLikes.text = "Likes: \(viewModel.likes)"
             postViews.text = "Views: \(viewModel.views)"
+            postAuthor.text = "Автор: \(viewModel.author)"
         }
     }
 
@@ -33,6 +34,7 @@ class PostTableViewCell: UITableViewCell {
             postImage.image = UIImage(named: viewModel.image)
             postLikes.text = "Likes: \(viewModel.likes)"
             postViews.text = "Views: \(viewModel.views)"
+            postAuthor.text = "Автор: \(viewModel.author)"
         }
     }
 
@@ -57,6 +59,14 @@ class PostTableViewCell: UITableViewCell {
         let postDescription = UILabel()
         postDescription.font = UIFont.systemFont(ofSize: 14)
         postDescription.textColor = .systemGray
+        postDescription.numberOfLines = 0
+        return postDescription
+    }()
+
+    private lazy var postAuthor: UILabel = {
+        let postDescription = UILabel()
+        postDescription.font = UIFont.systemFont(ofSize: 14)
+        postDescription.textColor = .black
         postDescription.numberOfLines = 0
         return postDescription
     }()
@@ -115,7 +125,11 @@ class PostTableViewCell: UITableViewCell {
             postImage.heightAnchor.constraint(equalTo: postImage.widthAnchor),
             postImage.topAnchor.constraint(equalTo: postTitle.bottomAnchor, constant: Constants.indent),
 
-            postDescription.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: Constants.indent),
+            postAuthor.topAnchor.constraint(equalTo: postImage.bottomAnchor, constant: Constants.indent),
+            postAuthor.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
+
+
+            postDescription.topAnchor.constraint(equalTo: postAuthor.bottomAnchor, constant: Constants.indent),
             postDescription.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
             postDescription.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
 
@@ -138,7 +152,7 @@ class PostTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        contentView.addSubviews(postTitle, postImage, postDescription, postLikes, postViews, likesButtom)
+        contentView.addSubviews(postTitle, postImage, postDescription, postLikes, postViews, likesButtom, postAuthor)
         self.selectionStyle = .none
         setupConstraints()
     }
