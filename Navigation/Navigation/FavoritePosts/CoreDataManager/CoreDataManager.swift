@@ -80,7 +80,7 @@ class CoreDataManager {
             guard let self = self else { return }
             var filterPost: [FavoritePost] = []
             let fetchRequest = PostCoreDataModel.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "author == %@", author)
+            fetchRequest.predicate = NSPredicate(format: "author CONTAINS[cd] %@", author)
             do {
                 let filtred = try self.backgroundContext.fetch(fetchRequest)
                 for post in filtred {
