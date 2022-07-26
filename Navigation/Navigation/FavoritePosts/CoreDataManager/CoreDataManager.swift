@@ -24,31 +24,37 @@ class CoreDataManager {
         return persistenConteiner
     }()
 
-    lazy var mainContext: NSManagedObjectContext = {
-        let context = persistenConteiner.viewContext
-        return context
-    }()
-
     lazy var backgroundContext: NSManagedObjectContext = {
         let context = persistenConteiner.newBackgroundContext()
         return context
     }()
 
-    func savePost(index: Int, post: [Post]){
-        print("save in background")
-        backgroundContext.perform {
+    // реализовал проверку на сохранение дубликатов в избранном по рекомендации преподавателя
+
+    func savePost(index: Int, post: [Post]) {
+        backgroundContext.perform { [self] in
             guard let favoritePost = NSEntityDescription.insertNewObject(forEntityName: "PostCoreDataModel", into: self.backgroundContext) as? PostCoreDataModel else { return }
-            favoritePost.descript = post[index].description
-            favoritePost.image = post[index].image
-            favoritePost.title = post[index].title
-            favoritePost.likes = Int16(post[index].likes)
-            favoritePost.views = Int16(post[index].views)
-            favoritePost.author = post[index].author
-            do {
-                try self.backgroundContext.save()
-            } catch {
-                print("Ошибка сохранения")
+            let fetchRequest = PostCoreDataModel.fetchRequest()
+            let posts = try! backgroundContext.fetch(fetchRequest)
+            for i in posts {
+                if i.title != post[index].title {
+                    favoritePost.descript = post[index].description
+                    favoritePost.image = post[index].image
+                    favoritePost.title = post[index].title
+                    favoritePost.likes = Int16(post[index].likes)
+                    favoritePost.views = Int16(post[index].views)
+                    favoritePost.author = post[index].author
+                    do {
+                        try self.backgroundContext.save()
+                    } catch {
+                        print("Ошибка сохранения")
+                    }
+                } else {
+                    print("dublicate")
+                }
+
             }
+
         }
     }
 
@@ -64,12 +70,12 @@ class CoreDataManager {
                                             likes: Int(i.likes),
                                             views: Int(i.views),
                                             author: i.author ?? "")
+                if CoreDataManager.shared.postArray.contains(where: {$0.title == tempPost.title}) == false {
                 CoreDataManager.shared.postArray.append(tempPost)
+                print(CoreDataManager.shared.postArray)
+                }
             }
-
-
         } catch {
-            print("Ошибка получения")
             fatalError()
         }
         callback()
@@ -90,11 +96,14 @@ class CoreDataManager {
                                                 likes: Int(post.likes),
                                                 views: Int(post.views),
                                                 author: post.author ?? "")
-                    filterPost.append(tempPost)
+                    if filterPost.contains(where: {$0.title == tempPost.title}) == false {
+                        filterPost.append(tempPost)
+                        print(CoreDataManager.shared.postArray)
+                    }
+
                 }
             } catch {
                 fatalError()
-
             }
             completion(filterPost)
         }
@@ -114,7 +123,6 @@ class CoreDataManager {
             try backgroundContext.save()
 
         } catch {
-            print("Ошибка получения")
             fatalError()
         }
         callback()

@@ -79,8 +79,10 @@ class FavoritePostsViewController: UIViewController {
         }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default))
         alertController.addAction(searchAction)
-        self.present(alertController, animated: true)
 
+        DispatchQueue.main.async {
+            self.present(alertController, animated: true)
+        }
     }
 
 
@@ -126,12 +128,16 @@ extension FavoritePostsViewController: UITableViewDelegate {
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: "Delete") { action, view, handler in
             CoreDataManager.shared.delete(index: indexPath.row) {
+                // debug
                 self.tableView.reloadData()
             }
             handler(true)
         }
-        let swipe = UISwipeActionsConfiguration(actions: [deleteAction])
-        return swipe
+        if !isFiltred {
+            let swipe = UISwipeActionsConfiguration(actions: [deleteAction])
+            return swipe
+        }
+        return nil
     }
 
 }
