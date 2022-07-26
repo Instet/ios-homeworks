@@ -6,21 +6,21 @@
 //
 
 import Foundation
-import RealmSwift
+//import RealmSwift
 
-final class AuthModel: Object {
-
-    @Persisted var email: String?
-    @Persisted var password: String?
-    @Persisted var isLogined: Bool
-    // пока не придумал
-
-    convenience init(email: String, password: String, isLogined: Bool) {
-        self.init()
-        self.email = email
-        self.password = password
-        self.isLogined = isLogined
-
-    }
-
-}
+//final class AuthModel: Object {
+//
+//    @Persisted var email: String?
+//    @Persisted var password: String?
+//    @Persisted var isLogined: Bool
+//    // пока не придумал
+//
+//    convenience init(email: String, password: String, isLogined: Bool) {
+//        self.init()
+//        self.email = email
+//        self.password = password
+//        self.isLogined = isLogined
+//
+//    }
+//
+//}

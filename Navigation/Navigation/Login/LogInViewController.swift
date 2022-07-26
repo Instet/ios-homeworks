@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import FirebaseAuth
+//import FirebaseAuth
 
 class LogInViewController: UIViewController {
 
@@ -134,13 +134,13 @@ class LogInViewController: UIViewController {
 
         authSignIn()
 
-        let currentUser = RealmService.shared.fetch()?.last
-        guard currentUser != nil else {
-            print("currentUser nil")
-            return
-        }
-        passwordTF.text = currentUser?.password
-        loginTF.text = currentUser?.email
+//        let currentUser = RealmService.shared.fetch()?.last
+//        guard currentUser != nil else {
+//            print("currentUser nil")
+//            return
+//        }
+//        passwordTF.text = currentUser?.password
+//        loginTF.text = currentUser?.email
     }
 
 

@@ -17,8 +17,6 @@
 		DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */; };
 		DB2C7CEE282FD1780044AC30 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */; };
 		DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CF92830C20E0044AC30 /* Factory.swift */; };
-		DB696222287D4C8F006E6DE0 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = DB696221287D4C8F006E6DE0 /* Realm */; };
-		DB696224287D4C8F006E6DE0 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = DB696223287D4C8F006E6DE0 /* RealmSwift */; };
 		DB696227287D4D51006E6DE0 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB696226287D4D51006E6DE0 /* AuthModel.swift */; };
 		DB69622B287D5634006E6DE0 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69622A287D5634006E6DE0 /* RealmService.swift */; };
 		DB69622D287D56E7006E6DE0 /* DataBaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69622C287D56E7006E6DE0 /* DataBaseError.swift */; };
@@ -171,8 +169,6 @@
 			files = (
 				DB2A87F4284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView in Frameworks */,
 				DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */,
-				DB696222287D4C8F006E6DE0 /* Realm in Frameworks */,
-				DB696224287D4C8F006E6DE0 /* RealmSwift in Frameworks */,
 				CF516777CDD9450F6F128FED /* Pods_Navigation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,7 +525,6 @@
 				DBBBD12D27B82BC200900EE7 /* Sources */,
 				DBBBD12E27B82BC200900EE7 /* Frameworks */,
 				DBBBD12F27B82BC200900EE7 /* Resources */,
-				7192D5C867633D7DA3F2DEA7 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -539,8 +534,6 @@
 			packageProductDependencies = (
 				DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */,
 				DB2A87F3284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView */,
-				DB696221287D4C8F006E6DE0 /* Realm */,
-				DB696223287D4C8F006E6DE0 /* RealmSwift */,
 			);
 			productName = Navigation;
 			productReference = DBBBD13127B82BC200900EE7 /* Navigation.app */;
@@ -573,7 +566,6 @@
 			packageReferences = (
 				DBF7EA192837642400E7DEC6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				DB2A87F2284CDF9A0037E1B4 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */,
-				DB696220287D4C8F006E6DE0 /* XCRemoteSwiftPackageReference "realm-swift" */,
 			);
 			productRefGroup = DBBBD13227B82BC200900EE7 /* Products */;
 			projectDirPath = "";
@@ -603,23 +595,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7192D5C867633D7DA3F2DEA7 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		90273FCCDB4BAA4036CC7F6E /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -939,14 +914,6 @@
 				minimumVersion = 0.3.8;
 			};
 		};
-		DB696220287D4C8F006E6DE0 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift";
-			requirement = {
-				branch = master;
-				kind = branch;
-			};
-		};
 		DBF7EA192837642400E7DEC6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage.git";
@@ -962,16 +929,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DB2A87F2284CDF9A0037E1B4 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
 			productName = "YoutubePlayer-in-WKWebView";
-		};
-		DB696221287D4C8F006E6DE0 /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DB696220287D4C8F006E6DE0 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		DB696223287D4C8F006E6DE0 /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DB696220287D4C8F006E6DE0 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */ = {
 			isa = XCSwiftPackageProductDependency;

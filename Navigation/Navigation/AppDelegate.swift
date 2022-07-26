@@ -9,7 +9,7 @@ import UIKit
 import AVFoundation
 import YoutubePlayer_in_WKWebView
 import Foundation
-import FirebaseCore
+//import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UITabBar.appearance().barStyle = .default
 //      NetworkManager.shared.getDataAll()
 
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
 
         appendArrayPhotos()
         self.window?.rootViewController = coordinator.startApplication(userData: nil, stateAuthorization: .notAuthorized)
