@@ -31,12 +31,11 @@ final class CheckerService: CheckerServiceProtocol {
                          callback: @escaping (_ success: Bool) -> Void) {
         auth.signIn(withEmail: email, password: password) { result, error in
             if let user = result?.user {
-                print(user.uid)
-                callback(true)
-            } else {
-                callback(false)
-            }
-
+                 print(user.uid)
+                 callback(true)
+             } else {
+                 callback(false)
+             }
         }
     }
 
@@ -45,12 +44,12 @@ final class CheckerService: CheckerServiceProtocol {
                     callback: @escaping (_ success: Bool) -> Void) {
         auth.createUser(withEmail: email, password: password) { result, error in
             if let user = result?.user {
-                print(user.uid)
-                callback(true)
-            } else {
-                callback(false)
-            }
-
+                 print(user.uid)
+                 callback(true)
+             } else {
+                 callback(false)
+             }
+            
         }
     }
 

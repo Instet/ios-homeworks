@@ -1,15 +1,15 @@
 //
-//  PostTableViewModel.swift
+//  FavoritePostsCellViewModel.swift
 //  Navigation
 //
-//  Created by Руслан Магомедов on 19.05.2022.
+//  Created by Руслан Магомедов on 19.07.2022.
 //
 
 import Foundation
 
-struct PostTableViewModel {
+struct FavoritePostsCellViewModel {
 
-    var post: Post
+    var post: FavoritePost
 
     var title: String {
         return post.title
@@ -23,11 +23,11 @@ struct PostTableViewModel {
         return post.image
     }
     var likes: UInt {
-        return post.likes
+        return UInt(post.likes)
     }
 
     var views: UInt {
-        return post.views
+        return UInt(post.views)
     }
 
     var author: String {
@@ -35,4 +35,3 @@ struct PostTableViewModel {
     }
 
 }
-
