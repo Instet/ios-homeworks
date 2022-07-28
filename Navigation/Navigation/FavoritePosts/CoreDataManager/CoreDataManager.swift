@@ -59,11 +59,10 @@ class CoreDataManager {
                     do {
                         try self.privateContext.save()
                     } catch {
-                        print("Ошибка сохранения")
+                        fatalError(error.localizedDescription)
                     }
                 }
             }
-
         } catch let error as NSError {
             print(error.userInfo)
         }

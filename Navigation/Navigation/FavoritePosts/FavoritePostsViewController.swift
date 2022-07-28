@@ -62,9 +62,7 @@ class FavoritePostsViewController: UIViewController {
         CoreDataManager.shared.context.perform {
             do {
                 try self.fetchResultsController.performFetch()
-                DispatchQueue.main.async {
                     self.tableView.reloadData()
-                }
             } catch let error as NSError {
                 print(error.userInfo)
             }
@@ -76,7 +74,6 @@ class FavoritePostsViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         fetchFavoritePosts()
-
     }
 
     override func viewDidLoad() {
