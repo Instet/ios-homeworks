@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let coordinator: GeneralCoordinator = RootCoordinator()
         UITabBar.appearance().barTintColor = .white
         UITabBar.appearance().barStyle = .default
-//      NetworkManager.shared.getDataAll()
+//        NetworkManager.shared.getDataAll()
 
 //        FirebaseApp.configure()
 

@@ -302,12 +302,12 @@ extension LogInViewController {
     func authSignIn() {
 
         // userdefauls
-        if UserDefaults.standard.bool(forKey: "isLogined") {
+//        if UserDefaults.standard.bool(forKey: "isLogined") {
             let userService = CurrentUserService(name: "Ruslam Magomedow",
                                                  userStatus: "Glück ist immer mit mir",
                                                  userAvatar: "гомер")
             self.callback((userService: userService, userLogin: loginTF.text!))
-        }
+//        }
 
     }
 }

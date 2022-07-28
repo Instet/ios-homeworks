@@ -6,13 +6,25 @@
 //
 
 import UIKit
+import CoreData
 
 class FavoritePostsViewController: UIViewController {
 
     private let coordinator: FavoritesCoordinator?
-    var filterPost: [FavoritePost] = []
     var author = ""
-    var isFiltred = false
+
+    private lazy var fetchResultsController: NSFetchedResultsController<PostCoreDataModel> = {
+        let request = PostCoreDataModel.fetchRequest()
+        let sortDesriptor = NSSortDescriptor(key: "author", ascending: true)
+        request.sortDescriptors = [sortDesriptor]
+        let fetchResultsController = NSFetchedResultsController(fetchRequest: request,
+                                                                managedObjectContext: CoreDataManager.shared.context,
+                                                                sectionNameKeyPath: nil,
+                                                                cacheName: nil)
+        fetchResultsController.delegate = self
+        return fetchResultsController
+
+    }()
 
 
     private lazy var tableView: UITableView = {
@@ -32,13 +44,39 @@ class FavoritePostsViewController: UIViewController {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func fetchFavoritePosts() {
+        fetchResultsController.fetchRequest.predicate = nil
+        CoreDataManager.shared.context.perform {
+            do {
+                try self.fetchResultsController.performFetch()
+                self.tableView.reloadData()
+            } catch let error as NSError {
+                print(error.userInfo)
+            }
+        }
+    }
+
+    func fetchFilterFavoritePost(author: String) {
+        fetchResultsController.fetchRequest.predicate = NSPredicate(format: "author CONTAINS[cd] %@", author)
+        CoreDataManager.shared.context.perform {
+            do {
+                try self.fetchResultsController.performFetch()
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            } catch let error as NSError {
+                print(error.userInfo)
+            }
+        }
+        
+    }
     
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        CoreDataManager.shared.getPost {
-            tableView.reloadData()
-        }
+        fetchFavoritePosts()
+
     }
 
     override func viewDidLoad() {
@@ -67,15 +105,7 @@ class FavoritePostsViewController: UIViewController {
             textField.addTarget(self, action: #selector(self.enterAuthor(_:)), for: .editingChanged)
         }
         let searchAction = UIAlertAction(title: "Ok", style: .default) { action in
-            CoreDataManager.shared.update(author: self.author) { array in
-                self.filterPost = array
-                self.isFiltred = true
-                print(self.filterPost)
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-
-            }
+            self.fetchFilterFavoritePost(author: self.author)
         }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default))
         alertController.addAction(searchAction)
@@ -91,10 +121,7 @@ class FavoritePostsViewController: UIViewController {
                                                 message: nil,
                                                 preferredStyle: .alert)
         let resetAlert = UIAlertAction(title: "Yes", style: .default) { _ in
-            CoreDataManager.shared.getPost {
-                self.isFiltred = false
-                self.tableView.reloadData()
-            }
+            self.fetchFavoritePosts()
         }
         alertController.addAction(UIAlertAction(title: "Cancel", style: .default))
         alertController.addAction(resetAlert)
@@ -127,46 +154,80 @@ extension FavoritePostsViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .destructive,
                                               title: "Delete") { action, view, handler in
-            CoreDataManager.shared.delete(index: indexPath.row) {
-                // debug
+            let postDelete = self.fetchResultsController.object(at: indexPath)
+            CoreDataManager.shared.context.delete(postDelete)
+            do {
+                try CoreDataManager.shared.context.save()
                 self.tableView.reloadData()
+            } catch {
+                print(error.localizedDescription)
             }
             handler(true)
         }
-        if !isFiltred {
             let swipe = UISwipeActionsConfiguration(actions: [deleteAction])
             return swipe
         }
-        return nil
-    }
+
 
 }
 
 extension FavoritePostsViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !isFiltred {
-            return CoreDataManager.shared.postArray.count
-        } else {
-            return filterPost.count
-        }
+            return fetchResultsController.fetchedObjects?.count ?? 0
+
     }
 
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell =  tableView.dequeueReusableCell(withIdentifier: String(describing: PostTableViewCell.self), for: indexPath) as? PostTableViewCell else { return  UITableViewCell()}
-        if !isFiltred {
-            cell.favoritesViewModel = FavoritePostsCellViewModel(post: CoreDataManager.shared.postArray[indexPath.row])
-
+        let postObject = fetchResultsController.object(at: indexPath)
+        let post = FavoritePost(title: postObject.title ?? "",
+                                description: postObject.descript ?? "",
+                                image: postObject.image ?? "",
+                                likes: Int(postObject.likes),
+                                views: Int(postObject.views),
+                                author: postObject.author ?? "")
+        cell.favoritesViewModel = FavoritePostsCellViewModel(post: post)
             return cell
-        } else {
-            cell.favoritesViewModel = FavoritePostsCellViewModel(post: self.filterPost[indexPath.row])
-
-            return cell
-
-        }
 
     }
+}
 
+
+
+extension FavoritePostsViewController: NSFetchedResultsControllerDelegate {
+
+    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+            self.tableView.beginUpdates()
+    }
+
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>,
+                    didChange anObject: Any,
+                    at indexPath: IndexPath?,
+                    for type: NSFetchedResultsChangeType,
+                    newIndexPath: IndexPath?) {
+        switch type {
+        case .insert:
+            guard let newIndexPath = newIndexPath else { fallthrough }
+            tableView.insertRows(at: [newIndexPath], with: .automatic)
+        case .delete:
+            guard let indexPath = indexPath else { fallthrough }
+            tableView.deleteRows(at: [indexPath], with: .automatic)
+        case .move:
+            guard let indexPath = indexPath,
+                  let newIndexPath = newIndexPath else { fallthrough }
+            tableView.moveRow(at: indexPath, to: newIndexPath)
+        case .update:
+            guard let indexPath = indexPath else { fallthrough }
+            tableView.reloadRows(at: [indexPath], with: .automatic)
+        @unknown default:
+            fatalError()
+        }
+    }
+
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        tableView.endUpdates()
+    }
 
 }
