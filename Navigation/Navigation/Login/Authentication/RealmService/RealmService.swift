@@ -7,34 +7,14 @@
 
 import Foundation
 import RealmSwift
-import KeychainAccess
 
 final class RealmService{
 
     static let shared = RealmService()
 
-    func getKey() -> Data {
-        let keychain = Keychain(service: "MyNetology")
-
-        do {
-            if let key = try keychain.getData("MyRealm") {
-                return key
-            } else {
-                var key = Data(count: 64)
-                _ = key.withUnsafeMutableBytes { (pointer: UnsafeMutableRawBufferPointer) in
-                    SecRandomCopyBytes(kSecRandomDefault, 64, pointer.baseAddress!)}
-                try keychain.set(key, key: "MyRealm")
-                return key
-            }
-        } catch {
-            fatalError()
-        }
-    }
-    
-
     private func getConfig() -> Realm.Configuration {
-        let key = getKey()
-        let config = Realm.Configuration(encryptionKey: key)
+        let key = KeychainEncrypt.getkey()
+        let config = Realm.Configuration(encryptionKey: key as Data)
         return config
     }
 

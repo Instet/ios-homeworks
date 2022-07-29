@@ -94,7 +94,7 @@ class ProfileViewController: UIViewController {
         ProfileViewController.postTableView.refreshControl = UIRefreshControl()
         ProfileViewController.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
         timer()
-        let currentUser = RealmService.shared.fetch()?.last
+      
 
     }
 
