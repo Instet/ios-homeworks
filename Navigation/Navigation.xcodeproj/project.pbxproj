@@ -52,6 +52,8 @@
 		DB70BE1227BB755F00599559 /* ProfileHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */; };
 		DB7F36C528661F5800D929A0 /* Planet.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F36C428661F5800D929A0 /* Planet.swift */; };
 		DB7F36C7286AD42800D929A0 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB7F36C6286AD42700D929A0 /* InfoTableViewCell.swift */; };
+		DB98BC622894080200BEB5E8 /* KeychainEncrypt.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB98BC612894080200BEB5E8 /* KeychainEncrypt.swift */; };
+		DB98BC65289437B400BEB5E8 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = DB98BC64289437B400BEB5E8 /* KeychainAccess */; };
 		DBA0E24B28338CA4002C5077 /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E24A28338CA4002C5077 /* ProfileViewModel.swift */; };
 		DBA0E25328339754002C5077 /* FeedViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E25228339754002C5077 /* FeedViewModel.swift */; };
 		DBA0E26E2834D752002C5077 /* CustomButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E26D2834D752002C5077 /* CustomButton.swift */; };
@@ -128,6 +130,7 @@
 		DB70BE1127BB755F00599559 /* ProfileHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileHeaderView.swift; sourceTree = "<group>"; };
 		DB7F36C428661F5800D929A0 /* Planet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Planet.swift; sourceTree = "<group>"; };
 		DB7F36C6286AD42700D929A0 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		DB98BC612894080200BEB5E8 /* KeychainEncrypt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainEncrypt.swift; sourceTree = "<group>"; };
 		DBA0E24A28338CA4002C5077 /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
 		DBA0E25228339754002C5077 /* FeedViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewModel.swift; sourceTree = "<group>"; };
 		DBA0E26D2834D752002C5077 /* CustomButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomButton.swift; sourceTree = "<group>"; };
@@ -171,6 +174,7 @@
 			files = (
 				DB2A87F4284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView in Frameworks */,
 				DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */,
+				DB98BC65289437B400BEB5E8 /* KeychainAccess in Frameworks */,
 				DB696222287D4C8F006E6DE0 /* Realm in Frameworks */,
 				DB696224287D4C8F006E6DE0 /* RealmSwift in Frameworks */,
 				CF516777CDD9450F6F128FED /* Pods_Navigation.framework in Frameworks */,
@@ -290,6 +294,7 @@
 			isa = PBXGroup;
 			children = (
 				DB69622A287D5634006E6DE0 /* RealmService.swift */,
+				DB98BC612894080200BEB5E8 /* KeychainEncrypt.swift */,
 			);
 			path = RealmService;
 			sourceTree = "<group>";
@@ -541,6 +546,7 @@
 				DB2A87F3284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView */,
 				DB696221287D4C8F006E6DE0 /* Realm */,
 				DB696223287D4C8F006E6DE0 /* RealmSwift */,
+				DB98BC64289437B400BEB5E8 /* KeychainAccess */,
 			);
 			productName = Navigation;
 			productReference = DBBBD13127B82BC200900EE7 /* Navigation.app */;
@@ -574,6 +580,7 @@
 				DBF7EA192837642400E7DEC6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
 				DB2A87F2284CDF9A0037E1B4 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */,
 				DB696220287D4C8F006E6DE0 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				DB98BC63289437B400BEB5E8 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = DBBBD13227B82BC200900EE7 /* Products */;
 			projectDirPath = "";
@@ -650,6 +657,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DBBAECE827D6640000AA366E /* PhotosTableViewCell.swift in Sources */,
+				DB98BC622894080200BEB5E8 /* KeychainEncrypt.swift in Sources */,
 				DBBAECEA27D6641200AA366E /* PhotosViewController.swift in Sources */,
 				DB2A87FB284D07970037E1B4 /* DictaphoneViewController.swift in Sources */,
 				DB7F36C528661F5800D929A0 /* Planet.swift in Sources */,
@@ -947,6 +955,14 @@
 				kind = branch;
 			};
 		};
+		DB98BC63289437B400BEB5E8 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		DBF7EA192837642400E7DEC6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TrueMax/iOSIntPackage.git";
@@ -972,6 +988,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = DB696220287D4C8F006E6DE0 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		DB98BC64289437B400BEB5E8 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB98BC63289437B400BEB5E8 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 		DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */ = {
 			isa = XCSwiftPackageProductDependency;

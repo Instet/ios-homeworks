@@ -133,14 +133,6 @@ class LogInViewController: UIViewController {
         nc.addObserver(self, selector: #selector(keyboardHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
         authSignIn()
-
-        let currentUser = RealmService.shared.fetch()?.last
-        guard currentUser != nil else {
-            print("currentUser nil")
-            return
-        }
-        passwordTF.text = currentUser?.password
-        loginTF.text = currentUser?.email
     }
 
 
@@ -302,6 +294,15 @@ extension LogInViewController {
     func authSignIn() {
 
         // userdefauls
+        // переделать позже
+        let currentUser = RealmService.shared.fetch()?.last
+        guard currentUser != nil else {
+            print("currentUser nil")
+            return
+        }
+        passwordTF.text = currentUser?.password
+        loginTF.text = currentUser?.email
+
         if UserDefaults.standard.bool(forKey: "isLogined") {
             let userService = CurrentUserService(name: "Ruslam Magomedow",
                                                  userStatus: "Glück ist immer mit mir",
