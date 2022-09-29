@@ -6,8 +6,8 @@
 //
 
 import UIKit
-import FirebaseAuth
-import RealmSwift
+//import FirebaseAuth
+//import RealmSwift
 
 class ProfileViewController: UIViewController {
 
@@ -56,20 +56,20 @@ class ProfileViewController: UIViewController {
     }
 
     @objc func exitProfile() {
-        do {
-            try Auth.auth().signOut()
-            coordinator?.exitProfile()
-        } catch {
-            print(error.localizedDescription)
-        }
-
-        let currentUser = RealmService.shared.fetch()?.last
-        guard currentUser != nil else {
-            print("currentUser nil")
-            return
-        }
-        UserDefaults.standard.set(false, forKey: "isLogined")
-        RealmService.shared.deleteUser(currentUser!)
+//        do {
+//            try Auth.auth().signOut()
+//            coordinator?.exitProfile()
+//        } catch {
+//            print(error.localizedDescription)
+//        }
+//
+//        let currentUser = RealmService.shared.fetch()?.last
+//        guard currentUser != nil else {
+//            print("currentUser nil")
+//            return
+//        }
+//        UserDefaults.standard.set(false, forKey: "isLogined")
+//        RealmService.shared.deleteUser(currentUser!)
 
     }
 

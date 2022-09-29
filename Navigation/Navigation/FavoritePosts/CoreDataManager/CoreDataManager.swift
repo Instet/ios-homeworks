@@ -12,8 +12,6 @@ class CoreDataManager {
 
     static let shared = CoreDataManager()
 
-    var postArray: [FavoritePost] = []
-
     lazy var persistenConteiner: NSPersistentContainer = {
         let persistenConteiner = NSPersistentContainer(name: "PostModel")
         persistenConteiner.loadPersistentStores { description, error in
@@ -21,23 +19,37 @@ class CoreDataManager {
                 fatalError("Unable to load persistent stores: \(error)")
             }
         }
+        persistenConteiner.viewContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
+        persistenConteiner.viewContext.automaticallyMergesChangesFromParent = true
+        persistenConteiner.viewContext.shouldDeleteInaccessibleFaults = true
         return persistenConteiner
     }()
 
-    lazy var backgroundContext: NSManagedObjectContext = {
+    lazy var context: NSManagedObjectContext = {
+        let context = persistenConteiner.viewContext
+        return context
+    }()
+
+    lazy var privateContext: NSManagedObjectContext = {
         let context = persistenConteiner.newBackgroundContext()
         return context
     }()
 
-    // реализовал проверку на сохранение дубликатов в избранном по рекомендации преподавателя
 
     func savePost(index: Int, post: [Post]) {
-        backgroundContext.perform { [self] in
-            guard let favoritePost = NSEntityDescription.insertNewObject(forEntityName: "PostCoreDataModel", into: self.backgroundContext) as? PostCoreDataModel else { return }
-            let fetchRequest = PostCoreDataModel.fetchRequest()
-            let posts = try! backgroundContext.fetch(fetchRequest)
-            for i in posts {
-                if i.title != post[index].title {
+        let fetchRequest = PostCoreDataModel.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "author == %@", post[index].author)
+        fetchRequest.predicate = NSPredicate(format: "descript == %@", post[index].description)
+        do {
+            let count = try privateContext.count(for: fetchRequest)
+            if count > 0 {
+                let fetchResult = try privateContext.fetch(fetchRequest) as [NSManagedObject]
+                if let post = fetchResult.first as? PostCoreDataModel {
+                    privateContext.delete(post)
+                }
+            } else {
+                privateContext.perform { [self] in
+                    guard let favoritePost = NSEntityDescription.insertNewObject(forEntityName: "PostCoreDataModel", into: self.privateContext) as? PostCoreDataModel else { return }
                     favoritePost.descript = post[index].description
                     favoritePost.image = post[index].image
                     favoritePost.title = post[index].title
@@ -45,93 +57,16 @@ class CoreDataManager {
                     favoritePost.views = Int16(post[index].views)
                     favoritePost.author = post[index].author
                     do {
-                        try self.backgroundContext.save()
+                        try self.privateContext.save()
                     } catch {
-                        print("Ошибка сохранения")
+                        fatalError(error.localizedDescription)
                     }
-                } else {
-                    print("dublicate")
-                }
-
-            }
-
-        }
-    }
-
-    func getPost(callback: () -> Void) {
-        CoreDataManager.shared.postArray.removeAll()
-        let fetchRequest = PostCoreDataModel.fetchRequest()
-        do {
-            let posts = try backgroundContext.fetch(fetchRequest)
-            for i in posts {
-                let tempPost = FavoritePost(title: i.title ?? "",
-                                            description: i.descript ?? "",
-                                            image: i.image ?? "",
-                                            likes: Int(i.likes),
-                                            views: Int(i.views),
-                                            author: i.author ?? "")
-                if CoreDataManager.shared.postArray.contains(where: {$0.title == tempPost.title}) == false {
-                CoreDataManager.shared.postArray.append(tempPost)
-                print(CoreDataManager.shared.postArray)
                 }
             }
-        } catch {
-            fatalError()
+        } catch let error as NSError {
+            print(error.userInfo)
         }
-        callback()
     }
-
-    func update(author: String, completion: @escaping ([FavoritePost]) -> Void) {
-        backgroundContext.perform { [weak self] in
-            guard let self = self else { return }
-            var filterPost: [FavoritePost] = []
-            let fetchRequest = PostCoreDataModel.fetchRequest()
-            fetchRequest.predicate = NSPredicate(format: "author CONTAINS[cd] %@", author)
-            do {
-                let filtred = try self.backgroundContext.fetch(fetchRequest)
-                for post in filtred {
-                    let tempPost = FavoritePost(title: post.title ?? "",
-                                                description: post.descript ?? "",
-                                                image: post.image ?? "",
-                                                likes: Int(post.likes),
-                                                views: Int(post.views),
-                                                author: post.author ?? "")
-                    if filterPost.contains(where: {$0.title == tempPost.title}) == false {
-                        filterPost.append(tempPost)
-                        print(CoreDataManager.shared.postArray)
-                    }
-
-                }
-            } catch {
-                fatalError()
-            }
-            completion(filterPost)
-        }
-
-    }
-
-    func delete(index: Int, callback: () -> Void) {
-        let fetchRequest = PostCoreDataModel.fetchRequest()
-        do {
-            let posts = try backgroundContext.fetch(fetchRequest)
-            for i in posts.indices {
-                if i == index {
-                    backgroundContext.delete(posts[i])
-                    CoreDataManager.shared.postArray.remove(at: i)
-                }
-            }
-            try backgroundContext.save()
-
-        } catch {
-            fatalError()
-        }
-        callback()
-
-    }
-
-
-
-
 
 
 }

@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import FirebaseAuth
+//import FirebaseAuth
 
 class LogInViewController: UIViewController {
 
@@ -134,13 +134,13 @@ class LogInViewController: UIViewController {
 
         authSignIn()
 
-        let currentUser = RealmService.shared.fetch()?.last
-        guard currentUser != nil else {
-            print("currentUser nil")
-            return
-        }
-        passwordTF.text = currentUser?.password
-        loginTF.text = currentUser?.email
+//        let currentUser = RealmService.shared.fetch()?.last
+//        guard currentUser != nil else {
+//            print("currentUser nil")
+//            return
+//        }
+//        passwordTF.text = currentUser?.password
+//        loginTF.text = currentUser?.email
     }
 
 
@@ -302,12 +302,12 @@ extension LogInViewController {
     func authSignIn() {
 
         // userdefauls
-        if UserDefaults.standard.bool(forKey: "isLogined") {
+//        if UserDefaults.standard.bool(forKey: "isLogined") {
             let userService = CurrentUserService(name: "Ruslam Magomedow",
                                                  userStatus: "Glück ist immer mit mir",
                                                  userAvatar: "гомер")
             self.callback((userService: userService, userLogin: loginTF.text!))
-        }
+//        }
 
     }
 }
