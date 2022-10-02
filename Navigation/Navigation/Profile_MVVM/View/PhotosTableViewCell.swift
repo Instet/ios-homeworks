@@ -14,13 +14,13 @@ class PhotosTableViewCell: UITableViewCell {
         let label = UILabel()
         label.text = "Photos"
         label.font = .systemFont(ofSize: 24, weight: .bold)
-        label.textColor = .black
+        label.textColor = .createColor(lightMod: .black, darkMod: .white)
         return label
     }()
 
     var arrowImage: UIImageView = {
         let arrow = UIImageView()
-        arrow.image = UIImage(systemName: "arrow.right")?.withTintColor(.black, renderingMode: .alwaysOriginal)
+        arrow.image = UIImage(systemName: "arrow.right")?.withTintColor(.createColor(lightMod: .black, darkMod: .white), renderingMode: .alwaysOriginal)
         return arrow
     }()
 
@@ -104,6 +104,7 @@ class PhotosTableViewCell: UITableViewCell {
         stackViewImage.addArrangedSubview(previewImageThree)
         stackViewImage.addArrangedSubview(previewImageFour)
         setupConstraints()
+        self.backgroundColor = .createColor(lightMod: .white, darkMod: .darkGray)
     }
 
 

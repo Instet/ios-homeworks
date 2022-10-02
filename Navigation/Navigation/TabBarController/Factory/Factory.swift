@@ -57,7 +57,7 @@ final class Factory {
                                               image: UIImage(systemName: "play"),
                                               selectedImage: UIImage(systemName: "play.fill"))
             return mediaNC
-            
+
         case .video:
             let viewModel = VideoViewModel()
             let videoVC = VideoViewController(coordinator: coordinator as? VideoCoordinator, viewModel: viewModel)
@@ -81,7 +81,6 @@ final class Factory {
 
         case .favoritesPost:
             let favoritesVC = FavoritePostsViewController(coordinator: coordinator as? FavoritesCoordinator)
-            favoritesVC.view.backgroundColor = .white
             favoritesVC.title = "Favorites"
             let favoritesNC = UINavigationController(rootViewController: favoritesVC)
             favoritesNC.tabBarItem = UITabBarItem(title: "Favorites",

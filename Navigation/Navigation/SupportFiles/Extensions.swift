@@ -43,7 +43,21 @@ public extension UIColor {
 
         self.init(red: r, green: g, blue: b, alpha: a)
     }
+
+
+    static func createColor(lightMod: UIColor, darkMod: UIColor) -> UIColor {
+        if #available(iOS 13, *) {
+            return UIColor { traitCollection in
+                traitCollection.userInterfaceStyle == .light ? lightMod : darkMod
+            }
+        } else {
+            return lightMod
+        }
+    }
+
 }
+
+
 
 
 public extension UIImage {
@@ -81,3 +95,8 @@ extension StringProtocol {
         return String(first).uppercased() + dropFirst()
     }
 }
+
+
+//extension UITabBarController: UITabBarControllerDelegate {
+
+//}

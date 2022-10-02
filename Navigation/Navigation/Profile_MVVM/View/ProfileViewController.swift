@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import FirebaseAuth
+import FirebaseAuth
 //import RealmSwift
 
 class ProfileViewController: UIViewController {
@@ -31,6 +31,7 @@ class ProfileViewController: UIViewController {
         postTableView.register(PhotosTableViewCell.self, forCellReuseIdentifier: String(describing: PhotosTableViewCell.self))
         postTableView.separatorInset = .zero
         postTableView.separatorStyle = .none
+        postTableView.backgroundColor = .createColor(lightMod: .systemGray6, darkMod: .darkGray)
         return postTableView
     }()
 
@@ -56,19 +57,19 @@ class ProfileViewController: UIViewController {
     }
 
     @objc func exitProfile() {
-//        do {
-//            try Auth.auth().signOut()
-//            coordinator?.exitProfile()
-//        } catch {
-//            print(error.localizedDescription)
-//        }
+        do {
+            try Auth.auth().signOut()
+            coordinator?.exitProfile()
+        } catch {
+            print(error.localizedDescription)
+        }
 //
 //        let currentUser = RealmService.shared.fetch()?.last
 //        guard currentUser != nil else {
 //            print("currentUser nil")
 //            return
 //        }
-//        UserDefaults.standard.set(false, forKey: "isLogined")
+        UserDefaults.standard.set(false, forKey: "isLogined")
 //        RealmService.shared.deleteUser(currentUser!)
 
     }
@@ -83,17 +84,18 @@ class ProfileViewController: UIViewController {
 
     }
 
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Profile"
-        view.backgroundColor = .systemGray6
+        view.backgroundColor = .createColor(lightMod: .systemGray6, darkMod: .darkGray)
         view.addSubviews(ProfileViewController.postTableView)
         setupConstaintTableView()
         ProfileViewController.postTableView.dataSource = self
         ProfileViewController.postTableView.delegate = self
         ProfileViewController.postTableView.refreshControl = UIRefreshControl()
         ProfileViewController.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
-        timer()
+    //    timer()
     }
 
     @objc func reloadTableView() {

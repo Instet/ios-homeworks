@@ -6,7 +6,7 @@
 //
 
 import UIKit
-//import FirebaseAuth
+import FirebaseAuth
 
 class LogInViewController: UIViewController {
 
@@ -40,7 +40,7 @@ class LogInViewController: UIViewController {
         stack.layer.borderWidth = 0.5
         stack.layer.cornerRadius = 10
         stack.distribution = .fillProportionally
-        stack.backgroundColor = .systemGray6
+        stack.backgroundColor = .createColor(lightMod: .systemGray6, darkMod: .darkGray)
         stack.clipsToBounds = true
         return stack
     }()
@@ -54,7 +54,7 @@ class LogInViewController: UIViewController {
         login.leftViewMode = .always
         login.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: login.frame.height))
         login.keyboardType = .emailAddress
-        login.textColor = .black
+        login.textColor = .createColor(lightMod: .black, darkMod: .white)
         login.font = UIFont.systemFont(ofSize: 16)
         login.autocapitalizationType = .none
         login.returnKeyType = .done
@@ -191,7 +191,6 @@ class LogInViewController: UIViewController {
     }
 
     private func setupViews() {
-        view.backgroundColor = .white
         view.addSubviews(loginScrollView)
         loginScrollView.addSubviews(contentView)
         contentView.addSubviews(imageVK, loginStackView, loginButton, registerButton)
@@ -302,12 +301,12 @@ extension LogInViewController {
     func authSignIn() {
 
         // userdefauls
-//        if UserDefaults.standard.bool(forKey: "isLogined") {
+        if UserDefaults.standard.bool(forKey: "isLogined") {
             let userService = CurrentUserService(name: "Ruslam Magomedow",
                                                  userStatus: "Glück ist immer mit mir",
                                                  userAvatar: "гомер")
             self.callback((userService: userService, userLogin: loginTF.text!))
-//        }
+        }
 
     }
 }

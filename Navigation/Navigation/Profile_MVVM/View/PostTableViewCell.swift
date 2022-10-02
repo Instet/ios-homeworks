@@ -43,7 +43,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var postTitle: UILabel = {
         let postTitle = UILabel()
         postTitle.font =  .systemFont(ofSize: 20, weight: .bold)
-        postTitle.textColor = .black
+        postTitle.textColor = .createColor(lightMod: .black, darkMod: .white)
         postTitle.numberOfLines = 2
         return postTitle
     }()
@@ -58,7 +58,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var postDescription: UILabel = {
         let postDescription = UILabel()
         postDescription.font = UIFont.systemFont(ofSize: 14)
-        postDescription.textColor = .systemGray
+        postDescription.textColor = .createColor(lightMod: .systemGray, darkMod: .white)
         postDescription.numberOfLines = 0
         return postDescription
     }()
@@ -66,7 +66,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var postAuthor: UILabel = {
         let postDescription = UILabel()
         postDescription.font = UIFont.systemFont(ofSize: 14)
-        postDescription.textColor = .black
+        postDescription.textColor = .createColor(lightMod: .black, darkMod: .white)
         postDescription.numberOfLines = 0
         return postDescription
     }()
@@ -74,7 +74,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var postLikes: UILabel = {
         let postLikes = UILabel()
         postLikes.font = .systemFont(ofSize: 16)
-        postLikes.textColor = .black
+        postLikes.textColor = .createColor(lightMod: .black, darkMod: .white)
         return postLikes
     }()
 
@@ -82,7 +82,7 @@ class PostTableViewCell: UITableViewCell {
     private lazy var postViews: UILabel = {
         let postViews = UILabel()
         postViews.font = .systemFont(ofSize: 16)
-        postViews.textColor = .black
+        postViews.textColor = .createColor(lightMod: .black, darkMod: .white)
         return postViews
     }()
 
@@ -154,6 +154,7 @@ class PostTableViewCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         contentView.addSubviews(postTitle, postImage, postDescription, postLikes, postViews, likesButtom, postAuthor)
         self.selectionStyle = .none
+        self.backgroundColor = .createColor(lightMod: .white, darkMod: .darkGray)
         setupConstraints()
     }
 

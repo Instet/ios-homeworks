@@ -74,15 +74,16 @@ final class MainTabBarController: UITabBarController {
                                     videoNC,
                                     dictaphoneNC]
 
-
         case .notAuthorized:
             let loginVC = LogInViewController { userData in
                 self.userData = userData
                 self.stateAuthorization = .authorized
             }
-            loginVC.view.backgroundColor = .white
             let loginFactory = MyLoginFactory()
+
             loginVC.delegate = loginFactory.factory()
+            loginVC.view.backgroundColor = UIColor.createColor(lightMod: .white, darkMod: .darkGray)
+
             let loginNC = UINavigationController(rootViewController: loginVC)
             loginNC.navigationBar.isHidden = true
             self.viewControllers = [loginNC]

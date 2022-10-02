@@ -32,6 +32,7 @@ class FavoritePostsViewController: UIViewController {
         tableView.register(PostTableViewCell.self, forCellReuseIdentifier: String(describing: PostTableViewCell.self))
         tableView.separatorInset = .zero
         tableView.separatorStyle = .none
+        tableView.backgroundColor = .createColor(lightMod: .systemGray6, darkMod: .darkGray)
         return tableView
     }()
 
@@ -90,6 +91,7 @@ class FavoritePostsViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         setupView()
+        self.view.backgroundColor = .createColor(lightMod: .white, darkMod: .darkGray)
 
     }
 
