@@ -33,5 +33,8 @@ final class CoreDataManagerTests: XCTestCase {
         let result =  try! manager.context.fetch(fetch)
         manager.context.delete(result[0])
         try! manager.context.save()
+        XCTAssertEqual(try! manager.context.count(for: fetch), 0)
+
+
     }
 }

@@ -16,7 +16,8 @@
 		DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */; };
 		DB2C7CEE282FD1780044AC30 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */; };
 		DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CF92830C20E0044AC30 /* Factory.swift */; };
-		DB3C70BB28FB3BBB004A4CED /* YoutubePlayer-in-WKWebView in Frameworks */ = {isa = PBXBuildFile; productRef = DB3C70BA28FB3BBB004A4CED /* YoutubePlayer-in-WKWebView */; };
+		DB2F7F5F28FB410C00261F40 /* YoutubePlayer-in-WKWebView in Frameworks */ = {isa = PBXBuildFile; productRef = DB2F7F5E28FB410C00261F40 /* YoutubePlayer-in-WKWebView */; };
+		DB2F7F6128FB413700261F40 /* YoutubePlayer-in-WKWebView in Frameworks */ = {isa = PBXBuildFile; productRef = DB2F7F6028FB413700261F40 /* YoutubePlayer-in-WKWebView */; };
 		DB3C70BD28FB3BF3004A4CED /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3C70BC28FB3BF3004A4CED /* CoreDataManagerTests.swift */; };
 		DB696227287D4D51006E6DE0 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB696226287D4D51006E6DE0 /* AuthModel.swift */; };
 		DB69622B287D5634006E6DE0 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69622A287D5634006E6DE0 /* RealmService.swift */; };
@@ -184,6 +185,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DB2F7F6128FB413700261F40 /* YoutubePlayer-in-WKWebView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,7 +193,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB3C70BB28FB3BBB004A4CED /* YoutubePlayer-in-WKWebView in Frameworks */,
+				DB2F7F5F28FB410C00261F40 /* YoutubePlayer-in-WKWebView in Frameworks */,
 				DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */,
 				CF516777CDD9450F6F128FED /* Pods_Navigation.framework in Frameworks */,
 			);
@@ -568,6 +570,7 @@
 			);
 			name = NavigationTests;
 			packageProductDependencies = (
+				DB2F7F6028FB413700261F40 /* YoutubePlayer-in-WKWebView */,
 			);
 			productName = NavigationTests;
 			productReference = DBBAC5EA28F46B1500EA02C7 /* NavigationTests.xctest */;
@@ -590,7 +593,7 @@
 			name = Navigation;
 			packageProductDependencies = (
 				DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */,
-				DB3C70BA28FB3BBB004A4CED /* YoutubePlayer-in-WKWebView */,
+				DB2F7F5E28FB410C00261F40 /* YoutubePlayer-in-WKWebView */,
 			);
 			productName = Navigation;
 			productReference = DBBBD13127B82BC200900EE7 /* Navigation.app */;
@@ -626,7 +629,7 @@
 			mainGroup = DBBBD12827B82BC200900EE7;
 			packageReferences = (
 				DBF7EA192837642400E7DEC6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
-				DB3C70B928FB3BBB004A4CED /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */,
+				DB2F7F5D28FB410C00261F40 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */,
 			);
 			productRefGroup = DBBBD13227B82BC200900EE7 /* Products */;
 			projectDirPath = "";
@@ -1071,11 +1074,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DB3C70B928FB3BBB004A4CED /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */ = {
+		DB2F7F5D28FB410C00261F40 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmhv/YoutubePlayer-in-WKWebView.git";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = versionRange;
+				maximumVersion = 1.0.0;
 				minimumVersion = 0.3.8;
 			};
 		};
@@ -1090,9 +1094,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DB3C70BA28FB3BBB004A4CED /* YoutubePlayer-in-WKWebView */ = {
+		DB2F7F5E28FB410C00261F40 /* YoutubePlayer-in-WKWebView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DB3C70B928FB3BBB004A4CED /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
+			package = DB2F7F5D28FB410C00261F40 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
+			productName = "YoutubePlayer-in-WKWebView";
+		};
+		DB2F7F6028FB413700261F40 /* YoutubePlayer-in-WKWebView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB2F7F5D28FB410C00261F40 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
 			productName = "YoutubePlayer-in-WKWebView";
 		};
 		DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */ = {
