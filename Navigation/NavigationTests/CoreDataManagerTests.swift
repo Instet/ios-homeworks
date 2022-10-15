@@ -30,10 +30,16 @@ final class CoreDataManagerTests: XCTestCase {
     }
 
     func testManagerWhenDeleteInContext() {
-        let result =  try! manager.context.fetch(fetch)
-        manager.context.delete(result[0])
-        try! manager.context.save()
-        XCTAssertEqual(try! manager.context.count(for: fetch), 0)
+        if try! manager.context.count(for: fetch) != 0 {
+            let result =  try! manager.context.fetch(fetch)
+            manager.context.delete(result[0])
+            try! manager.context.save()
+            print("⚠️произошло удаление")
+            XCTAssertEqual(try! manager.context.count(for: fetch), 0)
+
+        } else {
+            print("🔴нет данных")
+        }
 
 
     }
