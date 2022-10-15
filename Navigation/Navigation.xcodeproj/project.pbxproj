@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CF516777CDD9450F6F128FED /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD9D0B25C8C2CE365A68942E /* Pods_Navigation.framework */; };
-		DB2A87F4284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView in Frameworks */ = {isa = PBXBuildFile; productRef = DB2A87F3284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView */; };
 		DB2A87F8284CEBB00037E1B4 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A87F7284CEBB00037E1B4 /* PlayerViewController.swift */; };
 		DB2A87FB284D07970037E1B4 /* DictaphoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A87FA284D07970037E1B4 /* DictaphoneViewController.swift */; };
 		DB2A87FD284D07B20037E1B4 /* DictaphoneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A87FC284D07B20037E1B4 /* DictaphoneCoordinator.swift */; };
@@ -17,6 +16,8 @@
 		DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */; };
 		DB2C7CEE282FD1780044AC30 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */; };
 		DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CF92830C20E0044AC30 /* Factory.swift */; };
+		DB3C70BB28FB3BBB004A4CED /* YoutubePlayer-in-WKWebView in Frameworks */ = {isa = PBXBuildFile; productRef = DB3C70BA28FB3BBB004A4CED /* YoutubePlayer-in-WKWebView */; };
+		DB3C70BD28FB3BF3004A4CED /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3C70BC28FB3BF3004A4CED /* CoreDataManagerTests.swift */; };
 		DB696227287D4D51006E6DE0 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB696226287D4D51006E6DE0 /* AuthModel.swift */; };
 		DB69622B287D5634006E6DE0 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69622A287D5634006E6DE0 /* RealmService.swift */; };
 		DB69622D287D56E7006E6DE0 /* DataBaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69622C287D56E7006E6DE0 /* DataBaseError.swift */; };
@@ -63,7 +64,7 @@
 		DBA0E28328361A62002C5077 /* PostTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E28228361A62002C5077 /* PostTableViewModel.swift */; };
 		DBB686ED2871C729009348BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBB686EC2871C729009348BA /* GoogleService-Info.plist */; };
 		DBBAC5ED28F46B1500EA02C7 /* NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAC5EC28F46B1500EA02C7 /* NavigationTests.swift */; };
-		DBBAC5F628F46C6A00EA02C7 /* LogInViewControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAC5F528F46C6A00EA02C7 /* LogInViewControllerTest.swift */; };
+		DBBAC5F628F46C6A00EA02C7 /* LoginInspectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAC5F528F46C6A00EA02C7 /* LoginInspectorTests.swift */; };
 		DBBAECE227D6617C00AA366E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE127D6617C00AA366E /* Constants.swift */; };
 		DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE327D6618D00AA366E /* Extensions.swift */; };
 		DBBAECE627D661A100AA366E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE527D661A100AA366E /* Photo.swift */; };
@@ -105,6 +106,7 @@
 		DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		DB2C7CF92830C20E0044AC30 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		DB3C70BC28FB3BF3004A4CED /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
 		DB696226287D4D51006E6DE0 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		DB69622A287D5634006E6DE0 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		DB69622C287D56E7006E6DE0 /* DataBaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseError.swift; sourceTree = "<group>"; };
@@ -152,7 +154,7 @@
 		DBB686EC2871C729009348BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		DBBAC5EA28F46B1500EA02C7 /* NavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DBBAC5EC28F46B1500EA02C7 /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
-		DBBAC5F528F46C6A00EA02C7 /* LogInViewControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInViewControllerTest.swift; sourceTree = "<group>"; };
+		DBBAC5F528F46C6A00EA02C7 /* LoginInspectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspectorTests.swift; sourceTree = "<group>"; };
 		DBBAECE127D6617C00AA366E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DBBAECE327D6618D00AA366E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DBBAECE527D661A100AA366E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -189,7 +191,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB2A87F4284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView in Frameworks */,
+				DB3C70BB28FB3BBB004A4CED /* YoutubePlayer-in-WKWebView in Frameworks */,
 				DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */,
 				CF516777CDD9450F6F128FED /* Pods_Navigation.framework in Frameworks */,
 			);
@@ -471,7 +473,8 @@
 			isa = PBXGroup;
 			children = (
 				DBBAC5EC28F46B1500EA02C7 /* NavigationTests.swift */,
-				DBBAC5F528F46C6A00EA02C7 /* LogInViewControllerTest.swift */,
+				DBBAC5F528F46C6A00EA02C7 /* LoginInspectorTests.swift */,
+				DB3C70BC28FB3BF3004A4CED /* CoreDataManagerTests.swift */,
 			);
 			path = NavigationTests;
 			sourceTree = "<group>";
@@ -565,7 +568,6 @@
 			);
 			name = NavigationTests;
 			packageProductDependencies = (
-				DBBAC5F828F46EB800EA02C7 /* YoutubePlayer-in-WKWebView */,
 			);
 			productName = NavigationTests;
 			productReference = DBBAC5EA28F46B1500EA02C7 /* NavigationTests.xctest */;
@@ -588,7 +590,7 @@
 			name = Navigation;
 			packageProductDependencies = (
 				DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */,
-				DB2A87F3284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView */,
+				DB3C70BA28FB3BBB004A4CED /* YoutubePlayer-in-WKWebView */,
 			);
 			productName = Navigation;
 			productReference = DBBBD13127B82BC200900EE7 /* Navigation.app */;
@@ -624,7 +626,7 @@
 			mainGroup = DBBBD12827B82BC200900EE7;
 			packageReferences = (
 				DBF7EA192837642400E7DEC6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
-				DB2A87F2284CDF9A0037E1B4 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */,
+				DB3C70B928FB3BBB004A4CED /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */,
 			);
 			productRefGroup = DBBBD13227B82BC200900EE7 /* Products */;
 			projectDirPath = "";
@@ -708,7 +710,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DBBAC5F628F46C6A00EA02C7 /* LogInViewControllerTest.swift in Sources */,
+				DBBAC5F628F46C6A00EA02C7 /* LoginInspectorTests.swift in Sources */,
+				DB3C70BD28FB3BF3004A4CED /* CoreDataManagerTests.swift in Sources */,
 				DBBAC5ED28F46B1500EA02C7 /* NavigationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1068,7 +1071,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DB2A87F2284CDF9A0037E1B4 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */ = {
+		DB3C70B928FB3BBB004A4CED /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmhv/YoutubePlayer-in-WKWebView.git";
 			requirement = {
@@ -1087,14 +1090,9 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DB2A87F3284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView */ = {
+		DB3C70BA28FB3BBB004A4CED /* YoutubePlayer-in-WKWebView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DB2A87F2284CDF9A0037E1B4 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
-			productName = "YoutubePlayer-in-WKWebView";
-		};
-		DBBAC5F828F46EB800EA02C7 /* YoutubePlayer-in-WKWebView */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = DB2A87F2284CDF9A0037E1B4 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
+			package = DB3C70B928FB3BBB004A4CED /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
 			productName = "YoutubePlayer-in-WKWebView";
 		};
 		DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */ = {
