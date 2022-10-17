@@ -14,6 +14,8 @@ class LogInViewController: UIViewController {
 
     let coordinator = RootCoordinator()
 
+    var localBiometrics = LocalAuthorizationService()
+
     var callback: (_ userData: (userService: UserServiceProtocol, userLogin: String)) -> Void
     private let minLenght = 6
 
@@ -104,6 +106,23 @@ class LogInViewController: UIViewController {
         return button
     }()
 
+    private lazy var biometricButton: UIButton = {
+        let button = UIButton()
+        if let image = UIImage(named: "blue_pixel") {
+            button.setBackgroundImage(image.image(alpha: 1), for: .normal)
+            button.setBackgroundImage(image.image(alpha: 0.8), for: .selected)
+            button.setBackgroundImage(image.image(alpha: 0.8), for: .highlighted)
+            button.setBackgroundImage(image.image(alpha: 0.8), for: .disabled)
+        }
+        localBiometrics.typeBiometrics == .faceID ? button.setTitle("FaceID", for: .normal) : button.setTitle("touchID", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(checkBoimetrics), for: .touchUpInside)
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.isEnabled = localBiometrics.isAccesBiometric()
+        return button
+    }()
+
 
     init(callback: @escaping (_ userData: (userService: UserServiceProtocol, userLogin: String)) -> Void) {
         self.callback = callback
@@ -183,7 +202,12 @@ class LogInViewController: UIViewController {
             loginButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
             loginButton.heightAnchor.constraint(equalToConstant: 50),
 
-            registerButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: 1),
+            biometricButton.topAnchor.constraint(equalTo: loginButton.bottomAnchor, constant: Constants.indent),
+            biometricButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
+            biometricButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
+            biometricButton.heightAnchor.constraint(equalToConstant: 50),
+
+            registerButton.topAnchor.constraint(equalTo: biometricButton.bottomAnchor, constant: 1),
             registerButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: Constants.leadingMargin),
             registerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: Constants.trailingMargin),
 
@@ -193,7 +217,7 @@ class LogInViewController: UIViewController {
     private func setupViews() {
         view.addSubviews(loginScrollView)
         loginScrollView.addSubviews(contentView)
-        contentView.addSubviews(imageVK, loginStackView, loginButton, registerButton)
+        contentView.addSubviews(imageVK, loginStackView, loginButton, registerButton, biometricButton)
         loginStackView.addArrangedSubview(loginTF)
         loginStackView.addArrangedSubview(passwordTF)
         setupConstraints()
@@ -245,6 +269,22 @@ class LogInViewController: UIViewController {
         })
 
     }
+
+    @objc func checkBoimetrics() {
+        localBiometrics.authorizeIfPossible { [weak self] result in
+            guard let self = self else { return }
+            if result {
+                // сюда можно добавить заполнение полей ввода данных из базы
+                // поставил просто заглушку для входа
+                let userService = CurrentUserService(name: "Ruslam Magomedow",
+                                                     userStatus: "Glück ist immer mit mir",
+                                                     userAvatar: "гомер")
+                self.callback((userService: userService, userLogin: self.loginTF.text!))
+            }
+        }
+    }
+
+
 
     @objc private func tap() {
          loginTF.resignFirstResponder()
