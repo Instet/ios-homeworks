@@ -86,6 +86,7 @@
 		DBD4A139285D180900D3C997 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4A138285D180900D3C997 /* NetworkManager.swift */; };
 		DBD4A13B285D245F00D3C997 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4A13A285D245F00D3C997 /* AppConfiguration.swift */; };
 		DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */; };
+		DBFFB1E428FFD7F700AE9F8D /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFFB1E328FFD7F700AE9F8D /* LocalNotificationsService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +179,7 @@
 		DBBE367527D23264006CD4FB /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DBD4A138285D180900D3C997 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DBD4A13A285D245F00D3C997 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		DBFFB1E328FFD7F700AE9F8D /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		E3EBBD878BE92F46B486A554 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
 		FD9D0B25C8C2CE365A68942E /* Pods_Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -519,6 +521,7 @@
 			isa = PBXGroup;
 			children = (
 				DBBBD13427B82BC200900EE7 /* AppDelegate.swift */,
+				DBFFB1E228FFD7C600AE9F8D /* LocalNotification */,
 				DBA0E24928338C1D002C5077 /* Login */,
 				DBD4A137285D17DB00D3C997 /* Networking */,
 				DB2C7CE3282FCAFB0044AC30 /* Coordinator */,
@@ -553,6 +556,14 @@
 				DBD4A13A285D245F00D3C997 /* AppConfiguration.swift */,
 			);
 			path = Networking;
+			sourceTree = "<group>";
+		};
+		DBFFB1E228FFD7C600AE9F8D /* LocalNotification */ = {
+			isa = PBXGroup;
+			children = (
+				DBFFB1E328FFD7F700AE9F8D /* LocalNotificationsService.swift */,
+			);
+			path = LocalNotification;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -730,6 +741,7 @@
 				DBBAECEA27D6641200AA366E /* PhotosViewController.swift in Sources */,
 				DB2A87FB284D07970037E1B4 /* DictaphoneViewController.swift in Sources */,
 				DB7F36C528661F5800D929A0 /* Planet.swift in Sources */,
+				DBFFB1E428FFD7F700AE9F8D /* LocalNotificationsService.swift in Sources */,
 				DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */,
 				DBBBD14D27B8CC3C00900EE7 /* PostViewController.swift in Sources */,
 				DB6E34CA2841291500A44F03 /* NetologyViewController.swift in Sources */,
@@ -988,6 +1000,7 @@
 				DEVELOPMENT_TEAM = 46SB5959W9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Используйте Face ID вместо пароля для доступа к своей учетной записи.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -1023,6 +1036,7 @@
 				DEVELOPMENT_TEAM = 46SB5959W9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Используйте Face ID вместо пароля для доступа к своей учетной записи.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

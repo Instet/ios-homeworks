@@ -12,7 +12,7 @@ import Foundation
 import FirebaseCore
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
 
@@ -25,17 +25,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        NetworkManager.shared.getDataAll()
 
         FirebaseApp.configure()
+        
 
-
+        let notificationService = LocalNotificationsService()
+        notificationService.center.delegate = self
+        notificationService.registeForLatestUpdatesIfPossible()
 
         appendArrayPhotos()
         self.window?.rootViewController = coordinator.startApplication(userData: nil, stateAuthorization: .notAuthorized)
-
-
 
         return true
     }
 
 
 
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        if response.notification.request.content.categoryIdentifier == "UPDATESAPP" {
+            switch response.actionIdentifier {
+            case "UPDATE":
+                print("🔴Обновление🔴")
+            default:
+                break
+            }
+        }
+        completionHandler()
+    }
+
 }
+
