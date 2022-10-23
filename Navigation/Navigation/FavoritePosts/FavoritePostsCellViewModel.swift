@@ -20,7 +20,7 @@ struct FavoritePostsCellViewModel {
     }
 
     var image: UIImage {
-        return UIImage(named: post.image) ?? UIImage()
+        return post.image ?? UIImage()
     }
     var likes: UInt {
         return UInt(post.likes)

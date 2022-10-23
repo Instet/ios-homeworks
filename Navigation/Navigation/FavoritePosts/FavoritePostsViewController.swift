@@ -183,7 +183,7 @@ extension FavoritePostsViewController: UITableViewDataSource {
         let postObject = fetchResultsController.object(at: indexPath)
         let post = FavoritePost(title: postObject.title ?? "",
                                 description: postObject.descript ?? "",
-                                image: postObject.image ?? "",
+                                image: postObject.image,
                                 likes: Int(postObject.likes),
                                 views: Int(postObject.views),
                                 author: postObject.author ?? "")

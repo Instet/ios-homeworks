@@ -291,7 +291,7 @@ extension ProfileViewController: UITableViewDropDelegate {
         var imagePost: UIImage?
 
 
-        coordinator.session.loadObjects(ofClass: NSString.self) { [self] items in
+        coordinator.session.loadObjects(ofClass: NSString.self) { items in
             guard let stringItems = items as? [String],
                   let item = stringItems.first else {
                 return
@@ -299,14 +299,14 @@ extension ProfileViewController: UITableViewDropDelegate {
             descriptionNewPost = item
         }
 
-        coordinator.session.loadObjects(ofClass: UIImage.self) { [self] items in
+        coordinator.session.loadObjects(ofClass: UIImage.self) {  items in
             guard let stringItems = items as? [UIImage],
                   let item = stringItems.first else {
                 return
             }
             imagePost = item
 
-            insertNewPost(in: tableView, with: descriptionNewPost, image: imagePost!, destination: destinationIndexPath)
+            self.insertNewPost(in: tableView, with: descriptionNewPost, image: imagePost!, destination: destinationIndexPath)
         }
 
     }
