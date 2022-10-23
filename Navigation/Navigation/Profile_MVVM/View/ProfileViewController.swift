@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import UniformTypeIdentifiers
 //import RealmSwift
 
 class ProfileViewController: UIViewController {
@@ -14,7 +15,7 @@ class ProfileViewController: UIViewController {
     var userService: UserServiceProtocol
     var userLogin: String
     private let coordinator: ProfileCoordinator?
-    private let viewModel: ProfileViewModelProtocol?
+    private var viewModel: ProfileViewModelProtocol?
     var timeSeconds = 15 {
         didSet {
             ProfileHeaderView.timerLabel.text = String(timeSeconds)
@@ -32,6 +33,7 @@ class ProfileViewController: UIViewController {
         postTableView.separatorInset = .zero
         postTableView.separatorStyle = .none
         postTableView.backgroundColor = .createColor(lightMod: .systemGray6, darkMod: .darkGray)
+        postTableView.dragInteractionEnabled = true
         return postTableView
     }()
 
@@ -96,6 +98,8 @@ class ProfileViewController: UIViewController {
         ProfileViewController.postTableView.refreshControl = UIRefreshControl()
         ProfileViewController.postTableView.refreshControl?.addTarget(self, action: #selector(reloadTableView), for: .valueChanged)
     //    timer()
+        ProfileViewController.postTableView.dragDelegate = self
+        ProfileViewController.postTableView.dropDelegate = self
     }
 
     @objc func reloadTableView() {
@@ -218,6 +222,111 @@ extension ProfileViewController: UITableViewDataSource, UITableViewDelegate {
         // обновляем просмотры
         reload()
 
+    }
+
+}
+
+// MARK: - UITableViewDragDelegate
+extension ProfileViewController: UITableViewDragDelegate {
+
+    func tableView(_ tableView: UITableView, itemsForBeginning session: UIDragSession, at indexPath: IndexPath) -> [UIDragItem] {
+        if indexPath.section == 1 {
+            guard let viewModel = viewModel else { return [] }
+
+            let descriptionPost = viewModel.postArray[indexPath.row].description
+            let imagePost = viewModel.postArray[indexPath.row].image
+
+            let descriptionItempProvider = NSItemProvider(object: descriptionPost as NSString)
+            let imageItemProvider = NSItemProvider(object: imagePost ?? UIImage())
+
+            let descriptionDragItem = UIDragItem(itemProvider: descriptionItempProvider)
+            let imageDragItem = UIDragItem(itemProvider: imageItemProvider)
+
+            return [descriptionDragItem, imageDragItem]
+        }
+        return []
+    }
+
+
+}
+
+// MARK: - UITableViewDropDelegate
+extension ProfileViewController: UITableViewDropDelegate {
+
+    func tableView(_ tableView: UITableView, canHandle session: UIDropSession) -> Bool {
+
+        return session.hasItemsConforming(toTypeIdentifiers: [UTType.text.identifier, UTType.image.identifier])
+    }
+
+    func tableView(_ tableView: UITableView,
+                   dropSessionDidUpdate session: UIDropSession,
+                   withDestinationIndexPath destinationIndexPath: IndexPath?) -> UITableViewDropProposal {
+
+        var dropProrosal = UITableViewDropProposal(operation: .cancel)
+
+        guard session.items.count == 2 else { return dropProrosal }
+
+        if tableView.hasActiveDrag {
+         //   if tableView.isEditing {
+                dropProrosal = UITableViewDropProposal(operation: .move, intent: .insertAtDestinationIndexPath)
+          //  }
+        } else {
+            dropProrosal = UITableViewDropProposal(operation: .copy, intent: .insertAtDestinationIndexPath)
+        }
+        return dropProrosal
+    }
+
+
+    func tableView(_ tableView: UITableView, performDropWith coordinator: UITableViewDropCoordinator) {
+        let destinationIndexPath: IndexPath
+
+        if let indexPath = coordinator.destinationIndexPath {
+            destinationIndexPath = indexPath
+        } else {
+            let row = tableView.numberOfRows(inSection: 1)
+            destinationIndexPath = IndexPath(row: row, section: 1)
+        }
+
+        var descriptionNewPost: String = ""
+        var imagePost: UIImage?
+
+
+        coordinator.session.loadObjects(ofClass: NSString.self) { [self] items in
+            guard let stringItems = items as? [String],
+                  let item = stringItems.first else {
+                return
+            }
+            descriptionNewPost = item
+        }
+
+        coordinator.session.loadObjects(ofClass: UIImage.self) { [self] items in
+            guard let stringItems = items as? [UIImage],
+                  let item = stringItems.first else {
+                return
+            }
+            imagePost = item
+
+            insertNewPost(in: tableView, with: descriptionNewPost, image: imagePost!, destination: destinationIndexPath)
+        }
+
+    }
+
+}
+
+
+extension ProfileViewController {
+
+    private func insertNewPost(in tableView: UITableView, with description: String, image: UIImage, destination: IndexPath) {
+        let newPost = Post(title:  "Drag&Drop",
+                           description: description,
+                           image: image,
+                           likes: 0,
+                           views: 0,
+                           author:  "Drag&Drop")
+        
+
+        viewModel?.postArray.insert(newPost, at: destination.row)
+        tableView.reloadData()
     }
 
 }

@@ -17,7 +17,7 @@ class PostTableViewCell: UITableViewCell {
             }
             postTitle.text = viewModel.title
             postDescription.text = viewModel.description
-            postImage.image = UIImage(named: viewModel.image)
+            postImage.image = viewModel.image
             postLikes.text = "Likes: \(viewModel.likes)"
             postViews.text = "Views: \(viewModel.views)"
             postAuthor.text = "Автор: \(viewModel.author)"
@@ -31,7 +31,7 @@ class PostTableViewCell: UITableViewCell {
             }
             postTitle.text = viewModel.title
             postDescription.text = viewModel.description
-            postImage.image = UIImage(named: viewModel.image)
+            postImage.image = viewModel.image
             postLikes.text = "Likes: \(viewModel.likes)"
             postViews.text = "Views: \(viewModel.views)"
             postAuthor.text = "Автор: \(viewModel.author)"

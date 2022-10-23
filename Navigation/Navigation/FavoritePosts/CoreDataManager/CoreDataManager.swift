@@ -51,7 +51,7 @@ class CoreDataManager {
                 privateContext.perform { [self] in
                     guard let favoritePost = NSEntityDescription.insertNewObject(forEntityName: "PostCoreDataModel", into: self.privateContext) as? PostCoreDataModel else { return }
                     favoritePost.descript = post[index].description
-                    favoritePost.image = post[index].image
+                    favoritePost.image = ""
                     favoritePost.title = post[index].title
                     favoritePost.likes = Int16(post[index].likes)
                     favoritePost.views = Int16(post[index].views)

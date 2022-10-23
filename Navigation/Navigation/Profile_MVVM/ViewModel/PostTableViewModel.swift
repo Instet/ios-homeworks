@@ -5,7 +5,7 @@
 //  Created by Руслан Магомедов on 19.05.2022.
 //
 
-import Foundation
+import UIKit
 
 struct PostTableViewModel {
 
@@ -19,8 +19,8 @@ struct PostTableViewModel {
         return post.description
     }
 
-    var image: String {
-        return post.image
+    var image: UIImage {
+        return post.image ?? UIImage()
     }
     var likes: UInt {
         return post.likes

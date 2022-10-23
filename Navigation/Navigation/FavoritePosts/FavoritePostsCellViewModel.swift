@@ -5,7 +5,7 @@
 //  Created by Руслан Магомедов on 19.07.2022.
 //
 
-import Foundation
+import UIKit
 
 struct FavoritePostsCellViewModel {
 
@@ -19,8 +19,8 @@ struct FavoritePostsCellViewModel {
         return post.description
     }
 
-    var image: String {
-        return post.image
+    var image: UIImage {
+        return UIImage(named: post.image) ?? UIImage()
     }
     var likes: UInt {
         return UInt(post.likes)

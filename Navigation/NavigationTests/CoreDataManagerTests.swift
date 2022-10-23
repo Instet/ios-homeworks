@@ -12,7 +12,7 @@ import CoreData
 final class CoreDataManagerTests: XCTestCase {
 
     let manager = CoreDataManager()
-    var arrayPosts = [Post(title: "Fi", description: "Fu", image: "Fa", likes: 1, views: 1, author: "Fe")]
+    var arrayPosts = [PostTableViewModel(title: "Fi", description: "Fu", image: "Fa", likes: 1, views: 1, author: "Fe")]
     var fetch: NSFetchRequest<NSManagedObject>!
 
 
