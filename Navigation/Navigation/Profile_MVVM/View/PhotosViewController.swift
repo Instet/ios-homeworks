@@ -20,7 +20,7 @@ class PhotosViewController: UIViewController {
 
     private lazy var indicator: UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView()
-        indicator.color = .gray
+        indicator.color = .createColor(lightMod: .gray, darkMod: .white)
         indicator.style = .large
         indicator.startAnimating()
         return indicator
@@ -94,7 +94,7 @@ class PhotosViewController: UIViewController {
 
     lazy var photosCollectionView: UICollectionView = {
         let photosCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        photosCollectionView.backgroundColor = .white
+        photosCollectionView.backgroundColor = .createColor(lightMod: .white, darkMod: .darkGray)
         photosCollectionView.register(PhotosCollectionViewCell.self, forCellWithReuseIdentifier: String(describing: PhotosCollectionViewCell.self))
         
         return photosCollectionView

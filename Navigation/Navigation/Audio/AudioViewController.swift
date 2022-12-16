@@ -102,11 +102,11 @@ class AudioViewController: UIViewController {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "Music"
@@ -123,7 +123,7 @@ class AudioViewController: UIViewController {
         }
         setupAudioSession()
 
-        
+
     }
     private func setupAudioSession() {
         let audioSession = AVAudioSession.sharedInstance()
@@ -216,12 +216,4 @@ class AudioViewController: UIViewController {
 
     }
 
-
-    
 }
-
-
-
-
-
-

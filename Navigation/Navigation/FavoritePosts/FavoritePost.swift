@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
 struct FavoritePost {
     var title: String
     var description: String
-    var image: String
+    var image: UIImage?
     var likes: Int
     var views: Int
     var author: String

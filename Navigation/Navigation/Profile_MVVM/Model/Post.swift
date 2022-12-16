@@ -6,11 +6,12 @@
 //
 
 import Foundation
+import UIKit
 
-struct Post {
+struct Post: Equatable {
     var title: String
     var description: String
-    var image: String
+    var image: UIImage?
     var likes: UInt
     var views: UInt
     var author: String

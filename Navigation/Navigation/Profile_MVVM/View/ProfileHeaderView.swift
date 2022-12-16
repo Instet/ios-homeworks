@@ -21,7 +21,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     var userName: UILabel = {
         let userName = UILabel()
         userName.translatesAutoresizingMaskIntoConstraints = false
-        userName.textColor = .black
+        userName.textColor = .createColor(lightMod: .black, darkMod: .white)
         userName.text = "Ruslan Magomedow"
         userName.textAlignment = .center
         userName.font = .systemFont(ofSize: 18, weight: .bold)
@@ -31,7 +31,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     var avatarFoneView: UIView = {
         let view = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height))
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .gray
+        view.backgroundColor = .createColor(lightMod: .gray, darkMod: .darkGray)
         view.isHidden = true
         view.alpha = 0
         return view
@@ -56,7 +56,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         avatar.clipsToBounds = true
         avatar.layer.borderWidth = 3
         avatar.layer.cornerRadius = 50
-        avatar.layer.borderColor = .init(red: 0, green: 0, blue: 0, alpha: 1)
+        avatar.layer.borderColor = UIColor.black.cgColor
         var gesture = UITapGestureRecognizer(target: self, action: #selector(self.didTapAvatar))
         gesture.numberOfTapsRequired = 1
         gesture.numberOfTouchesRequired = 1
@@ -68,7 +68,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     var statusLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.textColor = .gray
+        label.textColor = .createColor(lightMod: .gray, darkMod: .white)
         label.text = "Waiting for something..."
         label.font = .systemFont(ofSize: 14, weight: .regular)
         return label
@@ -84,6 +84,7 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
         button.layer.shadowOpacity = 0.7
         button.layer.shadowRadius = 4
         button.setTitle("Show status", for: .normal)
+        button.setTitleColor(.createColor(lightMod: .white, darkMod: .black), for: .normal)
         button.setTitleColor(.lightGray, for: .highlighted)
         button.addTarget(nil, action: #selector(pressButton), for: .touchUpInside)
 
@@ -94,12 +95,11 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
     lazy var textFieldStatus: UITextField = {
         let text = UITextField()
         text.translatesAutoresizingMaskIntoConstraints = false
-        text.backgroundColor = .white
         text.font = .systemFont(ofSize: 15, weight: .regular)
-        text.textColor = .black
+        text.textColor = .createColor(lightMod: .black, darkMod: .white)
+        text.backgroundColor = .createColor(lightMod: .white, darkMod: .darkGray)
         text.layer.cornerRadius = 12
         text.layer.borderWidth = 1
-        text.layer.borderColor = CGColor(red: 0, green: 0, blue: 0, alpha: 1)
         text.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: text.frame.height))
         text.leftViewMode = .always
         text.placeholder = "Set status"
@@ -110,6 +110,19 @@ class ProfileHeaderView: UITableViewHeaderFooterView {
 
         return text
     }()
+
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+        super.traitCollectionDidChange(previousTraitCollection)
+        if traitCollection.userInterfaceStyle != previousTraitCollection?.userInterfaceStyle {
+            if traitCollection.userInterfaceStyle == .dark {
+                textFieldStatus.layer.borderColor = UIColor.white.cgColor
+            } else {
+                textFieldStatus.layer.borderColor = UIColor.black.cgColor
+
+
+            }
+        }
+    }
 
     private func setupConstraints() {
 

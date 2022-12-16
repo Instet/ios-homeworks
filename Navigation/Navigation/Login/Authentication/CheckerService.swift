@@ -6,7 +6,7 @@
 //
 
 import Foundation
-//import FirebaseAuth
+import FirebaseAuth
 import UIKit
 
 protocol CheckerServiceProtocol {
@@ -24,33 +24,33 @@ final class CheckerService: CheckerServiceProtocol {
 
     static let shared = CheckerService()
 
-//    private let auth = Auth.auth()
+    private let auth = Auth.auth()
 
     func checkCredential(email: String,
                          password: String,
                          callback: @escaping (_ success: Bool) -> Void) {
-//        auth.signIn(withEmail: email, password: password) { result, error in
-//            if let user = result?.user {
-//                 print(user.uid)
-//                 callback(true)
-//             } else {
-//                 callback(false)
-//             }
-//        }
+        auth.signIn(withEmail: email, password: password) { result, error in
+            if let user = result?.user {
+                 print(user.uid)
+                 callback(true)
+             } else {
+                 callback(false)
+             }
+        }
     }
 
     func createUser(email: String,
                     password: String,
                     callback: @escaping (_ success: Bool) -> Void) {
-//        auth.createUser(withEmail: email, password: password) { result, error in
-//            if let user = result?.user {
-//                 print(user.uid)
-//                 callback(true)
-//             } else {
-//                 callback(false)
-//             }
-//            
-//        }
+        auth.createUser(withEmail: email, password: password) { result, error in
+            if let user = result?.user {
+                 print(user.uid)
+                 callback(true)
+             } else {
+                 callback(false)
+             }
+            
+        }
     }
 
 }

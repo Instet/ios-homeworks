@@ -25,11 +25,12 @@ protocol CoordinatorViewController: AnyObject {
     func Start() throws -> UINavigationController?
 }
 
-final class RootCoordinator: GeneralCoordinator {
-
+class RootCoordinator: GeneralCoordinator {
 
     func startApplication(userData: (userService: UserServiceProtocol, userLogin: String)?, stateAuthorization: StateAuthorization) -> UIViewController {
         let tabBarcontroller = MainTabBarController(coordinator: self, stateAuthorization: .notAuthorized, userData: userData)
+        tabBarcontroller.tabBar.standardAppearance.backgroundColor = .createColor(lightMod: .systemGray6, darkMod: .black)
+
             return tabBarcontroller
         }
 

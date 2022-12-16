@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		CF516777CDD9450F6F128FED /* Pods_Navigation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FD9D0B25C8C2CE365A68942E /* Pods_Navigation.framework */; };
-		DB2A87F4284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView in Frameworks */ = {isa = PBXBuildFile; productRef = DB2A87F3284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView */; };
 		DB2A87F8284CEBB00037E1B4 /* PlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A87F7284CEBB00037E1B4 /* PlayerViewController.swift */; };
 		DB2A87FB284D07970037E1B4 /* DictaphoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A87FA284D07970037E1B4 /* DictaphoneViewController.swift */; };
 		DB2A87FD284D07B20037E1B4 /* DictaphoneCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2A87FC284D07B20037E1B4 /* DictaphoneCoordinator.swift */; };
@@ -17,6 +16,10 @@
 		DB2C7CEC282FD1640044AC30 /* ProfileCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */; };
 		DB2C7CEE282FD1780044AC30 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */; };
 		DB2C7CFA2830C20E0044AC30 /* Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB2C7CF92830C20E0044AC30 /* Factory.swift */; };
+		DB2F7F5F28FB410C00261F40 /* YoutubePlayer-in-WKWebView in Frameworks */ = {isa = PBXBuildFile; productRef = DB2F7F5E28FB410C00261F40 /* YoutubePlayer-in-WKWebView */; };
+		DB2F7F6128FB413700261F40 /* YoutubePlayer-in-WKWebView in Frameworks */ = {isa = PBXBuildFile; productRef = DB2F7F6028FB413700261F40 /* YoutubePlayer-in-WKWebView */; };
+		DB3C70BD28FB3BF3004A4CED /* CoreDataManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3C70BC28FB3BF3004A4CED /* CoreDataManagerTests.swift */; };
+		DB3DA12628FC2BB000AE821D /* LocalAuthorizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB3DA12528FC2BB000AE821D /* LocalAuthorizationService.swift */; };
 		DB696227287D4D51006E6DE0 /* AuthModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB696226287D4D51006E6DE0 /* AuthModel.swift */; };
 		DB69622B287D5634006E6DE0 /* RealmService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69622A287D5634006E6DE0 /* RealmService.swift */; };
 		DB69622D287D56E7006E6DE0 /* DataBaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = DB69622C287D56E7006E6DE0 /* DataBaseError.swift */; };
@@ -62,6 +65,8 @@
 		DBA0E27E2834E721002C5077 /* InfoCustomModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E27D2834E721002C5077 /* InfoCustomModel.swift */; };
 		DBA0E28328361A62002C5077 /* PostTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBA0E28228361A62002C5077 /* PostTableViewModel.swift */; };
 		DBB686ED2871C729009348BA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = DBB686EC2871C729009348BA /* GoogleService-Info.plist */; };
+		DBBAC5ED28F46B1500EA02C7 /* NavigationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAC5EC28F46B1500EA02C7 /* NavigationTests.swift */; };
+		DBBAC5F628F46C6A00EA02C7 /* LoginInspectorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAC5F528F46C6A00EA02C7 /* LoginInspectorTests.swift */; };
 		DBBAECE227D6617C00AA366E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE127D6617C00AA366E /* Constants.swift */; };
 		DBBAECE427D6618D00AA366E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE327D6618D00AA366E /* Extensions.swift */; };
 		DBBAECE627D661A100AA366E /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBAECE527D661A100AA366E /* Photo.swift */; };
@@ -81,7 +86,19 @@
 		DBD4A139285D180900D3C997 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4A138285D180900D3C997 /* NetworkManager.swift */; };
 		DBD4A13B285D245F00D3C997 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBD4A13A285D245F00D3C997 /* AppConfiguration.swift */; };
 		DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */ = {isa = PBXBuildFile; productRef = DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */; };
+		DBFEDD0C2905B73400C79755 /* PostCoreDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFEDD0B2905B73400C79755 /* PostCoreDataModel.swift */; };
+		DBFFB1E428FFD7F700AE9F8D /* LocalNotificationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBFFB1E328FFD7F700AE9F8D /* LocalNotificationsService.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		DBBAC5EE28F46B1500EA02C7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = DBBBD12927B82BC200900EE7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = DBBBD13027B82BC200900EE7;
+			remoteInfo = Navigation;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		D5B3528D07655BD85E9D99C4 /* Pods-Navigation.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.release.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.release.xcconfig"; sourceTree = "<group>"; };
@@ -93,6 +110,8 @@
 		DB2C7CEB282FD1640044AC30 /* ProfileCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCoordinator.swift; sourceTree = "<group>"; };
 		DB2C7CED282FD1780044AC30 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
 		DB2C7CF92830C20E0044AC30 /* Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Factory.swift; sourceTree = "<group>"; };
+		DB3C70BC28FB3BF3004A4CED /* CoreDataManagerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManagerTests.swift; sourceTree = "<group>"; };
+		DB3DA12528FC2BB000AE821D /* LocalAuthorizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalAuthorizationService.swift; sourceTree = "<group>"; };
 		DB696226287D4D51006E6DE0 /* AuthModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthModel.swift; sourceTree = "<group>"; };
 		DB69622A287D5634006E6DE0 /* RealmService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmService.swift; sourceTree = "<group>"; };
 		DB69622C287D56E7006E6DE0 /* DataBaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataBaseError.swift; sourceTree = "<group>"; };
@@ -138,6 +157,9 @@
 		DBA0E27D2834E721002C5077 /* InfoCustomModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoCustomModel.swift; sourceTree = "<group>"; };
 		DBA0E28228361A62002C5077 /* PostTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewModel.swift; sourceTree = "<group>"; };
 		DBB686EC2871C729009348BA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		DBBAC5EA28F46B1500EA02C7 /* NavigationTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = NavigationTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		DBBAC5EC28F46B1500EA02C7 /* NavigationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTests.swift; sourceTree = "<group>"; };
+		DBBAC5F528F46C6A00EA02C7 /* LoginInspectorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInspectorTests.swift; sourceTree = "<group>"; };
 		DBBAECE127D6617C00AA366E /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DBBAECE327D6618D00AA366E /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DBBAECE527D661A100AA366E /* Photo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
@@ -158,16 +180,26 @@
 		DBBE367527D23264006CD4FB /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
 		DBD4A138285D180900D3C997 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DBD4A13A285D245F00D3C997 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		DBFEDD0B2905B73400C79755 /* PostCoreDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostCoreDataModel.swift; sourceTree = "<group>"; };
+		DBFFB1E328FFD7F700AE9F8D /* LocalNotificationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalNotificationsService.swift; sourceTree = "<group>"; };
 		E3EBBD878BE92F46B486A554 /* Pods-Navigation.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Navigation.debug.xcconfig"; path = "Target Support Files/Pods-Navigation/Pods-Navigation.debug.xcconfig"; sourceTree = "<group>"; };
 		FD9D0B25C8C2CE365A68942E /* Pods_Navigation.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Navigation.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		DBBAC5FA28F46EF600EA02C7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB2F7F6128FB413700261F40 /* YoutubePlayer-in-WKWebView in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DBBBD12E27B82BC200900EE7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DB2A87F4284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView in Frameworks */,
+				DB2F7F5F28FB410C00261F40 /* YoutubePlayer-in-WKWebView in Frameworks */,
 				DBF7EA1B2837642400E7DEC6 /* iOSIntPackage in Frameworks */,
 				CF516777CDD9450F6F128FED /* Pods_Navigation.framework in Frameworks */,
 			);
@@ -314,6 +346,7 @@
 			children = (
 				DB6962472885B9E4006E6DE0 /* CoreDataManager.swift */,
 				DB69624D28871D22006E6DE0 /* PostModel.xcdatamodeld */,
+				DBFEDD0B2905B73400C79755 /* PostCoreDataModel.swift */,
 			);
 			path = CoreDataManager;
 			sourceTree = "<group>";
@@ -327,6 +360,7 @@
 				DB6E34B6283A0EDB00A44F03 /* CheckerService.swift */,
 				DB6E34B8283A0F1A00A44F03 /* LoginInspector.swift */,
 				DB6E34BA283A0F7800A44F03 /* LoginFactory.swift */,
+				DB3DA12528FC2BB000AE821D /* LocalAuthorizationService.swift */,
 			);
 			path = Authentication;
 			sourceTree = "<group>";
@@ -445,6 +479,16 @@
 			path = ModelViewElements;
 			sourceTree = "<group>";
 		};
+		DBBAC5EB28F46B1500EA02C7 /* NavigationTests */ = {
+			isa = PBXGroup;
+			children = (
+				DBBAC5EC28F46B1500EA02C7 /* NavigationTests.swift */,
+				DBBAC5F528F46C6A00EA02C7 /* LoginInspectorTests.swift */,
+				DB3C70BC28FB3BF3004A4CED /* CoreDataManagerTests.swift */,
+			);
+			path = NavigationTests;
+			sourceTree = "<group>";
+		};
 		DBBAECE027D6613D00AA366E /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
@@ -460,6 +504,7 @@
 			isa = PBXGroup;
 			children = (
 				DBBBD13327B82BC200900EE7 /* Navigation */,
+				DBBAC5EB28F46B1500EA02C7 /* NavigationTests */,
 				DBBBD13227B82BC200900EE7 /* Products */,
 				767425861A7E4B39E579E53F /* Pods */,
 				419D70A9B86BF8C9E061C3C2 /* Frameworks */,
@@ -470,6 +515,7 @@
 			isa = PBXGroup;
 			children = (
 				DBBBD13127B82BC200900EE7 /* Navigation.app */,
+				DBBAC5EA28F46B1500EA02C7 /* NavigationTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -478,6 +524,7 @@
 			isa = PBXGroup;
 			children = (
 				DBBBD13427B82BC200900EE7 /* AppDelegate.swift */,
+				DBFFB1E228FFD7C600AE9F8D /* LocalNotification */,
 				DBA0E24928338C1D002C5077 /* Login */,
 				DBD4A137285D17DB00D3C997 /* Networking */,
 				DB2C7CE3282FCAFB0044AC30 /* Coordinator */,
@@ -514,9 +561,38 @@
 			path = Networking;
 			sourceTree = "<group>";
 		};
+		DBFFB1E228FFD7C600AE9F8D /* LocalNotification */ = {
+			isa = PBXGroup;
+			children = (
+				DBFFB1E328FFD7F700AE9F8D /* LocalNotificationsService.swift */,
+			);
+			path = LocalNotification;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		DBBAC5E928F46B1500EA02C7 /* NavigationTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DBBAC5F228F46B1500EA02C7 /* Build configuration list for PBXNativeTarget "NavigationTests" */;
+			buildPhases = (
+				DBBAC5E628F46B1500EA02C7 /* Sources */,
+				DBBAC5E828F46B1500EA02C7 /* Resources */,
+				DBBAC5FA28F46EF600EA02C7 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				DBBAC5EF28F46B1500EA02C7 /* PBXTargetDependency */,
+			);
+			name = NavigationTests;
+			packageProductDependencies = (
+				DB2F7F6028FB413700261F40 /* YoutubePlayer-in-WKWebView */,
+			);
+			productName = NavigationTests;
+			productReference = DBBAC5EA28F46B1500EA02C7 /* NavigationTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		DBBBD13027B82BC200900EE7 /* Navigation */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DBBBD14527B82BC400900EE7 /* Build configuration list for PBXNativeTarget "Navigation" */;
@@ -525,6 +601,7 @@
 				DBBBD12D27B82BC200900EE7 /* Sources */,
 				DBBBD12E27B82BC200900EE7 /* Frameworks */,
 				DBBBD12F27B82BC200900EE7 /* Resources */,
+				C73BF5830D96FCAB6F428C4F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -533,7 +610,7 @@
 			name = Navigation;
 			packageProductDependencies = (
 				DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */,
-				DB2A87F3284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView */,
+				DB2F7F5E28FB410C00261F40 /* YoutubePlayer-in-WKWebView */,
 			);
 			productName = Navigation;
 			productReference = DBBBD13127B82BC200900EE7 /* Navigation.app */;
@@ -546,9 +623,13 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1320;
+				LastSwiftUpdateCheck = 1400;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
+					DBBAC5E928F46B1500EA02C7 = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = DBBBD13027B82BC200900EE7;
+					};
 					DBBBD13027B82BC200900EE7 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -565,18 +646,26 @@
 			mainGroup = DBBBD12827B82BC200900EE7;
 			packageReferences = (
 				DBF7EA192837642400E7DEC6 /* XCRemoteSwiftPackageReference "iOSIntPackage" */,
-				DB2A87F2284CDF9A0037E1B4 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */,
+				DB2F7F5D28FB410C00261F40 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */,
 			);
 			productRefGroup = DBBBD13227B82BC200900EE7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
 				DBBBD13027B82BC200900EE7 /* Navigation */,
+				DBBAC5E928F46B1500EA02C7 /* NavigationTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		DBBAC5E828F46B1500EA02C7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DBBBD12F27B82BC200900EE7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -617,9 +706,36 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		C73BF5830D96FCAB6F428C4F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Navigation/Pods-Navigation-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		DBBAC5E628F46B1500EA02C7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DBBAC5F628F46C6A00EA02C7 /* LoginInspectorTests.swift in Sources */,
+				DB3C70BD28FB3BF3004A4CED /* CoreDataManagerTests.swift in Sources */,
+				DBBAC5ED28F46B1500EA02C7 /* NavigationTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DBBBD12D27B82BC200900EE7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -628,6 +744,7 @@
 				DBBAECEA27D6641200AA366E /* PhotosViewController.swift in Sources */,
 				DB2A87FB284D07970037E1B4 /* DictaphoneViewController.swift in Sources */,
 				DB7F36C528661F5800D929A0 /* Planet.swift in Sources */,
+				DBFFB1E428FFD7F700AE9F8D /* LocalNotificationsService.swift in Sources */,
 				DBBE367627D23264006CD4FB /* PostTableViewCell.swift in Sources */,
 				DBBBD14D27B8CC3C00900EE7 /* PostViewController.swift in Sources */,
 				DB6E34CA2841291500A44F03 /* NetologyViewController.swift in Sources */,
@@ -637,6 +754,7 @@
 				DBA0E24B28338CA4002C5077 /* ProfileViewModel.swift in Sources */,
 				DBBBD14B27B8301E00900EE7 /* ProfileViewController.swift in Sources */,
 				DB6E34C0283A135300A44F03 /* CurrentUserService.swift in Sources */,
+				DBFEDD0C2905B73400C79755 /* PostCoreDataModel.swift in Sources */,
 				DBA0E28328361A62002C5077 /* PostTableViewModel.swift in Sources */,
 				DBA0E2782834DEC7002C5077 /* PostCoordinator.swift in Sources */,
 				DB70BE1227BB755F00599559 /* ProfileHeaderView.swift in Sources */,
@@ -663,6 +781,7 @@
 				DB6E35012849DBE600A44F03 /* VideoTableViewCell.swift in Sources */,
 				DB6E34B9283A0F1A00A44F03 /* LoginInspector.swift in Sources */,
 				DBA0E2702834D774002C5077 /* PasswordModel.swift in Sources */,
+				DB3DA12628FC2BB000AE821D /* LocalAuthorizationService.swift in Sources */,
 				DB6962422885AEAD006E6DE0 /* FavoritesCoordinator.swift in Sources */,
 				DBBAECEC27D6642700AA366E /* PhotosCollectionViewCell.swift in Sources */,
 				DB6E34E12846173700A44F03 /* Audio.swift in Sources */,
@@ -692,6 +811,14 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		DBBAC5EF28F46B1500EA02C7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = DBBBD13027B82BC200900EE7 /* Navigation */;
+			targetProxy = DBBAC5EE28F46B1500EA02C7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin PBXVariantGroup section */
 		DBBBD13F27B82BC400900EE7 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
@@ -704,6 +831,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		DBBAC5F028F46B1500EA02C7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 46SB5959W9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ios-18.NavigationTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navigation.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navigation";
+			};
+			name = Debug;
+		};
+		DBBAC5F128F46B1500EA02C7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 46SB5959W9;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ios-18.NavigationTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Navigation.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Navigation";
+			};
+			name = Release;
+		};
 		DBBBD14327B82BC400900EE7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -831,13 +1004,15 @@
 				DEVELOPMENT_TEAM = 46SB5959W9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Используйте Face ID вместо пароля для доступа к своей учетной записи.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -845,9 +1020,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-18.Navigation";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -862,13 +1040,15 @@
 				DEVELOPMENT_TEAM = 46SB5959W9;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Navigation/Info.plist;
+				INFOPLIST_KEY_LSApplicationCategoryType = "";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Используйте Face ID вместо пароля для доступа к своей учетной записи.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = UIInterfaceOrientationPortrait;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -876,15 +1056,27 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.iOS-18.Navigation";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		DBBAC5F228F46B1500EA02C7 /* Build configuration list for PBXNativeTarget "NavigationTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DBBAC5F028F46B1500EA02C7 /* Debug */,
+				DBBAC5F128F46B1500EA02C7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		DBBBD12C27B82BC200900EE7 /* Build configuration list for PBXProject "Navigation" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -906,11 +1098,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		DB2A87F2284CDF9A0037E1B4 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */ = {
+		DB2F7F5D28FB410C00261F40 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/hmhv/YoutubePlayer-in-WKWebView.git";
 			requirement = {
-				kind = upToNextMajorVersion;
+				kind = versionRange;
+				maximumVersion = 1.0.0;
 				minimumVersion = 0.3.8;
 			};
 		};
@@ -925,9 +1118,14 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		DB2A87F3284CDF9A0037E1B4 /* YoutubePlayer-in-WKWebView */ = {
+		DB2F7F5E28FB410C00261F40 /* YoutubePlayer-in-WKWebView */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = DB2A87F2284CDF9A0037E1B4 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
+			package = DB2F7F5D28FB410C00261F40 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
+			productName = "YoutubePlayer-in-WKWebView";
+		};
+		DB2F7F6028FB413700261F40 /* YoutubePlayer-in-WKWebView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DB2F7F5D28FB410C00261F40 /* XCRemoteSwiftPackageReference "YoutubePlayer-in-WKWebView" */;
 			productName = "YoutubePlayer-in-WKWebView";
 		};
 		DBF7EA1A2837642400E7DEC6 /* iOSIntPackage */ = {
